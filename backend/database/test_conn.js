@@ -6,7 +6,7 @@ const db = require("./connection");
 //This is a very basic example of how to make a query with the database
 async function exampleRoute(){
     sql = 'SELECT * FROM `user`';
-    const results = await db.query(sql);
+    const [results] = await db.query(sql);
     console.log(results);
 }
 
@@ -18,9 +18,10 @@ async function exampleRoute(){
 //This is for security so if you need to append user data: DO THIS
 async function exampleRoutePrepared(){
     const sql = 'SELECT * FROM `user` WHERE `user_id` = ?';
-    const results = await db.query(sql, [1]);
+    const [results] = await db.query(sql, [1]);
     console.log(results);
 }
+
 
 exampleRoute();
 exampleRoutePrepared();

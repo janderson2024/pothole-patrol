@@ -5,13 +5,14 @@ const SQL_OPTIONS = {
     user : process.env.SQL_USER,
     password : process.env.SQL_PASSWORD,
     database : process.env.SQL_DB,
-    supportBigNumbers : true
+    supportBigNumbers : true,
+    connectionLimit: 10,
 };
 
-async function query(sql, params) {
-    const connection = await mysql.createConnection(SQL_OPTIONS);
-    const [results] = await connection.execute(sql, params);
-    return results;
-  }
-  
-  module.exports = {query};
+const pool = mysql.createPool(SQL_OPTIONS);
+
+pool.on('acquire', function (connection) {
+    console.log('Connection %d acquired', connection.threadId);
+  });
+
+module.exports = pool;
