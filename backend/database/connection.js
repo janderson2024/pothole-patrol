@@ -11,8 +11,8 @@ const SQL_OPTIONS = {
 
 const pool = mysql.createPool(SQL_OPTIONS);
 
-pool.on('acquire', function (connection) {
+/*pool.on('acquire', function (connection) {
     console.log('Connection %d acquired', connection.threadId);
-  });
+  });*/
 
 module.exports = pool;
