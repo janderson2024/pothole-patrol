@@ -31,6 +31,9 @@ ALTER TABLE `Reports` ADD CONSTRAINT `Reports_fk0` FOREIGN KEY (`potholeID`) REF
 
 ALTER TABLE `Reports` ADD CONSTRAINT `Reports_fk1` FOREIGN KEY (`userID`) REFERENCES `Users`(`ID`);
 
-
+--CREATE INDEX index_city on Potholes (city)
+--Im not doing this now, but if we notice issues with speed with getting Potholes based on the city
+--We can add an Index, which speeds up searches (which would be good for the "get potholes on route")
+--But this would slow down creating a new Pothole or updating them
 
 
