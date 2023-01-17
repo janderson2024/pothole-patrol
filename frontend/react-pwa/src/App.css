@@ -4,26 +4,134 @@
   text-align: center;
 }
 
+.Body {
+  /*background-image: url(pothole_image_one.png); 
+  background-size: 100%;
+  background-repeat: no-repeat; */
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  background-image: url("pexels-iván-rivero-1046227.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
 .Header {
   font-family: 'Faustina', serif;
-  font-size: 20px;
+  margin-top: 10px;
+  background-color: mediumaquamarine;
+  border-radius: 5px;
+  display: flex;  
+}
+
+.App-Name {
+  font-family: 'Faustina';
+  font-size: 15px;
+  background-color: mediumaquamarine;
+  border: none;
+  border-radius: 5px;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+.Menu {
+  list-style-type: none;
+  display: flex;
+  position: fixed;
+  background-color: mediumaquamarine;
 }
 
 .NavBar {
-  font-family: Cambria;
-  font-size: 20px;
   position: flex;
   display: flex;
+  width: 60vw;
+  justify-content: right;
+  margin-top: 10px;
 }
 
-.SubmitLocation, .LocateOnMap {
-  font-family: Cambria;
+.Menu-Item {
+  background-color: mediumaquamarine;
   font-size: 20px;
+  font-family: 'Crete Round';
+  display: flex;
+  padding-right: 20px;
+  border: none;
 }
 
-.Footer {
+.Menu-Item:hover, .App-Name:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.SubmitLocation {
+  font-family: 'Faustina';
+  background-color: rgb(15, 36, 30);
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 300px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  color: whitesmoke;
+  width: 400px;
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+/*.OrButton {
+  font-family: 'Faustina';
+  background-color: mediumaquamarine;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-left: 45%;
+  margin-right: 50%;
+} 
+*/
+.LocateOnMap {
+  font-family: 'Faustina';
+  background-color: mediumaquamarine;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 400px;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+
+.SubmitLocation:hover {
+  color: aquamarine;
+  cursor: pointer;
+}
+
+.LocateOnMap:hover {
+  color: purple;
+  cursor: pointer;
+}
+/*.Footer {
+  position: fixed;
   font-family: Cambria;
   font-size: 15px;
-  position: fixed;
+  background-color: whitesmoke;
   display: flex;
-}
+  margin: auto;
+} */
+

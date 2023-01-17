@@ -3,44 +3,46 @@ import './App.css';
 function Header(props) {
   return (
     <header className="Header">
-      <h1>{props.name}</h1>
-    </header>
+    <button className="App-Name" onclick="location.href='#'" type="button">
+        <h1>{props.name}</h1></button>
+      <nav className="NavBar">
+        <ul className="Menu">
+          {props.menu_items.map((item) => (
+            <li key={item.id}>
+              {item.title}
+            </li>
+          ))}
+        </ul>
+        </nav>
+      </header>
   );
 }
 
-function Main(props) {
+function Body() {
   return (
-    <nav className="NavBar">
-      <ul>
-        {props.menu_items.map((item) => (
-          <li key={item.id}>
-            {item.title}
-          </li>
-        ))}
-      </ul>
-    </nav>
+  <body></body>
   );
 }
 
-function Footer(props) {
+/*function Footer(props) {
   return (
     <footer className="Footer">
       <p>&copy; {props.year} {props.team}</p>
     </footer>
   );
-}
+} */
 
 const teamMembers = [
   "Joshua Anderson, ",
   "Dennis Bowen, ",
   "Nicholas Hunter, ",
-  "Monica Tuttle",
+  "Monica Tuttle", // I should try to not hard code this
 ]
 
 const items = [
-  <a href="map.html">Map</a>,
-  <a href="settings.html">Settings</a>,
-  <a href="about.html">How It Works</a>
+  <button className="Menu-Item" onclick="map.html" type="button">Map</button>,
+  <button className="Menu-Item" onclick="settings.html" type="button">Settings</button>,
+  <button className="Menu-Item" onclick="about.html" type="button">How It Works</button>
 ];
 
 const menuObjects = items.map(
@@ -52,7 +54,7 @@ const menuObjects = items.map(
 
 function SubmitLocation(props) {
   return (
-    <button className="SubmitLocation">
+    <button className="SubmitLocation" onclick="#" type="button">
       <p>{props.text}</p>
     </button>
   )
@@ -60,27 +62,38 @@ function SubmitLocation(props) {
 
 function LocateOnMap(props) {
   return (
-    <button className="LocateOnMap">
+    <button className="LocateOnMap" onclick="map.html" type="button">
       <p>{props.text}</p>
     </button>
   )
 }
+/*
+function OrButton(props) {
+  return (
+    <button className="OrButton" type="button">
+      <p>{props.text}</p>
+    </button>
+  )
+} */
 
 function App() {
   return (
     <div>
-      <Header name="Pothole Patrol" />
-      <Main
-        menu_items={menuObjects}
-      />
+      <Body />
+      <Header name="Pothole Patrol" menu_items={menuObjects} />
       <SubmitLocation text="Submit My Location"/>
+      
       <LocateOnMap text="Locate on Map"/>
-      <Footer
-        team={teamMembers}
-        year={new Date().getFullYear()}
-      />
+      
     </div>
   );
 }
 
 export default App;
+
+/*<Footer
+        team={teamMembers}
+        year={new Date().getFullYear()}
+      /> */
+
+/*<OrButton text="OR" /> */
