@@ -50,16 +50,20 @@ router.post("/register", async (req, res) => {
     //get the user agent
     const userAgent = req.header("user-agent");
     const userReliability = 1;
-    
+
 
     //testing console.logs
     console.log("IP: " + ip);
-    console.log(ipGeoLocationData);
+    //console.log(ipGeoLocationData);
     console.log("User Agent: " + userAgent);
 
-    //console.log("OTHER headers: " + req.headers);
-    //console.log(req.body);
-    res.send("Create User Form");
+    const cookieName = "uID";
+    const uidValue = "example1234";
+    console.log("UID COOKIE: " + req.cookies[cookieName]);
+
+    //milli in sec * sec in min * min in hr * hr in day * day in month
+    const oneMonth = 1000 * 60 * 60 * 24 * 30;
+    res.cookie(cookieName, uidValue, {maxAge: oneMonth}).json({cookieName : uidValue})
 
 });
 

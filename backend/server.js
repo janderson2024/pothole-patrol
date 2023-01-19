@@ -1,17 +1,20 @@
 const express = require("express");
 require("dotenv").config();
+
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
+
 const path = require("path");
-const fileExists = require("./helpers/fileExists")
+const fileExists = require("./helpers/fileExists");
 
 const app = express();
 const port = 8106;
 
 app.use(
     bodyParser.json({extended: false}), 
-    bodyParser.urlencoded({extended: false})
+    bodyParser.urlencoded({extended: false}),
+    cookieParser()
 );
-
 
 app.get("/", (req, res) => {
     if(process.env.MODE == "production"){
