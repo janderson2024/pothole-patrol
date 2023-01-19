@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Testing the user register api</title>
+</head>
+<body>
+    <button onclick="callApi()">Send a post request</button>
+    <button onclick="getLocation()">test getting location</button>
+    <p id="test-output"></p>
+
+    <script>
+        output = document.getElementById("test-output");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else { 
+                output.innerHTML = "Geolocation is not supported by this browser.";
+            }
+            }
+
+            function showPosition(position) {
+                output.innerHTML = "Latitude: " + position.coords.latitude + 
+            " Longitude: " + position.coords.longitude;
+                console.log(position);
+            }
+
+            function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                output.innerHTML = "User denied the request for Geolocation.";
+                break;
+                case error.POSITION_UNAVAILABLE:
+                output.innerHTML = "Location information is unavailable.";
+                break;
+                case error.TIMEOUT:
+                output.innerHTML = "The request to get user location timed out.";
+                break;
+                case error.UNKNOWN_ERROR:
+                output.innerHTML = "An unknown error occurred.";
+                break;
+            }
+            }
+
+        async function callApi(){
+            response = await fetch('/user/register', {
+                method: 'POST',
+            });
+            
+            text = await response.text();
+            console.log(text);
+
+        }
+    </script>
+</body>
+</html>
