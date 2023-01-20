@@ -40,12 +40,13 @@ https://apidocs.geoapify.com/playground/ip-geolocation/
 
 router.post("/register", async (req, res) => {
     //get user IP
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
     //fetch the ip geolocation data from the ip-api API
     const apiUrl = "http://ip-api.com/json/" + ip;
     fetchResp = await fetch(apiUrl);
     ipGeoLocationData = await fetchResp.json();
+    console.log(ipGeoLocationData);
 
     //get the user agent
     const userAgent = req.header("user-agent");
