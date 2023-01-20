@@ -13,7 +13,7 @@ const port = 8106;
 app.use(
     bodyParser.json({extended: false}), 
     bodyParser.urlencoded({extended: false}),
-    cookieParser()
+    cookieParser(process.env.COOKIE_SECRET)
 );
 
 app.get("/", async (req, res) => {
