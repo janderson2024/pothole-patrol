@@ -16,10 +16,10 @@ app.use(
     cookieParser()
 );
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     if(process.env.MODE == "production"){
         const frontendPath = path.join(__dirname, "../frontend/react-pwa/build/index.html");
-        if(fileExists(frontendPath)){
+        if(await fileExists(frontendPath)){
             res.sendFile(frontendPath);
         } else {
             res.send("!ERROR!: the react pwa project has not been built yet!." + 
