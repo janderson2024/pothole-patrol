@@ -40,7 +40,7 @@ https://apidocs.geoapify.com/playground/ip-geolocation/
 
 router.post("/register", async (req, res) => {
     //get user IP
-    const ip = req.socket.remoteAddress;
+    const ip = req.ip;
 
     //fetch the ip geolocation data from the ip-api API
     const apiUrl = "http://ip-api.com/json/" + ip;
