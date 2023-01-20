@@ -22,7 +22,7 @@ app.get("/", async (req, res) => {
         if(await fileExists(frontendPath)){
             res.sendFile(frontendPath);
         } else {
-            res.send("!ERROR!: the react pwa project has not been built yet!." + 
+            res.send("!ERROR!: the react pwa project has not been built yet! " + 
             "go to the frontent/react-pwa folder and run \"npm run build\"!");
         }
     } else {
