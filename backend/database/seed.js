@@ -54,6 +54,7 @@ async function createNewTables(){
     " `ip` varchar(255) NOT NULL,"+
 	" `reliability` INT NOT NULL,"+
 	" `last_report` TIMESTAMP NOT NULL,"+
+    " `last_signin` TIMESTAMP NOT NULL,"+
 	" PRIMARY KEY (`ID`)"+
     ");";
     [result] = await db.query(users_sql);
