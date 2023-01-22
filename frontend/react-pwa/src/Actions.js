@@ -1,10 +1,10 @@
 import React, { useState} from 'react';
-import './styles.css';
+import './styles.css'
 
   export default function Actions(props) {
     const [buttons, setButtons] = useState(["Submit My Location", "Locate on Map"]); // need to figure out how to use setButtons
     return (
-    <div>
+    <div className = "container">
         <ul className="Actions">
         {buttons.map((item) => (
             <Button href={item}/>
