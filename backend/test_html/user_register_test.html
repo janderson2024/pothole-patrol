@@ -4,15 +4,17 @@
     <title>Testing the user register api</title>
 </head>
 <body>
-    <button onclick="callApi()">Send a post request</button>
-    <button onclick="getLocation()">test getting location</button>
+    <button onclick="getLocation(callApi, showError)">Send a post request</button>
+    <button onclick="getLocation(showPosition, showError)">test getting location</button>
     <p id="test-output"></p>
 
     <script>
+        var myLatitude;
+        var myLongitude;
         output = document.getElementById("test-output");
-        function getLocation() {
+        function getLocation(success, error) {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
+                navigator.geolocation.getCurrentPosition(success, error);
             } else { 
                 output.innerHTML = "Geolocation is not supported by this browser.";
             }
@@ -22,6 +24,8 @@
                 output.innerHTML = "Latitude: " + position.coords.latitude + 
             " Longitude: " + position.coords.longitude;
                 console.log(position);
+                myLatitude = position.coords.latitude;
+                myLongitude = position.coords.longitude;
             }
 
             function showError(error) {
@@ -41,9 +45,18 @@
             }
             }
 
-        async function callApi(){
+        async function callApi(position){
+            const data = {
+                "latitude" : position.coords.latitude, 
+                "longitude" : position.coords.longitude
+            };
+
             response = await fetch('register', {
                 method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data),
             });
             
             text = await response.text();
