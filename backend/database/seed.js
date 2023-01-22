@@ -1,6 +1,5 @@
 require("dotenv").config();
 
-console.log(process.env.SQL_HOST);
 const db = require("./connection");
 
 async function deleteOldTables(){
@@ -14,14 +13,14 @@ async function deleteOldTables(){
     const [rows]= await db.query(get_tables);
 
     for(i = 0; i < rows.length; i++){
-        const table = rows[i].Tables_in_twclass;
+        const table = rows[i]["Tables_in_" + process.env.SQL_DB];
         await db.query(delete_old_tables, table);
         console.log("Deleted Table: " + table);
     }
 }
 
 async function createNewTables(){
-    const pothole_sql = "CREATE TABLE `Potholes` ("+
+    const pothole_sql = "CREATE TABLE `potholes` ("+
         "`ID` INT NOT NULL AUTO_INCREMENT,"+
         " `city` varchar(255) NOT NULL,"+
         " `report_count` INT NOT NULL,"+
@@ -34,7 +33,7 @@ async function createNewTables(){
     console.log("Created Potholes...");
 
 
-    const reports_sql = "CREATE TABLE `Reports` ("+
+    const reports_sql = "CREATE TABLE `reports` ("+
         " `ID` INT NOT NULL AUTO_INCREMENT,"+
         " `potholeID` INT NOT NULL,"+
         " `userID` INT NOT NULL,"+
@@ -47,7 +46,7 @@ async function createNewTables(){
     console.log("Created Reports...");
 
 
-    const users_sql = "CREATE TABLE `Users` ("+
+    const users_sql = "CREATE TABLE `users` ("+
 	" `ID` INT NOT NULL AUTO_INCREMENT,"+
 	" `user_agent` varchar(255) NOT NULL,"+
 	" `city` varchar(255) NOT NULL,"+
