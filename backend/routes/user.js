@@ -132,7 +132,7 @@ router.post("/register", async (req, res) => {
         const distance = latlonDistance(ipapiData.lat, ipapiData.lon, userLat, userLon);
         
         //if the distance is less than 15 km, then we use this city as the response
-        if(distance > 15){
+        if(distance <= 15){
             console.log("We set city to the one from ip-api");
             city = ipapiData.city;
         }
