@@ -12,36 +12,6 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../test_html/user_register_test.html"));
 });
 
-/*Steps:
-    0: make sure the request contains a lat and lon value
-        -return a 400 with a {"error": "need lat and lon"}
-
-    1: check if user already have a valid cookie
-        -if they do: return it back to them and call it good.
-
-    2: if they do not have a valid cookie: pull the ip and user agent from the req
-
-    3: make a db seeing if there is already a user with the same ip
-        - if there is more than one, match it by the user-agent
-        - if there is still more than one, return the first one
-
-        -sidenote: check the last report time, and if less then 1 minute, return a 401 unauthorized
-
-    3: get the city from the ip-api request
-
-    4: match the ip-api lat lon to see if the distance is less than "some amount"
-        -if this isn't true: return a 401 unauthorized
-
-    5: at this step: make a new user, set user-agent, city, ip to their respective values
-        -set reliability_score to be 1, and set last report to "now()" the sql command
-
-    6: return the generated id as a cookie
-*/
-//maybe also take in LAT/LON as a way to make sure the user has location services on
-//takes in user agent, ip address
-//gets the city from the ip address
-//sets reliability to 1
-//last_report is set to now
 
 const COOKIE_NAME = "uID";
 //milli in sec * sec in min * min in hr * hr in day * day in month
@@ -88,7 +58,6 @@ router.post("/register", async (req, res) => {
     if(req.signedCookies[COOKIE_NAME]){
         uid = req.signedCookies[COOKIE_NAME]
         //cookie is already set and signed, so it's not tampered
-        console.log("Had prev cookie!");
         return makeCookie(res, uid);
     }
 
@@ -108,12 +77,10 @@ router.post("/register", async (req, res) => {
             //returns the first one that matches ip and user agent
             if(result.user_agent == userAgent){
                 //check if the match is spamming this endpoint
-                console.log("Matched userAgent and Ip!");
                 return await checkLastSignin(res, result);
             }
         }
         //if it makes it here: check the time and return the first one
-        console.log("No userAgents matched, but we returned first Ip!");
         return await checkLastSignin(res, results[0]);
     }
 
@@ -133,7 +100,6 @@ router.post("/register", async (req, res) => {
         
         //if the distance is less than 15 km, then we use this city as the response
         if(distance <= 15){
-            console.log("We set city to the one from ip-api");
             city = ipapiData.city;
         }
     }
@@ -145,9 +111,6 @@ router.post("/register", async (req, res) => {
         const fetchResp = await fetch(geoUrl);
         const geoData = await fetchResp.json();
 
-        /*console.log("GEOAPIFY data: ");
-        console.log(geoData);*/
-        console.log("We set the city to the one from geoapify");
         city = geoData.results[0].city;
     }
 
