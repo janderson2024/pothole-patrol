@@ -1,4 +1,5 @@
 import React, { useState} from 'react';
+import './styles.css';
 
   export default function Actions(props) {
     const [buttons, setButtons] = useState(["Submit My Location", "Locate on Map"]); // need to figure out how to use setButtons
@@ -14,7 +15,7 @@ import React, { useState} from 'react';
   }
 
   function Button({href}) {
-    return <button onclick={`${href}.html`} type="button">{href}</button>
+    return <button className="button" onclick={`${href}.html`} type="button">{href}</button>
   }
 
 

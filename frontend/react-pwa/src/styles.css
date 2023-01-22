@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round&family=Faustina:wght@700&family=Roboto+Slab&display=swap');
 
-
 * {
     box-sizing: border-box;
 }
@@ -9,32 +8,29 @@ body {
     margin: 0;
 }
 
-.container {
-    margin: 1rem;
-    text-align: center;
-}
-
 .nav {
     font-family: 'Roboto Slab';
     font-weight: bold;
+    font-size: 1.25rem;
     background-color: black;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     gap: 2rem;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
+    margin-bottom: 20%;
 }
 
 .site-title {
     font-family: 'Roboto Slab';
     font-size: 2rem;
 }
+
 .nav ul {
-    padding: 0;
-    margin: 0;
     list-style: none;
     display: flex;
+    font-size: 1.5rem;
     gap: 1rem;
 }
 
@@ -44,9 +40,24 @@ body {
     height: 100%;
     display: flex;
     align-items: center;
-    padding: .25rem;
+    padding-right: 2rem;
 }
 
 .nav li.active {
     background-color: rgb(53, 52, 52);
+}
+
+.button {
+    font-family: 'Roboto Slab';
+    display: flex;
+    font-size: 1.5rem;
+    background-color: black;
+    color: white;
+    width: 300px;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 50px;
+    padding: 25px;
 }
