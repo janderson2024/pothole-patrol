@@ -4,21 +4,25 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
+.Body {
+    background-color: whitesmoke;
+    /* background-image: url(ivan-rivero-black-white.png);
+    background-repeat: no-repeat; 
+    */
 }
 
 .nav {
     font-family: 'Roboto Slab';
     font-weight: bold;
     font-size: 1.25rem;
+    border-radius: 5px;
     background-color: black;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     gap: 2rem;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     margin-bottom: 20%;
 }
 
@@ -53,11 +57,47 @@ body {
     font-size: 1.5rem;
     background-color: black;
     color: white;
-    width: 300px;
+    width: 350px;
     border-radius: 5px;
+    border-style: none;
     text-align: center;
     justify-content: center;
+    padding: 30px;
     margin: auto;
-    margin-bottom: 50px;
-    padding: 25px;
+    margin-bottom: 65px;
+    text-align: center;
+}
+
+@media screen and (max-width: 2160px) {
+    .nav {
+      margin-bottom: 300px;
+      padding: .5 .5rem;
+
+    }
+  }
+
+@media screen and (max-width: 600px) {
+    
+    .nav {
+        justify-content: space-between;
+    }
+
+    .nav ul {
+        font-size: 1.25rem;
+    }
+
+    .site-title {
+        font-size: 1.5rem;
+    }
+
+    .button {
+        font-size: 1.5rem;
+        margin-bottom: 75px;
+    }
+
+    /*.Body {
+        box-sizing: content-box;
+        background-size: 210%;
+    }
+    */
 }
