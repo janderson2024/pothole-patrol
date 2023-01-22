@@ -1,3 +1,5 @@
+import '../styles.css';
+
 import Actions from '../Actions.js';
 
 export default function Home() {
