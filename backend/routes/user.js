@@ -60,7 +60,7 @@ async function checkLastSignin(res, sqlResult){
 
     //checks if the difference is greater than 1 minute
     if(diffBetweenNowAndReport >= (1000 * 60 * 1)){
-        const updateSQL = "UPDATE `users` SET `last_signin` = now() WHERE `ID` = ?";
+        const updateSQL = "UPDATE `Users` SET `last_signin` = now() WHERE `ID` = ?";
         await db.query(updateSQL, [result.ID]);
         return makeCookie(res, result.ID);
     } else {
