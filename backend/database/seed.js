@@ -20,7 +20,7 @@ async function deleteOldTables(){
 }
 
 async function createNewTables(){
-    const pothole_sql = "CREATE TABLE `potholes` ("+
+    const pothole_sql = "CREATE TABLE `Potholes` ("+
         "`ID` INT NOT NULL AUTO_INCREMENT,"+
         " `city` varchar(255) NOT NULL,"+
         " `report_count` INT NOT NULL,"+
@@ -33,7 +33,7 @@ async function createNewTables(){
     console.log("Created Potholes...");
 
 
-    const reports_sql = "CREATE TABLE `reports` ("+
+    const reports_sql = "CREATE TABLE `Reports` ("+
         " `ID` INT NOT NULL AUTO_INCREMENT,"+
         " `potholeID` INT NOT NULL,"+
         " `userID` INT NOT NULL,"+
@@ -46,7 +46,7 @@ async function createNewTables(){
     console.log("Created Reports...");
 
 
-    const users_sql = "CREATE TABLE `users` ("+
+    const users_sql = "CREATE TABLE `Users` ("+
 	" `ID` INT NOT NULL AUTO_INCREMENT,"+
 	" `user_agent` varchar(255) NOT NULL,"+
 	" `city` varchar(255) NOT NULL,"+
