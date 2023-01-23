@@ -10,8 +10,6 @@ const fileExists = require("./helpers/fileExists");
 const app = express();
 const port = 8106;
 
-app.set('view engine', 'ejs');
-
 app.use(
     bodyParser.json({extended: false}), 
     bodyParser.urlencoded({extended: false}),
