@@ -1,8 +1,9 @@
+const { application } = require("express");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.send("API Page");
+    res.send("API page");
     console.log("API route successful");
 });
 
