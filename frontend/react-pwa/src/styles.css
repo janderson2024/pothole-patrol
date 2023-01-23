@@ -11,6 +11,13 @@
     background-repeat: no-repeat; 
     
 } */
+/* container class is a placeholder and will be deleted in future */
+.container {
+    font-family: 'Roboto Slab';
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+}
 
 .nav {
     font-family: 'Roboto Slab';
@@ -49,7 +56,9 @@
 }
 
 .nav li.active {
-    background-color: rgb(53, 52, 52);
+    color: rgb(161, 159, 159);
+    font-size: larger;
+    text-decoration: underline;
 }
 
 .SubmitLocation {
@@ -69,6 +78,13 @@
     text-align: center;
 }
 
+.SubmitLocation:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
 .LocateOnMap {
     font-family: 'Roboto Slab';
     display: flex;
@@ -84,6 +100,13 @@
     margin: auto;
     margin-bottom: 50px;
     text-align: center;
+}
+
+.LocateOnMap:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
 }
 /* .coordinates is temporary - will remove eventually */
 .coordinates {
