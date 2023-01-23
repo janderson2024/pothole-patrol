@@ -4,18 +4,19 @@
     box-sizing: border-box;
 }
 
+/*
 .Body {
     background-color: whitesmoke;
-    /* background-image: url(ivan-rivero-black-white.png);
+    /*background-image: url(ivan-rivero-black-white.png);
     background-repeat: no-repeat; 
-    */
-}
+    
+} */
 
 .nav {
     font-family: 'Roboto Slab';
     font-weight: bold;
     font-size: 1.25rem;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: black;
     color: white;
     display: flex;
@@ -51,20 +52,37 @@
     background-color: rgb(53, 52, 52);
 }
 
-.button {
+.SubmitLocation {
     font-family: 'Roboto Slab';
     display: flex;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     background-color: black;
     color: white;
     width: 350px;
-    border-radius: 5px;
+    border-radius: 10px;
     border-style: none;
     text-align: center;
     justify-content: center;
-    padding: 30px;
+    padding: 10px;
     margin: auto;
-    margin-bottom: 65px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.LocateOnMap {
+    font-family: 'Roboto Slab';
+    display: flex;
+    font-size: 1.5rem;
+    background-color: rgb(201, 197, 197);
+    color: black;
+    width: 350px;
+    border-radius: 10px;
+    border-style: none;
+    text-align: center;
+    justify-content: center;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 50px;
     text-align: center;
 }
 

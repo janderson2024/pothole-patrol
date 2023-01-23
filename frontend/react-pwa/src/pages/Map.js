@@ -1,5 +1,5 @@
 export default function Map() {
     return (
-      <h1>Map</h1>
+      <h1 className="">Map</h1>
     );
   }

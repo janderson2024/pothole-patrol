@@ -1,4 +1,4 @@
-import './styles.css';
+// import './styles.css';
 import Home from './pages/Home.js';
 import Map from './pages/Map.js';
 import About from './pages/About.js';
