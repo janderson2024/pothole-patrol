@@ -85,6 +85,12 @@
     margin-bottom: 50px;
     text-align: center;
 }
+/* .coordinates is temporary - will remove eventually */
+.coordinates {
+    font-family: 'Roboto Slab';
+    font-size: 1rem;
+    text-align: center;
+}
 
 @media screen and (max-width: 2160px) {
     .nav {
