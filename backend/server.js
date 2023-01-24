@@ -37,7 +37,9 @@ const apiRouter = require("./routes/api");
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
 
-app.use(express.static("build"));
+
+//TODO: look into the leading and trailing "/"
+app.use(express.static("../frontend/react-pwa/build"));
 
 app.listen(port, () => {
     if(process.env.MODE == "development"){
