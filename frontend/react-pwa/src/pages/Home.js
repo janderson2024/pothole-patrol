@@ -1,4 +1,3 @@
-import '../styles.css';
 
 import Actions from '../Actions.js';
 

@@ -1,7 +1,6 @@
-import '../styles.css';
 export default function About() {
     return (
-      <h1>About</h1>
+      <h1 className="container">This page will tell the user how the app works.</h1>
     );
   }
   
