@@ -16,7 +16,7 @@ app.use(
     cookieParser(process.env.COOKIE_SECRET)
 );
 
-app.get("/", async (req, res) => {
+app.get("/disabled_for_testing", async (req, res) => {
     if(process.env.MODE == "production"){
         const frontendPath = path.join(__dirname, "../frontend/react-pwa/build/index.html");
         if(await fileExists(frontendPath)){
