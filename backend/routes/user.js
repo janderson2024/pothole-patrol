@@ -16,9 +16,9 @@ function makeCookie(res, uid){
 
 async function checkLastSignin(res, sqlResult){
     //check if the match is spamming this endpoint
-    const last_signin = new Date(sqlResult.last_signin);
+    const lastSignin = new Date(sqlResult.last_signin);
     const now = new Date();
-    const diffBetweenNowAndReport = now.getTime() - last_signin.getTime();
+    const diffBetweenNowAndReport = now.getTime() - lastSignin.getTime();
 
     //checks if the difference is greater than 1 minute
     if(diffBetweenNowAndReport >= (1000 * 60 * 1)){
