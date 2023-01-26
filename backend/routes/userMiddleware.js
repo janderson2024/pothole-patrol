@@ -23,7 +23,7 @@ async function userMiddleware(req, res, next){
     const diffBetweenNowAndReport = now.getTime() - lastReport.getTime();
 
     //limits this to 1 report to 1 minute
-    if(diffBetweenNowAndReport >= (1000 * 60 * 1)){
+    if(diffBetweenNowAndReport <= (1000 * 60 * 1)){
         return res.status(401).json({"error":"last report was too soon"});
     }
 
