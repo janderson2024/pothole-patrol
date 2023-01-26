@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
 router.post("/mid_test", userMiddleware, (req, res) => {
     console.log("On the api side...");
     console.log(req.user);
+    console.log(req.geoData);
     console.log(req.latitude);
     console.log(req.longitude);
     res.send({"nerd": "true"});
