@@ -39,19 +39,13 @@ async function userMiddleware(req, res, next){
 
     geoCity = geoData.results[0].city;
 
-    /*console.log("-----------");
-    console.log(user);
-    console.log(latitude);
-    console.log(longitude);
-    console.log(geoData);
-    console.log("Geoapify city: " + geoCity);*/
-
     if(user.city != geoCity){
         return res.status(401).json({"error":"different city than recorded user city... fail quietly"});
     }
 
-    //at this point a report is going to be created. Update last_report and send data to api
-
+    //at this point a report is going to be created.
+    //Update last_report and send data to api
+    
     const updateReportSql = "UPDATE `Users` SET `last_report` = now() WHERE `ID` = ?";
     await db.query(updateReportSql, [user.ID]);
 
@@ -59,12 +53,6 @@ async function userMiddleware(req, res, next){
     req.geoData = geoData;
     req.latitude = latitude;
     req.longitude = longitude;
-    next();
-    //authenticate user and request
-
-    //if all good: pass on to next()
-
-    //else return error 401
     next();
 }
 
