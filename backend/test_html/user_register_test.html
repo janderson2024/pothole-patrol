@@ -2,10 +2,26 @@
 <html lang="en">
 <head>
     <title>Testing the user register api</title>
+    <style>
+        body {
+            background-color: rgb(56, 56, 56);
+        }
+        button {
+            background-color: rgb(67, 69, 90);
+            color: white;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: rgb(84, 87, 112);
+        }
+        p { color: white; font-size: 16px;}
+    </style>
 </head>
 <body>
-    <button onclick="getLocation(callApi, showError)">Send a post request</button>
+    <button onclick="getLocation(callRegisterApi, showError)">Send a post request to the /user/register</button>
     <button onclick="getLocation(showPosition, showError)">test getting location</button>
+    <br/><br/>
+    <button onclick="getLocation(callMiddlewareTest, showError)">Send a post request to the userMiddleware</button>
     <p id="test-output"></p>
 
     <script>
@@ -45,13 +61,32 @@
             }
             }
 
-        async function callApi(position){
+        async function callRegisterApi(position){
             const data = {
                 "latitude" : position.coords.latitude, 
                 "longitude" : position.coords.longitude
             };
 
-            response = await fetch('register', {
+            response = await fetch('/user/register', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            });
+            
+            text = await response.text();
+            console.log(text);
+
+        }
+
+        async function callMiddlewareTest(position){
+            const data = {
+                "latitude" : position.coords.latitude, 
+                "longitude" : position.coords.longitude
+            };
+
+            response = await fetch('/api/mid_test', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'

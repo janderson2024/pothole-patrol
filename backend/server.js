@@ -16,6 +16,11 @@ app.use(
     cookieParser(process.env.COOKIE_SECRET)
 );
 
+app.get("/test_html", (req, res) => {
+    res.sendFile(path.join(__dirname, "/test_html/user_register_test.html"));
+});
+
+
 app.get("/", async (req, res) => {
     if(process.env.MODE == "production"){
         const frontendPath = path.join(__dirname, "../frontend/react-pwa/build/index.html");
@@ -36,16 +41,6 @@ const apiRouter = require("./routes/api");
 
 app.use("/user", userRouter);
 app.use("/api", apiRouter);
-
-
-//TODO: look into the leading and trailing "/"
-//https://stackoverflow.com/questions/46235798/relative-path-in-index-html-after-build
-//thanks to Christopher Pohlman and group 11 for the mention last week
-/*
-"name": "your-project-name",
-  "version": "0.1.0",
-  "homepage": "./"
-*/
 
 app.use(express.static("../frontend/react-pwa/build"));
 
