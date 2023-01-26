@@ -5,6 +5,10 @@ const latlonDistance = require("../helpers/latlonDistance");
 
 const COOKIE_NAME = process.env.COOKIE_NAME;
 
+/*
+THINGS TO DO: Check the current timestamp and the user `last_report`
+*/
+
 async function userMiddleware(req, res, next){
     if(!req.signedCookies[COOKIE_NAME]){
         return res.status(401).json({"error":"no uid provided"});
@@ -16,6 +20,14 @@ async function userMiddleware(req, res, next){
     const user = result[0];
     if(!user){
         return res.status(501).json({"error":"uid provided, but not in db"});
+    }
+
+    const lastReport = new Date(user.last_report);
+    const now = new Date();
+    const diffBetweenNowAndReport = now.getTime() - lastReport.getTime();
+
+    if(diffBetweenNowAndReport >= (1000 * 60 * 5)){
+        return res.status(501).json({"error":"last report was too soon"});
     }
 
     const latitude = req.body.latitude;
