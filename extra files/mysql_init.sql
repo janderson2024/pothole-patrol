@@ -1,6 +1,7 @@
 CREATE TABLE `Potholes` (
 	`ID` INT NOT NULL AUTO_INCREMENT,
 	`city` varchar(255) NOT NULL,
+	`zipcode` varchar(255) NOT NULL,
 	`report_count` INT NOT NULL,
 	`status` varchar(255) NOT NULL,
 	`approx_latitude` varchar(255) NOT NULL,
