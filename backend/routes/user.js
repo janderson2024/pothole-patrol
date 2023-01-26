@@ -5,15 +5,7 @@ const fetch = require("node-fetch");
 const db = require("../database/connection");
 const latlonDistance = require("../helpers/latlonDistance");
 
-//temporary testing user_register_test
-const path = require("path");
-
-router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../test_html/user_register_test.html"));
-});
-
-
-const COOKIE_NAME = "uID";
+const COOKIE_NAME = process.env.COOKIE_NAME;
 //milli in sec * sec in min * min in hr * hr in day * day in month
 const ONE_MONTH = 1000 * 60 * 60 * 24 * 30;
 
