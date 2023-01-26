@@ -2,11 +2,11 @@ import { Link, useMatch, useResolvedPath } from 'react-router-dom'
 
 function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to)
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true })
+  const isActive = useMatch({ path: resolvedPath.pathname, end: true }) //
   
   return (
     <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
+      <Link to={to} {...props}>  {/*... is the spread operator*/}
       {children}
       </Link>
     </li>
@@ -18,11 +18,11 @@ export default function Navbar() {
       <nav className='nav'>
         <h1 className='site-title'>
             <Link to="/">
-              Pothole Patrol
+              Pothole Patrol 
             </Link>
         </h1>
         <ul>
-          <CustomLink to="/map">Map</CustomLink>
+          <CustomLink to="/view_map">Map</CustomLink>
           <CustomLink to="/about">About</CustomLink>
         </ul>
       </nav>
