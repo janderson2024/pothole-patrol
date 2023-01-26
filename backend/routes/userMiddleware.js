@@ -50,6 +50,11 @@ async function userMiddleware(req, res, next){
         return res.status(401).json({"error":"different city than recorded user city... fail quietly"});
     }
 
+    //at this point a report is going to be created. Update last_report and send data to api
+
+    const updateReportSql = "UPDATE `Users` SET `last_report` = now() WHERE `ID` = ?";
+    await db.query(updateReportSql, [user.ID]);
+
     req.user = user;
     req.geoData = geoData;
     req.latitude = latitude;
