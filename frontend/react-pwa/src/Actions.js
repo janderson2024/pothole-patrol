@@ -1,22 +1,19 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Actions(props) {
   return (
     <div>
-      <SubmitLocation text="Submit My Location" />
+      <SubmitLocation />
       <LocateOnMap text="Locate on Map" />
     </div>
   );
 }
 
-//var array = [];
-
-function SubmitLocation(props) {
+function SubmitLocation() {
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
-
+  const [status, setStatus] = useState("Submit My Location");
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -25,10 +22,18 @@ function SubmitLocation(props) {
       setStatus("Locating...");
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setStatus(null);
           setLat(position.coords.latitude);
-          setLng(position.coords.longitude);        
+          setLng(position.coords.longitude);
+          const coordinates = {
+            latitude: lat,
+            longitude: lng, 
+          };
+
+          setStatus("Submitted!");
+          console.log(coordinates);
+          // I need a timer here and to reset the button to "Submit My Location" after a certain amount of time
         },
+
         () => {
           setStatus("Unable to retrieve your location");
         }
@@ -36,33 +41,22 @@ function SubmitLocation(props) {
     }
   };
 
-
   return (
     <div className="coordinates">
-      <p>{status}</p>
-      {lat && <p>Latitude: {lat}</p>}
-      {lng && <p>Longitude: {lng}</p>}
       <button className="SubmitLocation" onClick={getLocation} type="button">
-        <p>{props.text}</p>
+        <p>{status}</p> {/*how to use useState() for the button change?*/}
       </button>
     </div>
   );
 }
 
-// need to change where the button links to - it will be a whole different map page just for the user's view without other pins/markers
 function LocateOnMap(props) {
   return (
-        <Link className="LocateLink" to="/mark_map">
-        <button className="LocateOnMap"><p>{props.text}</p></button>
-          </Link>
+    <Link className="LocateLink" to="/mark_map">
+      <button className="LocateOnMap">
+        <p>{props.text}</p>
+      </button>
+    </Link>
   );
 }
 
-/*
-function LocationCode() {
-  alert(array); // temporary placeholder until we store the array somewhere for the backend to process
-}
-var array = []; // temporary global variable, not ideal
-array.push(position.coords.latitude, position.coords.longitude);
-
-*/
