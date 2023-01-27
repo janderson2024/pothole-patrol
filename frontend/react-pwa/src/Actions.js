@@ -27,7 +27,8 @@ function SubmitLocation(props) {
         (position) => {
           setStatus(null);
           setLat(position.coords.latitude);
-          setLng(position.coords.longitude);        },
+          setLng(position.coords.longitude);        
+        },
         () => {
           setStatus("Unable to retrieve your location");
         }
@@ -51,11 +52,9 @@ function SubmitLocation(props) {
 // need to change where the button links to - it will be a whole different map page just for the user's view without other pins/markers
 function LocateOnMap(props) {
   return (
-    <button className="LocateOnMap" type="button">
-         <Link to="/mark_map">
-            <p>{props.text}</p>
-            </Link>
-    </button>
+        <Link className="LocateLink" to="/mark_map">
+        <button className="LocateOnMap"><p>{props.text}</p></button>
+          </Link>
   );
 }
 

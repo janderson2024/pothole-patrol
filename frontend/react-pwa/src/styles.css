@@ -86,6 +86,10 @@
     cursor: pointer;
 }
 
+.LocateLink {
+    text-decoration: none;
+}
+
 .LocateOnMap {
     font-family: 'Roboto Slab';
     display: flex;
@@ -101,6 +105,7 @@
     margin: auto;
     margin-bottom: 50px;
     text-align: center;
+    text-decoration: none;
 }
 
 .LocateOnMap:hover {
