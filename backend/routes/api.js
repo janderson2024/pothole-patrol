@@ -1,10 +1,20 @@
 const { application } = require("express");
 const express = require("express");
 const router = express.Router();
+const userMiddleware = require("./userMiddleware");
 
 router.get("/", (req, res) => {
     res.send("API page");
     console.log("API route successful");
+});
+
+router.post("/mid_test", userMiddleware, (req, res) => {
+    console.log("On the api side...");
+    console.log(req.user);
+    console.log(req.geoData);
+    console.log(req.latitude);
+    console.log(req.longitude);
+    res.send({"nerd": "true"});
 });
 
 module.exports = router;

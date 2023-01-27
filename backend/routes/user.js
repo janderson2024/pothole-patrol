@@ -5,15 +5,7 @@ const fetch = require("node-fetch");
 const db = require("../database/connection");
 const latlonDistance = require("../helpers/latlonDistance");
 
-//temporary testing user_register_test
-const path = require("path");
-
-router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../test_html/user_register_test.html"));
-});
-
-
-const COOKIE_NAME = "uID";
+const COOKIE_NAME = process.env.COOKIE_NAME;
 //milli in sec * sec in min * min in hr * hr in day * day in month
 const ONE_MONTH = 1000 * 60 * 60 * 24 * 30;
 
@@ -24,9 +16,9 @@ function makeCookie(res, uid){
 
 async function checkLastSignin(res, sqlResult){
     //check if the match is spamming this endpoint
-    const last_signin = new Date(sqlResult.last_signin);
+    const lastSignin = new Date(sqlResult.last_signin);
     const now = new Date();
-    const diffBetweenNowAndReport = now.getTime() - last_signin.getTime();
+    const diffBetweenNowAndReport = now.getTime() - lastSignin.getTime();
 
     //checks if the difference is greater than 1 minute
     if(diffBetweenNowAndReport >= (1000 * 60 * 1)){
