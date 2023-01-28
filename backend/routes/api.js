@@ -17,6 +17,12 @@ router.post("/mid_test", userMiddleware, (req, res) => {
     res.send({"nerd": "true"});
 });
 
+router.post("/frontend_test", userMiddleware, (req, res) => {
+    console.log("The frontend made a request to this api!");
+
+    res.send({"success": "Data was totally saved in the database"});
+})
+
 module.exports = router;
 
 /*app.get("/potholes_in_city/:city", async (req, res) => {

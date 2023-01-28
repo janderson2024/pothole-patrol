@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Testing the user register api</title>
     <style>
         body {
             background-color: rgb(56, 56, 56);
         }
+
         button {
             background-color: rgb(67, 69, 90);
             color: white;
             font-size: 16px;
         }
+
         button:hover {
             background-color: rgb(84, 87, 112);
         }
-        p { color: white; font-size: 16px;}
+
+        p {
+            color: white;
+            font-size: 16px;
+        }
     </style>
 </head>
+
 <body>
     <button onclick="getLocation(callRegisterApi, showError)">Send a post request to the /user/register</button>
     <button onclick="getLocation(showPosition, showError)">test getting location</button>
-    <br/><br/>
+    <br /><br />
     <button onclick="getLocation(callMiddlewareTest, showError)">Send a post request to the userMiddleware</button>
     <p id="test-output"></p>
 
@@ -28,43 +36,44 @@
         var myLatitude;
         var myLongitude;
         output = document.getElementById("test-output");
+
         function getLocation(success, error) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(success, error);
-            } else { 
+            } else {
                 output.innerHTML = "Geolocation is not supported by this browser.";
             }
-            }
+        }
 
-            function showPosition(position) {
-                output.innerHTML = "Latitude: " + position.coords.latitude + 
-            " Longitude: " + position.coords.longitude;
-                console.log(position);
-                myLatitude = position.coords.latitude;
-                myLongitude = position.coords.longitude;
-            }
+        function showPosition(position) {
+            output.innerHTML = "Latitude: " + position.coords.latitude +
+                " Longitude: " + position.coords.longitude;
+            console.log(position);
+            myLatitude = position.coords.latitude;
+            myLongitude = position.coords.longitude;
+        }
 
-            function showError(error) {
-            switch(error.code) {
+        function showError(error) {
+            switch (error.code) {
                 case error.PERMISSION_DENIED:
-                output.innerHTML = "User denied the request for Geolocation.";
-                break;
+                    output.innerHTML = "User denied the request for Geolocation.";
+                    break;
                 case error.POSITION_UNAVAILABLE:
-                output.innerHTML = "Location information is unavailable.";
-                break;
+                    output.innerHTML = "Location information is unavailable.";
+                    break;
                 case error.TIMEOUT:
-                output.innerHTML = "The request to get user location timed out.";
-                break;
+                    output.innerHTML = "The request to get user location timed out.";
+                    break;
                 case error.UNKNOWN_ERROR:
-                output.innerHTML = "An unknown error occurred.";
-                break;
+                    output.innerHTML = "An unknown error occurred.";
+                    break;
             }
-            }
+        }
 
-        async function callRegisterApi(position){
+        async function callRegisterApi(position) {
             const data = {
-                "latitude" : position.coords.latitude, 
-                "longitude" : position.coords.longitude
+                "latitude": position.coords.latitude,
+                "longitude": position.coords.longitude
             };
 
             response = await fetch('/user/register', {
@@ -74,16 +83,15 @@
                 },
                 body: JSON.stringify(data),
             });
-            
+
             text = await response.text();
             console.log(text);
-
         }
 
-        async function callMiddlewareTest(position){
+        async function callMiddlewareTest(position) {
             const data = {
-                "latitude" : position.coords.latitude, 
-                "longitude" : position.coords.longitude
+                "latitude": position.coords.latitude,
+                "longitude": position.coords.longitude
             };
 
             response = await fetch('/api/mid_test', {
@@ -93,7 +101,7 @@
                 },
                 body: JSON.stringify(data),
             });
-            
+
             text = await response.text();
             console.log(text);
 

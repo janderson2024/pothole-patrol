@@ -17,7 +17,7 @@ app.use(
 );
 
 app.get("/test_html", (req, res) => {
-    res.sendFile(path.join(__dirname, "/test_html/user_register_test.html"));
+    res.sendFile(path.join(__dirname, "/test_html/backend_test.html"));
 });
 
 
@@ -33,7 +33,6 @@ app.get("/", async (req, res) => {
     } else {
         res.send("Backend Dev server :)");
     }
-    console.log("Get index successful");
 });
 
 const userRouter = require("./routes/user");
