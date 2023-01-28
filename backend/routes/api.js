@@ -29,16 +29,6 @@ router.get("/submitpothole", async (req, res) => {
     console.log("Pothole added correctly");
 });
 
-//Delete Pothole
-router.get('/deletepothole/:id', async (req, res) => {
-    let sql = `DELETE FROM potholes WHERE id= ${req.params.id}`;
-    let query = await db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send('Pothole deleted');
-    });
-});
-
 router.post("/mid_test", userMiddleware, (req, res) => {
     console.log("On the api side...");
     console.log(req.user);
