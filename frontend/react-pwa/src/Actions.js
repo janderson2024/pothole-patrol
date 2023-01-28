@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Actions(props) {
@@ -11,8 +11,6 @@ export default function Actions(props) {
 }
 
 function SubmitLocation() {
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
   const [status, setStatus] = useState("Submit My Location");
 
   const getLocation = () => {
@@ -21,17 +19,27 @@ function SubmitLocation() {
     } else {
       setStatus("Locating...");
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLat(position.coords.latitude);
-          setLng(position.coords.longitude);
+        async (position) => {
           const coordinates = {
-            latitude: lat,
-            longitude: lng, 
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
           };
+         /* const response = await fetch("./api/mid_test", {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify(coordinates),
+          });
+
+          const text = await response.text();
+          console.log(text); */
 
           setStatus("Submitted!");
-          console.log(coordinates);
-          // I need a timer here and to reset the button to "Submit My Location" after a certain amount of time
+          console.log(coordinates)
+          setTimeout(() => {
+            setStatus("Submit My Location")
+          }, 5000);
         },
 
         () => {
@@ -44,7 +52,7 @@ function SubmitLocation() {
   return (
     <div className="coordinates">
       <button className="SubmitLocation" onClick={getLocation} type="button">
-        <p>{status}</p> {/*how to use useState() for the button change?*/}
+        <p>{status}</p>
       </button>
     </div>
   );
@@ -59,4 +67,3 @@ function LocateOnMap(props) {
     </Link>
   );
 }
-
