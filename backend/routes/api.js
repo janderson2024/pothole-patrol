@@ -2,10 +2,41 @@ const { application } = require("express");
 const express = require("express");
 const router = express.Router();
 const userMiddleware = require("./userMiddleware");
+const db = require("../database/connection");
 
 router.get("/", (req, res) => {
     res.send("API page");
     console.log("API route successful");
+});
+
+//Add hard-coded sample pothole
+router.get("/submitpothole", async (req, res) => {
+    console.log("Adding pothole to database");
+    let pothole = {
+        city : "Des Moines", 
+        zipcode: "50311",
+        report_count: 1,
+        status: "Not completed",
+        approx_latitude: "41.6039",
+        approx_longitude: "-93.6585"
+    };
+    let sql = "INSERT INTO potholes SET ?";
+    let query =  await db.query(sql, pothole, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send("Pothole added");
+    });
+    console.log("Pothole added correctly");
+});
+
+//Delete Pothole
+router.get('/deletepothole/:id', async (req, res) => {
+    let sql = `DELETE FROM potholes WHERE id= ${req.params.id}`;
+    let query = await db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        res.send('Pothole deleted');
+    });
 });
 
 router.post("/mid_test", userMiddleware, (req, res) => {
