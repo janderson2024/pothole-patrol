@@ -16,7 +16,6 @@ if(!duplicateLongtitude(longsArray, newLongitude)) {
     console.log("Duplicate Longitude entry");
 };
 
-
 //Function to determine if latitude is a duplicate
 function duplicateLatitude(lats, newLat) {
     for (var i = 0; i < lats.length; i++) {
