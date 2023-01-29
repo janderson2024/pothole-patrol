@@ -99,7 +99,7 @@ router.post("/register", async (req, res) => {
     if(!city){
         //only run if city hasn't been set yet
         //now we make the call to the geoapify service
-        const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ userLat +"&lon=" + userLon + "&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
+        const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ userLat +"&lon=" + userLon + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
         const fetchResp = await fetch(geoUrl);
         const geoData = await fetchResp.json();
 
