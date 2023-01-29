@@ -2,15 +2,11 @@
 
 * {
     box-sizing: border-box;
+    --primary: white;
+    --secondary: black;
+    --tertiary: rgb(201, 197, 197);
 }
 
-/*
-.Body {
-    background-color: whitesmoke;
-    /*background-image: url(ivan-rivero-black-white.png);
-    background-repeat: no-repeat; 
-    
-} */
 /* container class is a placeholder and will be deleted in future */
 .container {
     font-family: 'Roboto Slab';
@@ -24,11 +20,11 @@
     font-weight: bold;
     font-size: 1.25rem;
     border-radius: 10px;
-    background-color: black;
-    color: white;
+    background-color: var(--secondary);
+    color: var(--primary);
     display: flex;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
     gap: 2rem;
     padding: 0 1rem;
     margin-bottom: 20%;
@@ -39,11 +35,17 @@
     font-size: 2rem;
 }
 
+.site-title:hover {
+    color: rgb(161, 159, 159);
+    text-decoration: underline;
+}
+
 .nav ul {
     list-style: none;
     display: flex;
     font-size: 1.5rem;
     gap: 1rem;
+    align-items: center;
 }
 
 .nav a {
@@ -51,22 +53,26 @@
     text-decoration: none;
     height: 100%;
     display: flex;
-    align-items: center;
     padding-right: 2rem;
 }
 
-.nav li.active {
-    color: rgb(161, 159, 159);
+.nav li.active, .nav li:hover {
+    color: var(--tertiary);
     font-size: larger;
     text-decoration: underline;
 }
+
+.hamburger {
+    display: none;
+}
+
 
 .SubmitLocation {
     font-family: 'Roboto Slab';
     display: flex;
     font-size: 1.75rem;
-    background-color: black;
-    color: white;
+    background-color: var(--secondary);
+    color: var(--primary);
     width: 350px;
     border-radius: 10px;
     border-style: none;
@@ -81,8 +87,8 @@
 .SubmitLocation:hover {
     color: black;
     font-size: 2rem;
-    background-color: white;
-    border: 1px solid black;
+    background-color: var(--primary);
+    border: 1px solid var(--secondary);
     cursor: pointer;
 }
 
@@ -101,7 +107,7 @@
     border-style: none;
     text-align: center;
     justify-content: center;
-    padding: 10px;
+    padding: 30px;
     margin: auto;
     margin-bottom: 50px;
     text-align: center;
@@ -109,24 +115,17 @@
 }
 
 .LocateOnMap:hover {
-    color: black;
-    background-color: white;
-    border: 1px solid black;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
     cursor: pointer;
-}
-/* .coordinates is temporary - will remove eventually */
-.coordinates {
-    font-family: 'Roboto Slab';
-    font-size: 1rem;
-    text-align: center;
 }
 
 @media screen and (max-width: 2160px) {
     .nav {
       margin-bottom: 300px;
       padding: .5 .5rem;
-
     }
+
   }
 
 @media screen and (max-width: 600px) {
@@ -137,20 +136,38 @@
 
     .nav ul {
         font-size: 1.25rem;
+        display: none;
     }
 
     .site-title {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
     }
 
     .button {
         font-size: 1.5rem;
         margin-bottom: 75px;
     }
+   
+.hamburger {
+    display: flex;
+    border-style: none;
+    padding: 10px;
+    width: 45px;
+    height: 40px;
+    margin: 5px;
+    background: linear-gradient(
+        to bottom, 
+        var(--primary), var(--primary) 20%,
+        var(--secondary) 20%, var(--secondary) 40%, 
+        var(--primary) 40%, var(--primary) 60%, 
+        var(--secondary) 60%, var(--secondary) 80%, 
+        var(--primary) 80%, var(--primary) 100%,
+        var(--secondary) 60%, var(--secondary) 80%
+);
+}  
+}  
+    
+    
+   
 
-    /*.Body {
-        box-sizing: content-box;
-        background-size: 210%;
-    }
-    */
-}
+

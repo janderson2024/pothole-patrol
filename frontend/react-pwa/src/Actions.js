@@ -62,7 +62,7 @@ function LocateOnMap(props) {
   return (
     <Link className="LocateLink" to="/mark_map">
       <button className="LocateOnMap">
-        <p>{props.text}</p>
+       {props.text}
       </button>
     </Link>
   );
