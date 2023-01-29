@@ -31,12 +31,22 @@
     <br /><br />
     <button onclick="getLocation(callMiddlewareTest, showError)">Send a post request to the userMiddleware</button>
     <button onclick="getLocation(callSubmitPothole, showError)">Send a get request to the submitPothole</button>
+    <button onclick="getLocation(callFrontendTest, showError)">Send a post request to the frontendTest</button>
     <p id="test-output"></p>
+    <hr/>
+    <p>Set your own custom lat/lon (Note: the userMiddleware will detect this and block the request)</p>
+    <input type="text" id="custom-lat" placeholder="Latitude">
+    <input type="text" id="custom-lon" placeholder="Longitude">
+    <button type="button" id="custom-pos-save" onclick="saveCustomLocation()">Save Custom Location</button>
+    <button type="button" id="custom-pos-clear" onclick="clearCustomLocation()">Clear Custom Location</button>
 
     <script>
-        var myLatitude;
-        var myLongitude;
-        output = document.getElementById("test-output");
+        var testLatitude = ""; 
+        var testLongitude = "";
+
+        const custoLat = document.getElementById("custom-lat");
+        const custoLon = document.getElementById("custom-lon");
+        const output = document.getElementById("test-output");
 
         function getLocation(success, error) {
             if (navigator.geolocation) {
@@ -47,11 +57,28 @@
         }
 
         function showPosition(position) {
+            if(testLatitude){
+                output.innerHTML = "Custom Latitude: " + testLatitude +
+                " Custom Longitude: " + testLongitude;
+            } else {
             output.innerHTML = "Latitude: " + position.coords.latitude +
                 " Longitude: " + position.coords.longitude;
+            }
             console.log(position);
-            myLatitude = position.coords.latitude;
-            myLongitude = position.coords.longitude;
+        }
+
+        function saveCustomLocation() {
+            testLatitude = custoLat.value;
+            testLongitude = custoLon.value;
+            output.innerHTML = "Custom Latitude: " + testLatitude +
+                " Custom Longitude: " + testLongitude;
+        }
+
+        function clearCustomLocation() {
+            testLatitude = "";
+            testLongitude = "";
+            custoLat.value = "";
+            custoLon.value = "";
         }
 
         function showError(error) {
@@ -73,8 +100,8 @@
 
         async function callRegisterApi(position) {
             const data = {
-                "latitude": position.coords.latitude,
-                "longitude": position.coords.longitude
+                "latitude": testLatitude || position.coords.latitude,
+                "longitude": testLongitude || position.coords.longitude
             };
 
             response = await fetch('./user/register', {
@@ -91,8 +118,8 @@
 
         async function callMiddlewareTest(position) {
             const data = {
-                "latitude": position.coords.latitude,
-                "longitude": position.coords.longitude
+                "latitude": testLatitude || position.coords.latitude,
+                "longitude": testLongitude || position.coords.longitude
             };
 
             response = await fetch('./api/mid_test', {
@@ -109,8 +136,8 @@
         }
         async function callSubmitPothole(position) {
             const data = {
-                "latitude": position.coords.latitude,
-                "longitude": position.coords.longitude
+                "latitude": testLatitude || position.coords.latitude,
+                "longitude": testLongitude || position.coords.longitude
             };
             //GET for now, but needs to be a POST
             response = await fetch('./api/submitpothole', {
@@ -119,6 +146,25 @@
                     'Content-type': 'application/json'
                 },
                 //body: JSON.stringify(data),
+            });
+
+            text = await response.text();
+            console.log(text);
+
+        }
+
+        async function callFrontendTest(position) {
+            const data = {
+                "latitude": testLatitude || position.coords.latitude,
+                "longitude": testLongitude || position.coords.longitude
+            };
+
+            response = await fetch('./api/frontend_test', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data),
             });
 
             text = await response.text();
