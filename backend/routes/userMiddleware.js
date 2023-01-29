@@ -33,7 +33,7 @@ async function userMiddleware(req, res, next){
         return res.status(401).json({"error":"No included lat/lon"});
     }
 
-    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
+    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
     const fetchResp = await fetch(geoUrl);
     const geoData = await fetchResp.json();
 
