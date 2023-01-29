@@ -35,9 +35,25 @@ const MarkMapLocation = () => {
     });
   }
 
-  const handleLogLocation = () => {
+  const handleLogLocation = async () => {
+    const coordinates = {
+      latitude: markerCoords.lat,
+      longitude: markerCoords.lng,
+    }
+
+    //TODO: switch frontend_test to be report_pothole once code is finished
+    const response = await fetch("./api/frontend_test", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(coordinates),
+    });
+    const resp = await response.json();
+    console.log(resp);
+    
     // Send markerCoords to backend MySQL database
-    console.log(`Marker Coordinates: ${markerCoords.lat}, ${markerCoords.lng}`);
+    //console.log(`Marker Coordinates: ${markerCoords.lat}, ${markerCoords.lng}`);
     // navigate to a different page using history.push
     // history.push('/');
   }
