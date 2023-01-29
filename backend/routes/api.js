@@ -41,7 +41,7 @@ router.post("/mid_test", userMiddleware, (req, res) => {
 router.post("/frontend_test", userMiddleware, (req, res) => {
     console.log("The frontend made a request to this api!");
 
-    res.send({"success": "Data was totally saved in the database"});
+    res.send({"success": "Data was recieved and will be saved", "lat" : req.latitude, "long" : req.longitude});
 })
 
 module.exports = router;
