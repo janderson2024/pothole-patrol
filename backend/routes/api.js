@@ -38,10 +38,10 @@ router.post("/mid_test", userMiddleware, (req, res) => {
     res.send({"nerd": "true"});
 });
 
-router.post("/frontend_test", userMiddleware, (req, res) => {
+router.post("/frontend_test", (req, res) => {
     console.log("The frontend made a request to this api!");
 
-    res.send({"success": "Data was recieved and will be saved", "lat" : req.latitude, "long" : req.longitude});
+    res.send({"success": "Data was recieved and will be saved", "lat" : req.body.latitude, "long" : req.body.longitude});
 })
 
 module.exports = router;
