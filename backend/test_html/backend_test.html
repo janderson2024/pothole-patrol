@@ -76,7 +76,7 @@
                 "longitude": position.coords.longitude
             };
 
-            response = await fetch('/user/register', {
+            response = await fetch('./user/register', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -94,7 +94,7 @@
                 "longitude": position.coords.longitude
             };
 
-            response = await fetch('/api/mid_test', {
+            response = await fetch('./api/mid_test', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
