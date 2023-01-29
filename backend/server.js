@@ -16,32 +16,48 @@ app.use(
     cookieParser(process.env.COOKIE_SECRET)
 );
 
-app.get("/test_html", (req, res) => {
+
+
+home = "/";
+user = "/user";
+api = "/api";
+test_html = "/test_html";
+static = "/";
+
+if(process.env.MODE == "development"){
+    potholeLink = "/pothole-patrol"
+    home = potholeLink + home;
+    user = potholeLink + user;
+    api = potholeLink + api;
+    test_html = potholeLink + test_html;
+    static = potholeLink + static;
+    app.get("/", (req, res) => {
+        res.send("<a href='."+home+"'>Main page</a><br/>" +
+        "<a href='."+test_html+"'>Backend test html link</a>");
+    });
+}
+
+app.get(test_html, (req, res) => {
     res.sendFile(path.join(__dirname, "/test_html/backend_test.html"));
 });
 
-
-app.get("/", async (req, res) => {
-    if(process.env.MODE == "production"){
-        const frontendPath = path.join(__dirname, "../frontend/react-pwa/build/index.html");
-        if(await fileExists(frontendPath)){
-            res.sendFile(frontendPath);
-        } else {
-            res.send("!ERROR!: the react pwa project has not been built yet! " + 
-            "go to the frontent/react-pwa folder and run \"npm run build\"!");
-        }
+app.get(home, async (req, res) => {
+    const frontendPath = path.join(__dirname, "../frontend/react-pwa/build/index.html");
+    if(await fileExists(frontendPath)){
+        res.sendFile(frontendPath);
     } else {
-        res.send("Backend Dev server :)");
+        res.send("No Build folder. <a href='./test_html'>Backend test html</a>");
     }
 });
 
 const userRouter = require("./routes/user");
 const apiRouter = require("./routes/api");
+const { env } = require("process");
 
-app.use("/user", userRouter);
-app.use("/api", apiRouter);
+app.use(user, userRouter);
+app.use(api, apiRouter);
 
-app.use(express.static("../frontend/react-pwa/build"));
+app.use(static,express.static("../frontend/react-pwa/build"));
 
 app.listen(port, () => {
     if(process.env.MODE == "development"){
