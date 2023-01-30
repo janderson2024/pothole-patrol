@@ -1,5 +1,5 @@
 export default function ViewMap() {
   return (
-    <h1 className="container">This page will be where a user can see the map.</h1>
+    <h3>UNDER CONSTRUCTION: page for viewing all reports on a map</h3>
   );
 }
