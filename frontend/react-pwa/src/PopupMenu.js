@@ -33,10 +33,10 @@ const MenuPopupState = () => {
       </Button>
       <Menu {...bindMenu(popupState)}>
         <MenuItem>
-            <CustomLink className="link" to="/view_map">VIEW MAP</CustomLink>
+            <CustomLink className="link" to="/view_map/">VIEW MAP</CustomLink>
         </MenuItem>
         <MenuItem>
-            <CustomLink className="link" to="/about">ABOUT</CustomLink>
+            <CustomLink className="link" to="/about/">ABOUT</CustomLink>
         </MenuItem>
       </Menu>
     </div>

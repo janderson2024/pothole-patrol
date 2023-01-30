@@ -42,18 +42,18 @@ const MarkMapLocation = () => {
     }
 
     //TODO: switch frontend_test to be report_pothole once code is finished
-    const response = await fetch("./api/frontend_test", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(coordinates),
-    });
-    const resp = await response.json();
-    console.log(resp);
+    // const response = await fetch("./api/frontend_test", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(coordinates),
+    // });
+    // const resp = await response.json();
+    // console.log(resp);
     
     // Send markerCoords to backend MySQL database
-    //console.log(`Marker Coordinates: ${markerCoords.lat}, ${markerCoords.lng}`);
+    console.log(`Marker Coordinates: ${markerCoords.lat}, ${markerCoords.lng}`);
     // navigate to a different page using history.push
     // history.push('/');
   }
@@ -61,7 +61,7 @@ const MarkMapLocation = () => {
   return (
     <div>
       <div>
-      <Button variant="contained" color="primary" onClick={handleLogLocation}>Log my location</Button>
+      
         <MapContainer className='map-container' center={[location.lat, location.lng]} zoom={zoom} scrollWheelZoom={false}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -69,7 +69,7 @@ const MarkMapLocation = () => {
           />
           {haveUsersLocation ?
             <Marker position={[location.lat, location.lng]} draggable={true} onDragEnd={handleMarkerDrag}>
-              <Popup>You are here</Popup>
+              <Popup><Button variant="contained" color="primary" onClick={handleLogLocation}>Log my location</Button></Popup>
             </Marker> : ''
           }
         </MapContainer>

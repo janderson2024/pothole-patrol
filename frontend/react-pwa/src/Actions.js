@@ -60,7 +60,7 @@ function SubmitLocation() {
 
 function LocateOnMap(props) {
   return (
-    <Link className="LocateLink" to="/mark_map">
+    <Link className="LocateLink" to="/mark_map/">
       <button className="LocateOnMap">
        {props.text}
       </button>

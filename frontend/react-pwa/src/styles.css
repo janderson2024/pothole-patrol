@@ -9,6 +9,18 @@
     --quinary: aqua; 
 }
 
+.no-bottom-margin {
+    margin-bottom: 0!important;
+    border-radius: 5px;
+    background-color: var(--secondary);
+    color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    padding-right: .75rem;
+    padding-left: .75rem;
+    align-items: center;
+}
+
 .body {
     height: 100vh;
 }
