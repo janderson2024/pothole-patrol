@@ -51,7 +51,7 @@ router.get("/show_console", (req, res) => {
     if(req.cookies["test_html_key"] != process.env.TEST_HTML_KEY){
         res.send("Imagine trying to bypass my checks lmaoooooooo");
     }
-    res.sendFile(path.join(__dirname, "../../../output.txt"));
+    res.sendFile(path.join(__dirname, "../output.txt"));
 });
 
 
