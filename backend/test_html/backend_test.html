@@ -32,36 +32,39 @@
     <button onclick="getLocation(callMiddlewareTest, showError)">Send a post request to the userMiddleware</button>
     <!--<button onclick="getLocation(callSubmitPothole, showError)">Send a get request to the submitPothole</button>-->
     <button onclick="getLocation(callFrontendTest, showError)">Send a post request to the frontendTest</button>
-    <p id="test-output"></p>
+    <p id="coord-output"></p>
     <hr/>
     <p>Set your own custom lat/lon (Note: the userMiddleware will detect this and block the request)</p>
     <input type="text" id="custom-lat" placeholder="Latitude">
     <input type="text" id="custom-lon" placeholder="Longitude">
     <button type="button" id="custom-pos-save" onclick="saveCustomLocation()">Save Custom Location</button>
     <button type="button" id="custom-pos-clear" onclick="clearCustomLocation()">Clear Custom Location</button>
-
+    <hr/>
+    <button type="button" id ="show-production-console" onclick="showConsole()">Load Server Console</button>
+    <p id="console-output"></p>
     <script>
         var testLatitude = ""; 
         var testLongitude = "";
 
         const custoLat = document.getElementById("custom-lat");
         const custoLon = document.getElementById("custom-lon");
-        const output = document.getElementById("test-output");
+        const coordOutput = document.getElementById("coord-output");
+        const consoleOutput = document.getElementById("console-output");
 
         function getLocation(success, error) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(success, error);
             } else {
-                output.innerHTML = "Geolocation is not supported by this browser.";
+                coordOutput.innerHTML = "Geolocation is not supported by this browser.";
             }
         }
 
         function showPosition(position) {
             if(testLatitude){
-                output.innerHTML = "Custom Latitude: " + testLatitude +
+                coordOutput.innerHTML = "Custom Latitude: " + testLatitude +
                 " Custom Longitude: " + testLongitude;
             } else {
-            output.innerHTML = "Latitude: " + position.coords.latitude +
+                coordOutput.innerHTML = "Latitude: " + position.coords.latitude +
                 " Longitude: " + position.coords.longitude;
             }
             console.log(position);
@@ -70,7 +73,7 @@
         function saveCustomLocation() {
             testLatitude = custoLat.value;
             testLongitude = custoLon.value;
-            output.innerHTML = "Custom Latitude: " + testLatitude +
+            coordOutput.innerHTML = "Custom Latitude: " + testLatitude +
                 " Custom Longitude: " + testLongitude;
         }
 
@@ -84,16 +87,16 @@
         function showError(error) {
             switch (error.code) {
                 case error.PERMISSION_DENIED:
-                    output.innerHTML = "User denied the request for Geolocation.";
+                coordOutput.innerHTML = "User denied the request for Geolocation.";
                     break;
                 case error.POSITION_UNAVAILABLE:
-                    output.innerHTML = "Location information is unavailable.";
+                coordOutput.innerHTML = "Location information is unavailable.";
                     break;
                 case error.TIMEOUT:
-                    output.innerHTML = "The request to get user location timed out.";
+                coordOutput.innerHTML = "The request to get user location timed out.";
                     break;
                 case error.UNKNOWN_ERROR:
-                    output.innerHTML = "An unknown error occurred.";
+                coordOutput.innerHTML = "An unknown error occurred.";
                     break;
             }
         }
@@ -170,6 +173,14 @@
             text = await response.text();
             console.log(text);
 
+        }
+        async function showConsole(){
+            response = await fetch('./api/show_console', {
+                method: 'GET'
+            });
+
+            text = await response.text();
+            consoleOutput.innerHTML = text;
         }
     </script>
 </body>

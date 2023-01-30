@@ -42,7 +42,19 @@ router.post("/frontend_test", (req, res) => {
     console.log("The frontend made a request to this api!");
 
     res.send({"success": "Data was recieved and will be saved", "lat" : req.body.latitude, "long" : req.body.longitude});
-})
+});
+
+router.get("/show_console", (req, res) => {
+    if(process.env.MODE != "production"){
+        res.send("You are not on the server. You dont need to access this!");
+    }
+    if(req.signedCookies["test_html_key"] != process.env.TEST_HTML_KEY){
+        res.send("Imagine trying to bypass my checks lmaoooooooo");
+    }
+    res.sendFile(path.join(__dirname, "../../../output.txt"));
+});
+
+
 
 module.exports = router;
 
