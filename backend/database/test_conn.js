@@ -23,7 +23,12 @@ async function exampleRoutePrepared(){
 }
 
 
-exampleRoute();
-exampleRoutePrepared();
-//after this you should run: db.end()
-//this makes sure to clean up the current connection!!
+
+async function main() {
+    console.log(process.env);
+    await exampleRoute();
+    await exampleRoutePrepared();
+    db.end();
+}
+
+main();
