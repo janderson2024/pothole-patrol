@@ -34,12 +34,12 @@ function SubmitLocation() {
 
           const text = await response.text();
           console.log(text); */
-
+          // https://stackoverflow.com/questions/63820933/how-to-disable-a-button-using-react-usestate-hook-inside-event-handler
           setStatus("SUBMITTED!");
           console.log(coordinates)
           setTimeout(() => {
             setStatus("SUBMIT MY LOCATION")
-          }, 5000);
+          }, 3000);
         },
 
         () => {
