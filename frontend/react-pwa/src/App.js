@@ -1,5 +1,3 @@
-// the whole import section is kinda like the React way of having links instead of <link> html tag
-import './styles.css';
 import Home from './pages/Home.js';
 import ViewMap from './pages/ViewMap.js';
 import MarkMap from './pages/MarkMap.js';

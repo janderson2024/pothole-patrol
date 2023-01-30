@@ -1,18 +1,4 @@
-import { Link, useMatch, useResolvedPath } from "react-router-dom";
-
-
-function CustomLink({ to, children, ...props }) {
-  const resolvedPath = useResolvedPath(to);
-  const isActive = useMatch({ path: resolvedPath.pathname, end: true }); //
-
-  return (
-    <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
-        {children}
-      </Link>
-    </li>
-  );
-}
+import MenuPopupState from "./PopupMenu";
 
 export default function Navbar() {
   return (
@@ -20,11 +6,8 @@ export default function Navbar() {
       <h1 className="site-title">
         <a href="/pothole-patrol/">Pothole Patrol</a>
       </h1>
-      <ul>
-        <CustomLink to="/view_map">Map</CustomLink>
-        <CustomLink to="/about">About</CustomLink>
-      </ul>
-      <button className="hamburger"></button>
+      <MenuPopupState />
     </nav>
   );
 }
+

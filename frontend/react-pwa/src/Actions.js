@@ -5,19 +5,19 @@ export default function Actions(props) {
   return (
     <div>
       <SubmitLocation />
-      <LocateOnMap text="Locate on Map" />
+      <LocateOnMap text="LOCATE ON MAP" />
     </div>
   );
 }
 
 function SubmitLocation() {
-  const [status, setStatus] = useState("Submit My Location");
+  const [status, setStatus] = useState("SUBMIT MY LOCATION");
 
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus("Geolocation is not supported by your browser");
     } else {
-      setStatus("Locating...");
+      setStatus("LOCATING...");
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const coordinates = {
@@ -35,10 +35,10 @@ function SubmitLocation() {
           const text = await response.text();
           console.log(text); */
 
-          setStatus("Submitted!");
+          setStatus("SUBMITTED!");
           console.log(coordinates)
           setTimeout(() => {
-            setStatus("Submit My Location")
+            setStatus("SUBMIT MY LOCATION")
           }, 5000);
         },
 
