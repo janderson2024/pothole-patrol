@@ -18,12 +18,12 @@
             background-color: rgb(84, 87, 112);
         }
 
-        p {
+        pre {
             color: white;
             font-size: 16px;
         }
 
-        #coord-output{
+        #console-output{
             border: 1px white solid;
         }
     </style>
@@ -36,9 +36,9 @@
     <button onclick="getLocation(callMiddlewareTest, showError)">Send a post request to the userMiddleware</button>
     <!--<button onclick="getLocation(callSubmitPothole, showError)">Send a get request to the submitPothole</button>-->
     <button onclick="getLocation(callFrontendTest, showError)">Send a post request to the frontendTest</button>
-    <p id="coord-output"></p>
+    <pre id="coord-output"></pre>
     <hr/>
-    <p>Set your own custom lat/lon (Note: the userMiddleware will detect this and block the request)</p>
+    <pre>Set your own custom lat/lon (Note: the userMiddleware will detect this and block the request)</pre>
     <input type="text" id="custom-lat" placeholder="Latitude">
     <input type="text" id="custom-lon" placeholder="Longitude">
     <button type="button" id="custom-pos-save" onclick="saveCustomLocation()">Save Custom Location</button>
