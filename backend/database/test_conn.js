@@ -5,9 +5,16 @@ const db = require("./connection");
 
 //This is a very basic example of how to make a query with the database
 async function exampleRoute(){
-    sql = 'SELECT * FROM `Users`';
-    const [results] = await db.query(sql);
+    sql = 'SELECT  * FROM `Potholes` WHERE `city` = ?'
+    cityName = "Des Moines";
+    //sql = 'SELECT * FROM `Users`';
+    const [results] = await db.query(sql, cityName);
     console.log(results);
+
+    for(result of results){
+        console.log(parseFloat(result.approx_latitude));
+        console.log(result.approx_longitude);
+    }
 }
 
 
@@ -25,7 +32,7 @@ async function exampleRoutePrepared(){
 
 
 async function main() {
-    console.log(process.env);
+    //console.log(process.env);
     await exampleRoute();
     await exampleRoutePrepared();
     db.end();
