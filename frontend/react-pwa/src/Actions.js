@@ -15,7 +15,7 @@ function SubmitLocation() {
 
   const getLocation = () => {
     if (!navigator.geolocation) {
-      setStatus("Geolocation is not supported by your browser");
+      setStatus("UNABLE TO GET LOCATION");
     } else {
       setStatus("LOCATING...");
       navigator.geolocation.getCurrentPosition(
@@ -43,7 +43,7 @@ function SubmitLocation() {
         },
 
         () => {
-          setStatus("Unable to retrieve your location");
+          setStatus("UNABLE TO GET LOCATION");
         }
       );
     }

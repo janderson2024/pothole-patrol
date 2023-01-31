@@ -36,7 +36,7 @@ const MenuPopupState = () => {
             <CustomLink className="link" to="/view_map/">VIEW MAP</CustomLink>
         </MenuItem>
         <MenuItem>
-            <CustomLink className="link" to="/about/">ABOUT</CustomLink>
+            <CustomLink className="link" to="/about/">HOW IT WORKS</CustomLink>
         </MenuItem>
       </Menu>
     </div>
