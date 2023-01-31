@@ -47,10 +47,10 @@ router.post("/frontend_test", (req, res) => {
 
 router.get("/show_console", (req, res) => {
     if(process.env.MODE != "production"){
-        res.send("You are not on the server. You dont need to access this!");
+        return res.send("You are not on the server. You dont need to access this!");
     }
     if(req.cookies["test_html_key"] != process.env.TEST_HTML_KEY){
-        res.send("Imagine trying to bypass my checks lmaoooooooo");
+        return res.send("Imagine trying to bypass my checks lmaoooooooo");
     }
     res.sendFile(path.join(__dirname, "../output.txt"));
 });
