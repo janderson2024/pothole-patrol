@@ -6,10 +6,7 @@ export default function Navbar() {
   const location = useLocation();
 
   let className = 'nav';
-  
-
   if (location.pathname === '/mark_map/' || location.pathname === '/view_map/' || location.pathname === '/about/') {
-
     className +=' no-bottom-margin';
     
   }
