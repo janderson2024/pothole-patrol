@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 // import { useHistory } from 'react-router-dom';
 import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
