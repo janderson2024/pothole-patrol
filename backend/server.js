@@ -7,6 +7,10 @@ const cookieParser = require('cookie-parser');
 const path = require("path");
 const fileExists = require("./helpers/fileExists");
 
+const userRouter = require("./routes/user");
+const apiRouter = require("./routes/api");
+
+
 const app = express();
 const port = 8106;
 
@@ -37,6 +41,11 @@ if(process.env.MODE == "development"){
     });
 }
 
+app.use(static,express.static("../frontend/react-pwa/build"));
+
+app.use(user, userRouter);
+app.use(api, apiRouter);
+
 app.get(test_html, (req, res) => {
     if(process.env.MODE == "production"){
         if(req.cookies["test_html_key"] != process.env.TEST_HTML_KEY){
@@ -46,7 +55,8 @@ app.get(test_html, (req, res) => {
     res.sendFile(path.join(__dirname, "/test_html/backend_test.html"));
 });
 
-app.get(home, async (req, res) => {
+//fixes the issue with "cannot get only if the react side changes"
+app.get(home + "*", async (req, res) => {
     const frontendPath = path.join(__dirname, "../frontend/react-pwa/build/index.html");
     if(await fileExists(frontendPath)){
         res.sendFile(frontendPath);
@@ -54,15 +64,6 @@ app.get(home, async (req, res) => {
         res.send("No Build folder. <a href='./test_html'>Backend test html</a>");
     }
 });
-
-const userRouter = require("./routes/user");
-const apiRouter = require("./routes/api");
-const { env } = require("process");
-
-app.use(user, userRouter);
-app.use(api, apiRouter);
-
-app.use(static,express.static("../frontend/react-pwa/build"));
 
 app.listen(port, () => {
     if(process.env.MODE == "development"){
