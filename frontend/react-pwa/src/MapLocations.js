@@ -25,7 +25,7 @@ const MapLocations = () => {
       },
       (error) => {
         console.log('Location error: ', error);
-        alert("You must accept location request for this app to work. Thank You! PotHole Patrol");
+        alert("You must accept the location request for this app to work. Thank You. -Pothole Patrol");
       },
     );
   }, []);
