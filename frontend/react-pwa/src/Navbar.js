@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className={className}>
       <h1 className='site-title'>
-        <Link to="/">Pothole patrol</Link>
+        <Link to="/">Pothole Patrol</Link>
       </h1>
       <MenuPopupState />
     </nav>
