@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Actions(props) {
   return (
-    <div>
+    <div className="actions-container">
       <SubmitLocation />
       <LocateOnMap text="LOCATE ON MAP" />
     </div>
