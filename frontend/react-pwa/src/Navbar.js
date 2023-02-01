@@ -1,6 +1,7 @@
 import React from 'react';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MenuPopupState from "./PopupMenu";
+
 
 export default function Navbar() {
   const location = useLocation();
@@ -14,10 +15,12 @@ export default function Navbar() {
   return (
     <nav className={className}>
       <h1 className='site-title'>
-        <a href="/pothole-patrol/">Pothole Patrol</a>
+        <Link to="/">Pothole patrol</Link>
       </h1>
       <MenuPopupState />
     </nav>
   );
 }
+
+// note: make a catch-all route, but also - the a href link above might be ejecting us from the react app
 
