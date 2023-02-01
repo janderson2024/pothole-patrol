@@ -24,7 +24,6 @@ function SubmitLocation() {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           };
-          
          const response = await fetch("./api/frontend_test", {
             method: "POST",
             headers: {
@@ -32,11 +31,8 @@ function SubmitLocation() {
             },
             body: JSON.stringify(coordinates),
           });
-
           const text = await response.text();
           console.log(text);
-
-          // https://stackoverflow.com/questions/63820933/how-to-disable-a-button-using-react-usestate-hook-inside-event-handler
           setStatus("SUBMITTED!");
           console.log(coordinates)
           setTimeout(() => {
@@ -69,3 +65,5 @@ function LocateOnMap(props) {
     </Link>
   );
 }
+
+//nest in a container with side margins? 
