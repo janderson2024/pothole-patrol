@@ -1,7 +1,6 @@
 const fetch = require("node-fetch");
 
 const db = require("../database/connection");
-const latlonDistance = require("../helpers/latlonDistance");
 
 const COOKIE_NAME = process.env.COOKIE_NAME;
 
@@ -36,11 +35,10 @@ async function userMiddleware(req, res, next){
     const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
     const fetchResp = await fetch(geoUrl);
     const geoData = await fetchResp.json();
-
     if(geoData.error){
         return res.status(401).json({"geoData error": geoData.message});
     }
-    if(geoData.results.length < 1){
+    if(geoData.results.length < 1 || (!geoData.results[0].city)){
         return res.status(401).json({"geoData error": "Lat Lon could not result in a city"});
     }
     geoCity = geoData.results[0].city;
