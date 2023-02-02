@@ -11,15 +11,19 @@ router.get("/", (req, res) => {
 });
 
 //Add hard-coded sample pothole
-router.get("/submitpothole", async (req, res) => {
+router.post("/submitpothole", async (req, res) => {
+    let userLat = req.body.latitude;
+    let userLong = req.body.longitude;
+    console.log(userLat);
+    console.log(userLong);
     console.log("Adding pothole to database");
     let pothole = {
         city : "Des Moines", 
         zipcode: "50311",
         report_count: 1,
         status: "Not completed",
-        approx_latitude: "41.6039",
-        approx_longitude: "-93.6585"
+        approx_latitude: userLat,
+        approx_longitude: userLong
     };
     let sql = "INSERT INTO potholes SET ?";
     let query =  await db.query(sql, pothole, (err, result) => {

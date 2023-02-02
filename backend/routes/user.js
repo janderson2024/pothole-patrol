@@ -103,7 +103,7 @@ router.post("/register", async (req, res) => {
         const fetchResp = await fetch(geoUrl);
         const geoData = await fetchResp.json();
 
-        city = geoData.results[0].city;
+        //city = geoData.results[0].city;
     }
 
     //At this point: it is time to insert the new user
