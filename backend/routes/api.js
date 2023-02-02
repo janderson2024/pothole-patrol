@@ -39,6 +39,10 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     console.log("Pothole added correctly");*/
 });
 
+router.get("/potholes", async (req, res) => {
+
+});
+
 router.post("/mid_test", userMiddleware, (req, res) => {
     console.log("On the api side...");
     console.log(req.user);

@@ -32,10 +32,11 @@
 <body>
     <button onclick="getLocation(callRegisterApi, showError)">Send a post request to the /user/register</button>
     <button onclick="getLocation(showPosition, showError)">test getting location</button>
-    <br /><br />
+    <br />
     <button onclick="getLocation(callMiddlewareTest, showError)">Send a post request to the userMiddleware</button>
-    <!--<button onclick="getLocation(callSubmitPothole, showError)">Send a get request to the submitPothole</button>-->
     <button onclick="getLocation(callFrontendTest, showError)">Send a post request to the frontendTest</button>
+    <br/>
+    <button onclick="getLocation(getPotholesTest, showError)">Get Potholes from location</button>
     <pre id="coord-output"></pre>
     <hr/>
     <pre>Set your own custom lat/lon (Note: the userMiddleware will detect this and block the request)</pre>
@@ -46,11 +47,11 @@
     <hr/>
     <button type="button" id ="show-production-console" onclick="showConsole()">Load Server Console</button>
     <pre id="console-output"></pre>
-    <button type="button" id="submitPotholeToDB" onclick="submitPotholeToDB()">Submit Pothole to Database</button>
+    <button type="button" id="submitPotholeToDB" onclick="getLocation(submitPotholeToDB, showError)">Submit Pothole to Database</button>
 
     <script>
-        var testLatitude = ""; 
-        var testLongitude = "";
+        var testLatitude = undefined; 
+        var testLongitude = undefined;
 
         const custoLat = document.getElementById("custom-lat");
         const custoLon = document.getElementById("custom-lon");
@@ -84,8 +85,8 @@
         }
 
         function clearCustomLocation() {
-            testLatitude = "";
-            testLongitude = "";
+            testLatitude = undefined;
+            testLongitude = undefined;
             custoLat.value = "";
             custoLon.value = "";
         }
@@ -189,7 +190,7 @@
             consoleOutput.innerHTML = text;
         }
 
-        async function submitPotholeToDB() {
+        async function submitPotholeToDB(position) {
             const data = {
                 "latitude": testLatitude || position.coords.latitude,
                 "longitude": testLongitude || position.coords.longitude
@@ -206,6 +207,20 @@
             text = await response.text();
             console.log(text);
         };
+
+        async function getPotholesTest(position) {
+            const data = {
+                lat: testLatitude || position.coords.latitude,
+                lng: testLongitude || position.coords.longitude
+            };
+            const url = './api/potholes' + "?latitude=" + data.lat + "&longitude=" + data.lng + "&filter=city";
+        
+            response = await fetch(url, {
+                method: "GET"
+            });
+            text = await response.json();
+            console.log(text);
+        }
     </script>
 </body>
 </html>
