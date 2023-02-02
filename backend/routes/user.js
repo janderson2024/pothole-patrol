@@ -103,7 +103,14 @@ router.post("/register", async (req, res) => {
         const fetchResp = await fetch(geoUrl);
         const geoData = await fetchResp.json();
 
-        //city = geoData.results[0].city;
+        if(geoData.error){
+            return res.status(401).json({"geoData error": geoData.message});
+        }
+        if(geoData.results.length < 1){
+            return res.status(401).json({"geoData error": "Lat Lon could not result in a city"});
+        }
+        
+        city = geoData.results[0].city;
     }
 
     //At this point: it is time to insert the new user
