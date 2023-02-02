@@ -14,7 +14,8 @@ async function userMiddleware(req, res, next){
     const [result] = await db.query(getUserSql, [UID]);
     const user = result[0];
     if(!user){
-        return res.status(501).json({"error":"uid provided, but not in db"});
+        res.clearCookie(COOKIE_NAME);
+        return res.status(501).json({"error":"database reset. Need to /user/register again"});
     }
 
     const lastReport = new Date(user.last_report);
