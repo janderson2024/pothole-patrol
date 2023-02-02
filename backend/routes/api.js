@@ -3,7 +3,7 @@ const path = require("path");
 const router = express.Router();
 
 const userMiddleware = require("./userMiddleware");
-const apiHelper = require("../helpers/apiHelper");
+//const apiHelper = require("../helpers/apiHelper");
 const db = require("../database/connection");
 
 router.get("/", (req, res) => {
@@ -11,32 +11,36 @@ router.get("/", (req, res) => {
     console.log("API route successful");
 });
 
-//Add hard-coded sample pothole
-router.post("/submitpothole", userMiddleware, async (req, res) => {
+//Add hard-coded sample pothole (with user entered data from test_html)
+router.post("/submitpothole", async (req, res) => {
+    const completionStatus = "Not completed";
+    const initialReportCount = 1;
     let userLat = req.body.latitude;
     let userLong = req.body.longitude;
-    console.log(userLat);
-    console.log(userLong);
-    const dbLats = await getDBLatitudes();
-    console.log(dbLats);
+    //console.log(userLat);
+    //console.log(userLong);
+    const dbLats = await getPotholeLatitudes();
     const isDuplicateLatitude = await duplicateLatitude(dbLats, userLat);
     console.log(isDuplicateLatitude);
-    console.log("Adding pothole to database");
+    const dbLongs = await getPotholeLongitudes();
+    const isDuplicateLongitude = await duplicateLongitude(dbLongs, userLong);
+    console.log(isDuplicateLongitude);
+    //console.log("Adding pothole to database");
     let pothole = {
         city : "Des Moines", 
         zipcode: "50311",
-        report_count: 1,
-        status: "Not completed",
+        report_count: initialReportCount,
+        status: completionStatus,
         approx_latitude: userLat,
         approx_longitude: userLong
     };
-    /*let sql = "INSERT INTO potholes SET ?";
+    let sql = "INSERT INTO potholes SET ?";
     let query =  await db.query(sql, pothole, (err, result) => {
         if (err) throw err;
         console.log(result);
         res.send("Pothole added");
     });
-    console.log("Pothole added correctly");*/
+    console.log("Pothole added correctly");
 });
 
 router.get("/potholes", async (req, res) => {
@@ -79,7 +83,7 @@ module.exports = router;
     //format and res.json()
 });*/
 
-async function getDBLatitudes(){
+async function getPotholeLatitudes(){
     let allLatitudes = [];
     sql = 'SELECT  * FROM `Potholes`';
     const [results] = await db.query(sql);
@@ -91,14 +95,36 @@ async function getDBLatitudes(){
     return allLatitudes;
 }
 
+async function getPotholeLongitudes(){
+    let allLongitudes = [];
+    sql = 'SELECT  * FROM `Potholes`';
+    const [results] = await db.query(sql);
+    //console.log(results);
+    for(var i = 0; i < results.length; i++){
+        currentLong = parseFloat(results[i].approx_longitude);
+        allLongitudes.push(currentLong);
+    }
+    return allLongitudes;
+}
+
 async function duplicateLatitude(lats, newLat) {
     for (var i = 0; i < lats.length; i++) {
         var absLat = Math.abs(lats[i]);
-        console.log(absLat);
         var absNewLat = Math.abs(newLat);
-        console.log(absNewLat);
         var difference = absLat - absNewLat;
-        console.log(difference);
+        if (difference > -0.001 && difference < 0.001) {
+            return true;
+        }
+    }
+    return false;
+}
+
+//Function to determine if longitude is a duplicate
+async function duplicateLongitude(longs, newLong) {
+    for (var i = 0; i < longs.length; i++) {
+        var absLong = Math.abs(longs[i]);
+        var absNewLong = Math.abs(newLong);
+        var difference = absLong - absNewLong;
         if (difference > -0.001 && difference < 0.001) {
             return true;
         }
