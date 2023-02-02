@@ -3,6 +3,7 @@ const path = require("path");
 const router = express.Router();
 
 const userMiddleware = require("./userMiddleware");
+const apiHelper = require("../helpers/apiHelper");
 const db = require("../database/connection");
 
 router.get("/", (req, res) => {
@@ -16,6 +17,10 @@ router.post("/submitpothole", async (req, res) => {
     let userLong = req.body.longitude;
     console.log(userLat);
     console.log(userLong);
+    const dbLats = await getDBLatitudes();
+    console.log(dbLats);
+    const isDuplicateLatitude = await duplicateLatitude(dbLats, userLat);
+    console.log(isDuplicateLatitude);
     console.log("Adding pothole to database");
     let pothole = {
         city : "Des Moines", 
@@ -25,13 +30,13 @@ router.post("/submitpothole", async (req, res) => {
         approx_latitude: userLat,
         approx_longitude: userLong
     };
-    let sql = "INSERT INTO potholes SET ?";
+    /*let sql = "INSERT INTO potholes SET ?";
     let query =  await db.query(sql, pothole, (err, result) => {
         if (err) throw err;
         console.log(result);
         res.send("Pothole added");
     });
-    console.log("Pothole added correctly");
+    console.log("Pothole added correctly");*/
 });
 
 router.post("/mid_test", userMiddleware, (req, res) => {
@@ -69,3 +74,30 @@ module.exports = router;
     console.log(results);
     //format and res.json()
 });*/
+
+async function getDBLatitudes(){
+    let allLatitudes = [];
+    sql = 'SELECT  * FROM `Potholes`';
+    const [results] = await db.query(sql);
+    //console.log(results);
+    for(var i = 0; i < results.length; i++){
+        currentLat = parseFloat(results[i].approx_latitude);
+        allLatitudes.push(currentLat);
+    }
+    return allLatitudes;
+}
+
+async function duplicateLatitude(lats, newLat) {
+    for (var i = 0; i < lats.length; i++) {
+        var absLat = Math.abs(lats[i]);
+        console.log(absLat);
+        var absNewLat = Math.abs(newLat);
+        console.log(absNewLat);
+        var difference = absLat - absNewLat;
+        console.log(difference);
+        if (difference > -0.001 && difference < 0.001) {
+            return true;
+        }
+    }
+    return false;
+}
