@@ -37,11 +37,17 @@ async function userMiddleware(req, res, next){
     const fetchResp = await fetch(geoUrl);
     const geoData = await fetchResp.json();
 
-    //console.log(geoData);
+    console.log(geoData);
+    if(geoData.error){
+        return res.status(401).json({"geoData error": geoData.message});
+    }
+    if(geoData.results.length = 0){
+        return res.status(401).json({"geoData error": "Lat Lon could n"});
+    }
     geoCity = geoData.results[0].city;
-    //console.log("CITY: " + geoCity);
+    console.log("CITY: " + geoCity);
 
-    if(user.city != geoCity){
+    if(process.env.MODE == "production" && user.city != geoCity){
         return res.status(401).json({"error":"different city than recorded user city... fail quietly"});
     }
 
