@@ -49,7 +49,7 @@ app.use(api, apiRouter);
 app.get(test_html, (req, res) => {
     if(process.env.MODE == "production"){
         if(req.cookies["test_html_key"] != process.env.TEST_HTML_KEY){
-            res.send("Nah Im not letting you into our test file 😂");
+            return res.send("Nah Im not letting you into our test file 😂");
         }
     }
     res.sendFile(path.join(__dirname, "/test_html/backend_test.html"));
