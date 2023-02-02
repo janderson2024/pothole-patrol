@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 // import { useHistory } from 'react-router-dom';
 import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
@@ -53,7 +53,7 @@ const MarkMapLocation = () => {
         <MapContainer className='map-container' center={userLocation} zoom={15} scrollWheelZoom={false}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">PotHole Patrol | Monica Tuttle | Nicholas Hunter | Joshua Anderson | Dennis Bowen  </a>'
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
               <Marker
               position={markerPosition}
