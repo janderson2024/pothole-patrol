@@ -207,14 +207,15 @@
 
             text = await response.text();
             console.log(text);
-        };
+        }
 
         async function getPotholesTest(position) {
             const data = {
                 lat: testLatitude || position.coords.latitude,
-                lng: testLongitude || position.coords.longitude
+                lng: testLongitude || position.coords.longitude,
+                filter: "city" || "zip"
             };
-            const url = './api/potholes' + "?latitude=" + data.lat + "&longitude=" + data.lng + "&filter=city";
+            const url = './api/potholes' + "?latitude=" + data.lat + "&longitude=" + data.lng + "&filter=" + data.filter;
         
             response = await fetch(url, {
                 method: "GET"
