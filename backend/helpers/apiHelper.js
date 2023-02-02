@@ -4,7 +4,7 @@ var longsArray = [-93.6465, -93.6585, -93.6573];
 newLatitude = 41.6029;
 newLongitude = -93.65782
 
-if(!duplicateLatitude(latsArray, newLatitude)) {
+/*if(!duplicateLatitude(latsArray, newLatitude)) {
     console.log ("Not a Duplicate Latitude entry");
 } else {
     console.log("Duplicate Latitude entry");
@@ -15,9 +15,9 @@ if(!duplicateLongtitude(longsArray, newLongitude)) {
 } else {
     console.log("Duplicate Longitude entry");
 };
-
-//Function to determine if latitude is a duplicate
-function duplicateLatitude(lats, newLat) {
+*/
+//Function to determine if latitude is a duplicate *Moved to API File*
+function duplicateLatitude2(lats, newLat) {
     for (var i = 0; i < lats.length; i++) {
         var absLat = Math.abs(lats[i]);
         var absNewLat = Math.abs(newLat);
@@ -29,7 +29,7 @@ function duplicateLatitude(lats, newLat) {
     return false;
 }
 
-//Function to determine if longitude is a duplicate
+//Function to determine if longitude is a duplicate *Moved to API FIle*
 function duplicateLongtitude(longs, newLong) {
     for (var i = 0; i < longs.length; i++) {
         var absLong = Math.abs(longs[i]);
