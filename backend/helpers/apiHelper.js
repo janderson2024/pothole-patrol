@@ -22,7 +22,7 @@ function duplicateLatitude2(lats, newLat) {
         var absLat = Math.abs(lats[i]);
         var absNewLat = Math.abs(newLat);
         var difference = absLat = absNewLat;
-        if (-0.001 < difference < 0.001) {
+        if (difference > -0.001 && difference < 0.001) {
             return true;
         }
     }
@@ -30,12 +30,12 @@ function duplicateLatitude2(lats, newLat) {
 }
 
 //Function to determine if longitude is a duplicate *Moved to API FIle*
-function duplicateLongtitude(longs, newLong) {
+function duplicateLongtitude2(longs, newLong) {
     for (var i = 0; i < longs.length; i++) {
         var absLong = Math.abs(longs[i]);
         var absNewLong = Math.abs(newLong);
         var difference = absLong - absNewLong;
-        if (-0.001 < difference < 0.001) {
+        if (difference > -0.001 && difference < 0.001) {
             return true;
         }
     }
