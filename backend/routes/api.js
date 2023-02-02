@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 });
 
 //Add hard-coded sample pothole
-router.post("/submitpothole", async (req, res) => {
+router.post("/submitpothole", userMiddleware, async (req, res) => {
     let userLat = req.body.latitude;
     let userLong = req.body.longitude;
     console.log(userLat);
