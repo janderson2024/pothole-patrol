@@ -35,7 +35,7 @@ router.post("/submitpothole", async (req, res) => {
         approx_latitude: userLat,
         approx_longitude: userLong
     };
-    let sql = "INSERT INTO potholes SET ?";
+    let sql = "INSERT INTO Potholes SET ?";
     let query =  await db.query(sql, pothole, (err, result) => {
         if (err) throw err;
         console.log(result);
@@ -72,10 +72,10 @@ router.get("/potholes", async (req, res) => {
     var getPotholeSql;
     if(filter == "city"){
         searchFilter = geoResult.city;
-        getPotholeSql = "SELECT * FROM `potholes` WHERE `city` = ?";
+        getPotholeSql = "SELECT * FROM `Potholes` WHERE `city` = ?";
     } else {
         searchFilter = geoResult.postcode;
-        getPotholeSql = "SELECT * FROM `potholes` WHERE `zipcode` = ?";
+        getPotholeSql = "SELECT * FROM `Potholes` WHERE `zipcode` = ?";
     }
     const [results] = await db.query(getPotholeSql, [searchFilter]);
 
