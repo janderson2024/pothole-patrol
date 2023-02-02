@@ -26,7 +26,9 @@ async function callRegisterApi(position) {
 }
 
 export default function Actions(props) {
-  getLocation(callRegisterApi, (error)=>{console.log(error)});
+  useEffect(() => {
+    getLocation(callRegisterApi, (error)=>{console.log(error)});
+  },[]);
   return (
     <div className="actions-container">
       <SubmitLocation />
