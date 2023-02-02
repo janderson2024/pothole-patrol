@@ -37,7 +37,9 @@ async function userMiddleware(req, res, next){
     const fetchResp = await fetch(geoUrl);
     const geoData = await fetchResp.json();
 
+    //console.log(geoData);
     geoCity = geoData.results[0].city;
+    //console.log("CITY: " + geoCity);
 
     if(user.city != geoCity){
         return res.status(401).json({"error":"different city than recorded user city... fail quietly"});
@@ -50,7 +52,7 @@ async function userMiddleware(req, res, next){
     await db.query(updateReportSql, [user.ID]);
 
     req.user = user;
-    req.geoData = geoData;
+    req.geoData = geoData.results[0];
     req.latitude = latitude;
     req.longitude = longitude;
     next();
