@@ -1,71 +1,75 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
-// import { useHistory } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
+import { useMap } from 'react-leaflet/hooks'
 import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
 import L from 'leaflet';
 
+function CustomPopup({markerPos}) {
+  const submitData = async() => {
+    console.log("submit data: " + markerPos());
+  }
+  return (
+      <Popup minWidth={90}>
+        <button onClick={submitData}>Submitttt</button>
+      </Popup>
+  )
+}
+
 const customMarkerIcon = new L.Icon ({
-  iconUrl: 'https://cdn0.iconfinder.com/data/icons/car-with-sensor/100/Car_Location-512.png',
-  iconSize: [100, 100],
-  iconAnchor: [12, 41],
+  iconUrl: 'https://cdn0.iconfinder.com/data/icons/map-location-solid-style/91/Map_-_Location_Solid_Style_01-512.png',
+  iconSize: [50, 50],
+  iconAnchor: [25, 50],
   popupAnchor: [1, -34],
 });
 
 
-const MarkMapLocation = () => {
-  // const [haveUsersLocation, setHaveUsersLocation] = useState(false);
-  // const [location, setLocation] = useState({ lat: 0, lng: 0 });
+function CustomMarker() {
   const [markerPosition, setMarkerPosition] = useState({lat: 0, lng: 0});
-  const [userLocation, setUserLocation] = useState({lat: 40.47470736152738, lng: -80.06415069160637});
-  //   const history = useHistory();
-  
+  const map = useMap();
+
+  const getMarkerPos = () => {
+    return markerPosition;
+  };
+
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUserLocation([position.coords.latitude, position.coords.longitude]);
-        setMarkerPosition([position.coords.latitude, position.coords.longitude]);
-      },
-      (error) => {
-        console.error('Error in getting location');
-        setUserLocation({ lat: 40.4406, lng: -79.9959 }); // city of Pittsburgh
-      },
-      {enableHighAccuracy: true}
-    )
-    }, []);
-    
-    const onMarkerDragEnd = (e) => {
-      setTimeout(() => {
-        const newCoords = e.target.getLatLng();
-        console.log('Marker dragged', newCoords);
-      });
-    };
-    
-    const onMarkerClick = (e) => {
-      const coords = e.target.getCoordinates();
-      console.log(coords);
-    };
-  
-    return (
-      <div>
-        <div>
-      
-        <MapContainer className='map-container' center={userLocation} zoom={15} scrollWheelZoom={false}>
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            />
-              <Marker
-              position={markerPosition}
-              icon={customMarkerIcon}
-              draggable={true}
-              onDragEnd={onMarkerDragEnd}
-              onClick={onMarkerClick}
-              />
-        </MapContainer>
-        
-      </div>
-    </div>
+    map.on("click", function (e){
+      //console.log("click");
+      setMarkerPosition(e.latlng);
+    });
+    map.on("locationfound", function (e) {
+      //console.log("here");
+      map.setView(e.latlng, map.getZoom(), {animate:true});
+    });
+    map.locate();
+  },[map]);
+
+  return (
+  <Marker
+    position={markerPosition}
+    icon={customMarkerIcon}
+  >
+    <CustomPopup markerPos={getMarkerPos}/>
+  </Marker>
+  );
+}
+
+
+const MarkMapLocation = () => {
+
+  return (
+    <MapContainer 
+      className='map-container' 
+      center={[51.505, -0.09]} 
+      zoom={15} 
+      scrollWheelZoom={true}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+      <CustomMarker/>
+    </MapContainer>
   );
 }
 
