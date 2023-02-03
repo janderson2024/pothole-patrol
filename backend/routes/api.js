@@ -24,7 +24,6 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     let userZip = req.geoData.postcode;
     let userID = req.user.ID
     let sqlTimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    console.log(userID);
 
     //report with hard-coded potholeID
     let report = {
@@ -36,13 +35,12 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     };
     
     let reportSql = "INSERT INTO reports SET ?";
-    let query =  await db.query(reportSql, report, (err, result) => {
+    let reportQuery =  await db.query(reportSql, report, (err, result) => {
         if (err) throw err;
         console.log(result);
-        console.log("reportAdded");
     });
     
-    /*
+    
     const completionStatus = "Not completed";
     const initialReportCount = 1;
     const dbLats = await getPotholeLatitudes();
@@ -60,13 +58,13 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
         approx_latitude: userLat,
         approx_longitude: userLong
     };
-    let sql = "INSERT INTO potholes SET ?";
-    let query =  await db.query(sql, pothole, (err, result) => {
+    let potholeSql = "INSERT INTO potholes SET ?";
+    let potholeQuery =  await db.query(potholeSql, pothole, (err, result) => {
         if (err) throw err;
         console.log(result);
         res.send("Pothole added");
     });
-    console.log("Pothole added correctly");*/
+    console.log("Pothole added correctly");
 });
 
 
