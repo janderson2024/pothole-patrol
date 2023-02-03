@@ -53,6 +53,7 @@ function CustomMarker() {
     map.on("locationfound", function (e) {
       //console.log("here");
       map.setView(e.latlng, map.getZoom(), {animate:true});
+      setMarkerPosition(e.latlng);
     });
     map.locate();
   },[map]);
@@ -80,7 +81,7 @@ const MarkMapLocation = () => {
   return (
     <MapContainer 
       className='map-container' 
-      center={[51.505, -0.09]} 
+      center={[0, 0]} 
       zoom={15} 
       scrollWheelZoom={true}
     >
