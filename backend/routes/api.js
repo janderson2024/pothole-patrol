@@ -18,20 +18,40 @@ Latitude: 41.8789 | Longitude: -87.6369| City: Chicago | Zip: 60606
 */
 
 router.post("/submitpothole", userMiddleware, async (req, res) => {
-    const completionStatus = "Not completed";
-    const initialReportCount = 1;
     let userLat = req.body.latitude;
     let userLong = req.body.longitude;
     let userCity = req.geoData.city;
-    console.log(userCity);
     let userZip = req.geoData.postcode;
-    console.log(userZip);
+    let userID = req.user.ID
+    let sqlTimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    console.log(userID);
+
+    //report with hard-coded potholeID
+    let report = {
+        potholeID: 1,
+        userID: userID,
+        timestamp: sqlTimestamp,
+        latitude: userLat,
+        longitude: userLong
+    };
+    
+    let reportSql = "INSERT INTO reports SET ?";
+    let query =  await db.query(reportSql, report, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+        console.log("reportAdded");
+    });
+    
+    /*
+    const completionStatus = "Not completed";
+    const initialReportCount = 1;
     const dbLats = await getPotholeLatitudes();
     const isDuplicateLatitude = await duplicateLatitude(dbLats, userLat);
     console.log(isDuplicateLatitude);
     const dbLongs = await getPotholeLongitudes();
     const isDuplicateLongitude = await duplicateLongitude(dbLongs, userLong);
     console.log(isDuplicateLongitude);
+    
     let pothole = {
         city : userCity, 
         zipcode: userZip,
@@ -46,7 +66,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
         console.log(result);
         res.send("Pothole added");
     });
-    console.log("Pothole added correctly");
+    console.log("Pothole added correctly");*/
 });
 
 
