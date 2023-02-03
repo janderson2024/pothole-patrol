@@ -51,7 +51,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     });
     let thisPotholeID = await findPothlholeID(userLat);
     
-    //Report with hard-coded potholeID
+    //Report with current potholeID
     let report = {
         potholeID: thisPotholeID,
         userID: userID,
