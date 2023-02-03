@@ -12,30 +12,35 @@ router.get("/", (req, res) => {
     console.log("API route successful");
 });
 
-//Add hard-coded sample pothole (with user entered data from test_html)
-router.post("/submitpothole", async (req, res) => {
+/* User Input Latitudes / Longitudes for DB Testing:
+Latitude: 40.748817 | Longitude: -73.985428 | City: New York | Zip: 10001
+Latitude: 41.8789 | Longitude: -87.6369| City: Chicago | Zip: 60606
+*/
+
+router.post("/submitpothole", userMiddleware, async (req, res) => {
     const completionStatus = "Not completed";
     const initialReportCount = 1;
     let userLat = req.body.latitude;
     let userLong = req.body.longitude;
-    //console.log(userLat);
-    //console.log(userLong);
+    let userCity = req.geoData.city;
+    console.log(userCity);
+    let userZip = req.geoData.postcode;
+    console.log(userZip);
     const dbLats = await getPotholeLatitudes();
     const isDuplicateLatitude = await duplicateLatitude(dbLats, userLat);
     console.log(isDuplicateLatitude);
     const dbLongs = await getPotholeLongitudes();
     const isDuplicateLongitude = await duplicateLongitude(dbLongs, userLong);
     console.log(isDuplicateLongitude);
-    //console.log("Adding pothole to database");
     let pothole = {
-        city : "Des Moines", 
-        zipcode: "50311",
+        city : userCity, 
+        zipcode: userZip,
         report_count: initialReportCount,
         status: completionStatus,
         approx_latitude: userLat,
         approx_longitude: userLong
     };
-    let sql = "INSERT INTO Potholes SET ?";
+    let sql = "INSERT INTO potholes SET ?";
     let query =  await db.query(sql, pothole, (err, result) => {
         if (err) throw err;
         console.log(result);
