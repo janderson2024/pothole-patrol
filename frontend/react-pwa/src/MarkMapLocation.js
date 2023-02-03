@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import { useMap } from 'react-leaflet/hooks'
 import '../node_modules/leaflet/dist/leaflet.css';
@@ -26,6 +26,19 @@ const customMarkerIcon = new L.Icon ({
 
 function CustomMarker() {
   const [markerPosition, setMarkerPosition] = useState({lat: 0, lng: 0});
+  const markerRef = useRef(null);
+  const eventHandlers = useMemo(
+    () => ({
+      dragend() {
+        const marker = markerRef.current;
+        if (marker != null) {
+          //console.log("dragged");
+          setMarkerPosition(marker.getLatLng());
+        }
+      },
+    }),
+    []
+  );
   const map = useMap();
 
   const getMarkerPos = () => {
@@ -44,10 +57,17 @@ function CustomMarker() {
     map.locate();
   },[map]);
 
+  const onMarkerDragEnd = (e) =>{
+    console.log(e);
+  }
+
   return (
   <Marker
     position={markerPosition}
     icon={customMarkerIcon}
+    draggable={true}
+    eventHandlers={eventHandlers}
+    ref={markerRef}
   >
     <CustomPopup markerPos={getMarkerPos}/>
   </Marker>
