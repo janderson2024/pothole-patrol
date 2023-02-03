@@ -14,7 +14,8 @@ router.get("/", (req, res) => {
 
 /* User Input Latitudes / Longitudes for DB Testing:
 Latitude: 40.748817 | Longitude: -73.985428 | City: New York | Zip: 10001
-Latitude: 41.8789 | Longitude: -87.6369| City: Chicago | Zip: 60606
+Latitude: 41.8789 | Longitude: -87.6369 | City: Chicago | Zip: 60606
+Latitude: 47.6123 | Longitude: -122.3363 | City: Seattle | Zip: 98191
 */
 
 router.post("/submitpothole", userMiddleware, async (req, res) => {
@@ -24,10 +25,35 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     let userZip = req.geoData.postcode;
     let userID = req.user.ID
     let sqlTimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let completionStatus = "Not completed";
+    let reportCount = 1;
 
-    //report with hard-coded potholeID
+    const dbLats = await getPotholeLatitudes();
+    const dbLongs = await getPotholeLongitudes();
+    
+    const isDuplicateLatitude = await duplicateLatitude(dbLats, userLat);
+    const isDuplicateLongitude = await duplicateLongitude(dbLongs, userLong);
+
+
+    //Pothole into Database Code 
+    let pothole = {
+        city : userCity, 
+        zipcode: userZip,
+        report_count: reportCount,
+        status: completionStatus,
+        approx_latitude: userLat,
+        approx_longitude: userLong
+    };
+    let potholeSql = "INSERT INTO potholes SET ?";
+    let potholeQuery =  await db.query(potholeSql, pothole, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+    });
+    let thisPotholeID = await findPothlholeID(userLat);
+    
+    //Report with hard-coded potholeID
     let report = {
-        potholeID: 1,
+        potholeID: thisPotholeID,
         userID: userID,
         timestamp: sqlTimestamp,
         latitude: userLat,
@@ -39,32 +65,8 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
         if (err) throw err;
         console.log(result);
     });
+    console.log("Pothole and Report added to DB");
     
-    
-    const completionStatus = "Not completed";
-    const initialReportCount = 1;
-    const dbLats = await getPotholeLatitudes();
-    const isDuplicateLatitude = await duplicateLatitude(dbLats, userLat);
-    console.log(isDuplicateLatitude);
-    const dbLongs = await getPotholeLongitudes();
-    const isDuplicateLongitude = await duplicateLongitude(dbLongs, userLong);
-    console.log(isDuplicateLongitude);
-    
-    let pothole = {
-        city : userCity, 
-        zipcode: userZip,
-        report_count: initialReportCount,
-        status: completionStatus,
-        approx_latitude: userLat,
-        approx_longitude: userLong
-    };
-    let potholeSql = "INSERT INTO potholes SET ?";
-    let potholeQuery =  await db.query(potholeSql, pothole, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.send("Pothole added");
-    });
-    console.log("Pothole added correctly");
 });
 
 
@@ -160,7 +162,6 @@ async function getPotholeLatitudes(){
     let allLatitudes = [];
     sql = 'SELECT  * FROM `Potholes`';
     const [results] = await db.query(sql);
-    //console.log(results);
     for(var i = 0; i < results.length; i++){
         currentLat = parseFloat(results[i].approx_latitude);
         allLatitudes.push(currentLat);
@@ -172,7 +173,6 @@ async function getPotholeLongitudes(){
     let allLongitudes = [];
     sql = 'SELECT  * FROM `Potholes`';
     const [results] = await db.query(sql);
-    //console.log(results);
     for(var i = 0; i < results.length; i++){
         currentLong = parseFloat(results[i].approx_longitude);
         allLongitudes.push(currentLong);
@@ -203,4 +203,13 @@ async function duplicateLongitude(longs, newLong) {
         }
     }
     return false;
+}
+
+async function findPothlholeID (coordinate) {
+    sql = "SELECT * FROM `Potholes` WHERE `approx_latitude` = ?";
+    const [results] = await db.query(sql, coordinate);
+    for(var i = 0; i < results.length; i++){
+        currentID = parseInt(results[i].ID);
+    }
+    return currentID;
 }

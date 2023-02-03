@@ -21,8 +21,6 @@ async function checkLastSignin(res, sqlResult){
     const diffBetweenNowAndReport = now.getTime() - lastSignin.getTime();
 
     //checks if the difference is greater than 1 minute
-    //Commented out for Dev testing
-    /*
     if(diffBetweenNowAndReport >= (1000 * 60 * 1)){
         const updateSQL = "UPDATE `Users` SET `last_signin` = now() WHERE `ID` = ?";
         await db.query(updateSQL, [result.ID]);
@@ -30,7 +28,7 @@ async function checkLastSignin(res, sqlResult){
     } else {
         console.log("caught a spam login attempt!");
         return res.status(401).json({"error": "slow down"});
-    }*/
+    }
 }
 
 
