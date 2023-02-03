@@ -46,7 +46,7 @@
     <hr/>
     <button type="button" id ="show-production-console" onclick="showConsole()">Load Server Console</button>
     <pre id="console-output"></pre>
-    <button type="button" id="submitPotholeToDB" onclick="submitPotholeToDB()">Submit Pothole to Database</button>
+    <button type="button" id="submitPotholeToDB" onclick="getLocation(submitPotholeToDB, showError)">Submit Pothole to Database</button>
 
 
     <script>
@@ -190,7 +190,7 @@
             consoleOutput.innerHTML = text;
         }
 
-        async function submitPotholeToDB() {
+        async function submitPotholeToDB(position) {
             const data = {
                 "latitude": testLatitude || position.coords.latitude,
                 "longitude": testLongitude || position.coords.longitude
