@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Noto+Sans+Khmer&family=Outfit&family=Roboto+Slab&display=swap');
 
 html {
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
+    height: 100%;
     --primary: white;
     --secondary: #1565C0;
     --tertiary: #0f4c91;
@@ -14,10 +15,12 @@ html {
 }
 
 .map-container {
-    width: 99%;
-    height: 100%;
+    width: 100%;
+    height: calc(100% - 100px);
     border-radius: 5px;
     position: absolute;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 /* About Page */
@@ -62,6 +65,7 @@ html {
 }
 
 .nav {
+    position: sticky;
     border-radius: 5px;
     background-color: var(--secondary);
     color: var(--primary);
