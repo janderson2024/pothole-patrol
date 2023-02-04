@@ -52,7 +52,7 @@ function CustomComp() {
       
       for(const pothole of potholes.potholes){
         const marker = new L.marker([pothole.latitude, pothole.longitude],{icon:customMarkerIcon});
-        map.addLayer(marker);
+        marker.addTo(map).bindPopup("Pothole location: " + pothole.latitude + ", " + pothole.longitude);
         console.log(pothole);
       }
     });
