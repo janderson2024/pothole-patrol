@@ -24,25 +24,24 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     let userLong = req.body.longitude;
     let userCity = req.geoData.city;
     let userZip = req.geoData.postcode;
-
-    if (userZip == null) {
-        userZip = "00000";
-    }
     let userID = req.user.ID
     let sqlTimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let completionStatus = "Not completed";
     let reportCount = 1;
-
-    const dbLats = await getPotholeLatitudes();
-    const dbLongs = await getPotholeLongitudes();
-    
-    let latitudeMatch = await duplicateLatitude(dbLats, userLat);
-    const isDuplicateLongitude = await duplicateLongitude(dbLongs, userLong);
-    console.log(latitudeMatch);
     let thisPotholeID = 0;
 
-    if (latitudeMatch === 0) {
-        //Pothole into Database Code 
+    let dbLats = await getPotholeLatitudes();
+    let dbLongs = await getPotholeLongitudes();
+
+    if (userZip == null) {
+        userZip = "00000";
+    }
+    
+    let latitudeMatch = await duplicateLatitude(dbLats, userLat);
+    let longitudeMatch = await duplicateLongitude(dbLongs, userLong);
+
+    if (latitudeMatch === 0 || longitudeMatch === 0) {
+        //If no duplicates, insert new pothole into database
         let pothole = {
             city : userCity, 
             zipcode: userZip,
@@ -56,10 +55,14 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
             if (err) throw err;
             console.log(result);
         });
-        thisPotholeID = await findPothlholeID(userLat);
-    } else thisPotholeID = await findPothlholeID(latitudeMatch);
-
-    //Report with current potholeID
+        thisPotholeID = await findPothlholeIDLatitude(userLat);
+    } else  {
+        //Find matching pothole and update the report count
+        thisPotholeID = await findPothlholeIDLatitude(latitudeMatch);
+        await updateReportCount(thisPotholeID);
+    }
+    
+    //Add to Report Database
     let report = {
         potholeID: thisPotholeID,
         userID: userID,
@@ -73,8 +76,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
         if (err) throw err;
         console.log(result);
     });
-    console.log("Pothole and Report added to DB");
-    
+    console.log("Pothole and/or Report succesfully added to DB");
 });
 
 
@@ -207,17 +209,38 @@ async function duplicateLongitude(longs, newLong) {
         var absNewLong = Math.abs(newLong);
         var difference = absLong - absNewLong;
         if (difference > -0.001 && difference < 0.001) {
-            return true;
+            return longs[i];
         }
     }
-    return false;
+    return 0;
 }
 
-async function findPothlholeID (coordinate) {
+async function findPothlholeIDLatitude (coordinate) {
     sql = "SELECT * FROM `Potholes` WHERE `approx_latitude` = ?";
     const [results] = await db.query(sql, coordinate);
     for(var i = 0; i < results.length; i++){
         currentID = parseInt(results[i].ID);
     }
     return currentID;
+}
+
+//At this time, this function is not being used. I am keeping it for now in case of errors during debugging. 
+async function findPothlholeIDLongitude (coordinate) {
+    sql = "SELECT * FROM `Potholes` WHERE `approx_longitude` = ?";
+    const [results] = await db.query(sql, coordinate);
+    for(var i = 0; i < results.length; i++){
+        currentID = parseInt(results[i].ID);
+    }
+    return currentID;
+}
+
+async function updateReportCount (potholeID) {
+    sql = "SELECT * FROM `Potholes` WHERE `ID` = ?";
+    const [results] = await db.query(sql, potholeID);
+    for(var i = 0; i < results.length; i++){
+        currentReportCount = parseInt(results[i].report_count);
+    }
+    let newReportCount = currentReportCount + 1;
+    let updateSql = "UPDATE `Potholes` SET `report_count` = ? WHERE `ID` = ?";
+    await db.query(updateSql, [newReportCount, potholeID]);
 }
