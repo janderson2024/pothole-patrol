@@ -85,10 +85,6 @@ function CustomMarker() {
     map.locate();
   },[map]);
 
-  const onMarkerDragEnd = (e) =>{
-    console.log(e);
-  }
-
   return (
   <Marker
     position={markerPosition}
@@ -123,44 +119,3 @@ const MarkMapLocation = () => {
 
 
 export default MarkMapLocation;
-//     setMarkerCoords({
-//       lat: position.coords.latitude,
-//       lng: position.coords.longitude
-//     });
-//     setLocation({
-//       lat: position.coords.latitude,
-//       lng: position.coords.longitude
-//     });
-//     setHaveUsersLocation(true);
-//   },
-//   () => {
-//     console.log('Error in getting location');
-//     setLocation({ lat: 40.4406, lng: -79.9959 }); // city of Pittsburgh
-//   });
-// }, [location]);
-
-// const handleMarkerDrag = (e) => {
-//   setMarkerCoords({
-//     lat: e.latlng.lat,
-//     lng: e.latlng.lng
-//   });
-// }
-
-// const handleLogLocation = async () => {
-//   const coordinates = {
-//     latitude: markerCoords.lat,
-//     longitude: markerCoords.lng,
-//   }
-
-//TODO: switch frontend_test to be report_pothole once code is finished
-// const response = await fetch("./api/frontend_test", {
-//   method: "POST",
-//   headers: {
-//     "Content-type": "application/json",
-//   },
-//   body: JSON.stringify(coordinates),
-// });
-// const resp = await response.json();
-// console.log(resp);
-
-// Send markerCoords to backend MySQL database
