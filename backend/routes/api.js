@@ -16,6 +16,7 @@ router.get("/", (req, res) => {
 Latitude: 40.748817 | Longitude: -73.985428 | City: New York | Zip: 10001
 Latitude: 41.8789 | Longitude: -87.6369 | City: Chicago | Zip: 60606
 Latitude: 47.6123 | Longitude: -122.3363 | City: Seattle | Zip: 98191
+Latitude: 42.0267 | Longitude: -93.6465 | City: Ames | Zip: 00000
 */
 
 router.post("/submitpothole", userMiddleware, async (req, res) => {
@@ -23,6 +24,10 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     let userLong = req.body.longitude;
     let userCity = req.geoData.city;
     let userZip = req.geoData.postcode;
+
+    if (userZip == null) {
+        userZip = "00000";
+    }
     let userID = req.user.ID
     let sqlTimestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let completionStatus = "Not completed";
@@ -31,26 +36,29 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     const dbLats = await getPotholeLatitudes();
     const dbLongs = await getPotholeLongitudes();
     
-    const isDuplicateLatitude = await duplicateLatitude(dbLats, userLat);
+    let latitudeMatch = await duplicateLatitude(dbLats, userLat);
     const isDuplicateLongitude = await duplicateLongitude(dbLongs, userLong);
+    console.log(latitudeMatch);
+    let thisPotholeID = 0;
 
+    if (latitudeMatch === 0) {
+        //Pothole into Database Code 
+        let pothole = {
+            city : userCity, 
+            zipcode: userZip,
+            report_count: reportCount,
+            status: completionStatus,
+            approx_latitude: userLat,
+            approx_longitude: userLong
+        };
+        let potholeSql = "INSERT INTO potholes SET ?";
+        let potholeQuery =  await db.query(potholeSql, pothole, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+        });
+        thisPotholeID = await findPothlholeID(userLat);
+    } else thisPotholeID = await findPothlholeID(latitudeMatch);
 
-    //Pothole into Database Code 
-    let pothole = {
-        city : userCity, 
-        zipcode: userZip,
-        report_count: reportCount,
-        status: completionStatus,
-        approx_latitude: userLat,
-        approx_longitude: userLong
-    };
-    let potholeSql = "INSERT INTO potholes SET ?";
-    let potholeQuery =  await db.query(potholeSql, pothole, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-    });
-    let thisPotholeID = await findPothlholeID(userLat);
-    
     //Report with current potholeID
     let report = {
         potholeID: thisPotholeID,
@@ -186,10 +194,10 @@ async function duplicateLatitude(lats, newLat) {
         var absNewLat = Math.abs(newLat);
         var difference = absLat - absNewLat;
         if (difference > -0.001 && difference < 0.001) {
-            return true;
+            return lats[i];
         }
     }
-    return false;
+    return 0;
 }
 
 //Function to determine if longitude is a duplicate
