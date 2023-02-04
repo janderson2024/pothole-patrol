@@ -5,13 +5,39 @@ import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
 import L from 'leaflet';
 
+async function callRegisterApi(position) {
+  console.log(position.lat)
+  const data = {
+      "latitude": position.lat,
+      "longitude": position.lng
+  }
+  console.log(data);
+
+  const response = await fetch('./api/reportpotholes', {
+      method: 'POST',
+      headers: {
+          'Content-type': 'application/json'
+      },
+      body: JSON.stringify(data),
+  });
+
+  const text = await response.text();
+  console.log(text);
+}
+
 function CustomPopup({markerPos}) {
+  const [status, setStatus] = useState("SUBMIT");
   const submitData = async() => {
     console.log("submit data: " + markerPos());
+    callRegisterApi(markerPos());
+    setStatus("SUBMITTED!")
+    setTimeout(() => {
+      setStatus("SUBMIT")
+    }, 3000);
   }
   return (
       <Popup minWidth={90}>
-        <button onClick={submitData}>Submitttt</button>
+        <button onClick={submitData}>{status}</button>
       </Popup>
   )
 }
@@ -26,6 +52,7 @@ const customMarkerIcon = new L.Icon ({
 
 function CustomMarker() {
   const [markerPosition, setMarkerPosition] = useState({lat: 0, lng: 0});
+
   const markerRef = useRef(null);
   const eventHandlers = useMemo(
     () => ({
