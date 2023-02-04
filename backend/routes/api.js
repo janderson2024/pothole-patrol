@@ -66,7 +66,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
         console.log(result);
     });
     console.log("Pothole and Report added to DB");
-    
+    res.send("Temp res. Pothole and Report saved!");
 });
 
 
