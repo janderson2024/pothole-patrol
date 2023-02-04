@@ -12,9 +12,9 @@ function App() {
     <div>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/view_map/" element={<ViewMap />} />
-            <Route path="/about/" element={<About />} />
-            <Route path="/mark_map/" element={<MarkMap />} />
+            <Route path="/view_map" element={<ViewMap />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/mark_map" element={<MarkMap />} />
         </Routes>
     </div>
     </>
