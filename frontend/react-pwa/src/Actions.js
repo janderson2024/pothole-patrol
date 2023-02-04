@@ -38,13 +38,21 @@ export default function Actions(props) {
 }
 
 function SubmitLocation() {
+  const statuses= {
+    submitMyLocation: "SUBMIT MY LOCATION",
+    locating: "LOCATING...",
+    submitted: "SUBMITTED",
+    unableToGetLocation: "UNABLE TO GET LOCATION"
+  }
+
   const [status, setStatus] = useState("SUBMIT MY LOCATION");
+  const [disabled, setDisabled] = useState(false);
 
   const getLocation = () => {
     if (!navigator.geolocation) {
-      setStatus("UNABLE TO GET LOCATION");
+      setStatus(statuses.unableToGetLocation);
     } else {
-      setStatus("LOCATING...");
+      setStatus(statuses.locating);
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const coordinates = {
@@ -60,15 +68,17 @@ function SubmitLocation() {
           });
           const text = await response.text();
           console.log(text);
-          setStatus("SUBMITTED!");
+          setStatus(statuses.submitted);
+          setDisabled(true)
           console.log(coordinates)
           setTimeout(() => {
-            setStatus("SUBMIT MY LOCATION")
-          }, 3000);
+            setStatus(statuses.submitMyLocation)
+            setDisabled(false)
+          }, 60000);
         },
 
         () => {
-          setStatus("UNABLE TO GET LOCATION");
+          setStatus(statuses.unableToGetLocation);
         }
       );
     }
@@ -76,7 +86,7 @@ function SubmitLocation() {
 
   return (
     <div className="coordinates">
-      <button className="SubmitLocation" onClick={getLocation} type="button">
+      <button disabled={disabled} className="SubmitLocation" onClick={getLocation} type="button">
         <p>{status}</p>
       </button>
     </div>
