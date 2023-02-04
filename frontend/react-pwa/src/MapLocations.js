@@ -1,20 +1,9 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
+import React, {useEffect} from 'react';
+import { MapContainer, TileLayer } from 'react-leaflet';
 import { useMap } from 'react-leaflet/hooks'
 import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
 import L from 'leaflet';
-
-// may not need this for now, maybe useful for testing
-function CustomPopup({markerPos}) {
-  return (
-      <Popup minWidth={90}>
-        <span>Position: {markerPos}</span>
-      </Popup>
-  )
-}
-
-// custom component as child of map
 
 const customMarkerIcon = new L.Icon ({
   iconUrl: './pin.png',
@@ -30,7 +19,7 @@ async function getPotholesTest(position) {
       lng: position.lng,
       filter: "city" || "zip"
   };
-  const url = './api/potholes' + "?latitude=" + data.lat + "&longitude=" + data.lng + "&filter=" + data.filter;
+  const url = './api/potholes?latitude=' + data.lat + "&longitude=" + data.lng + "&filter=" + data.filter;
 
   const response = await fetch(url, {
       method: "GET"
@@ -53,7 +42,7 @@ function CustomComp() {
       for(const pothole of potholes.potholes){
         const marker = new L.marker([pothole.latitude, pothole.longitude],{icon:customMarkerIcon});
         marker.addTo(map).bindPopup("Pothole location: " + pothole.latitude + ", " + pothole.longitude);
-        console.log(pothole);
+        //console.log(pothole);
       }
     });
     map.locate();

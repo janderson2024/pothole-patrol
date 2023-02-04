@@ -27,9 +27,10 @@ async function callRegisterApi(position) {
 
 function CustomPopup({markerPos}) {
   const [status, setStatus] = useState("SUBMIT");
+  
   const submitData = async() => {
-    console.log("submit data: " + markerPos());
-    callRegisterApi(markerPos());
+    console.log("submit data: " + markerPos);
+    callRegisterApi(markerPos);
     setStatus("SUBMITTED!")
     setTimeout(() => {
       setStatus("SUBMIT")
@@ -68,10 +69,6 @@ function CustomMarker() {
   );
   const map = useMap();
 
-  const getMarkerPos = () => {
-    return markerPosition;
-  };
-
   useEffect(() => {
     map.on("click", function (e){
       //console.log("click");
@@ -93,7 +90,7 @@ function CustomMarker() {
     eventHandlers={eventHandlers}
     ref={markerRef}
   >
-    <CustomPopup markerPos={getMarkerPos}/>
+    <CustomPopup markerPos={markerPosition}/>
   </Marker>
   );
 }
