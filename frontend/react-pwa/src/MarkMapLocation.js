@@ -13,7 +13,7 @@ async function callRegisterApi(position) {
   }
   console.log(data);
 
-  const response = await fetch('./api/frontend_test', {
+  const response = await fetch('./api/submitpothole', {
       method: 'POST',
       headers: {
           'Content-type': 'application/json'
