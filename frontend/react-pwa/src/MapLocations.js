@@ -7,12 +7,9 @@ import L from 'leaflet';
 
 // may not need this for now, maybe useful for testing
 function CustomPopup({markerPos}) {
-  const submitData = async() => {
-    console.log("submit data: " + markerPos()); // can pass in the position/lat/lng here instead, so popup can display that
-  }
   return (
       <Popup minWidth={90}>
-        {/* display location of pothole in the popup */}
+        <span>Position: {markerPos}</span>
       </Popup>
   )
 }
@@ -20,79 +17,50 @@ function CustomPopup({markerPos}) {
 // custom component as child of map
 
 const customMarkerIcon = new L.Icon ({
-  iconUrl: 'https://cdn0.iconfinder.com/data/icons/map-location-solid-style/91/Map_-_Location_Solid_Style_01-512.png',
+  iconUrl: './pin.png',
   iconSize: [50, 50],
   iconAnchor: [25, 50],
   popupAnchor: [1, -34],
 }); 
 
 // need a component that would call this, then make a new marker on lat/long
-/*async function getPotholesTest(position) {
+async function getPotholesTest(position) {
   const data = {
-      lat: testLatitude || position.coords.latitude,
-      lng: testLongitude || position.coords.longitude,
+      lat: position.lat,
+      lng: position.lng,
       filter: "city" || "zip"
   };
   const url = './api/potholes' + "?latitude=" + data.lat + "&longitude=" + data.lng + "&filter=" + data.filter;
 
-  response = await fetch(url, {
+  const response = await fetch(url, {
       method: "GET"
   });
-  text = await response.json();
-  console.log(text);
+  return await response.json();
 }
-*/
 
-function CustomMarker() {
-  const [markerPosition, setMarkerPosition] = useState({lat: 0, lng: 0});
-  const markerRef = useRef(null);
-  const eventHandlers = useMemo(
-    () => ({
-      dragend() {
-        const marker = markerRef.current;
-        if (marker != null) {
-          //console.log("dragged");
-          setMarkerPosition(marker.getLatLng());
-        }
-      },
-    }),
-    []
-  );
 
+function CustomComp() {
   const map = useMap();
 
-  const getMarkerPos = () => {
-    return markerPosition;
-  };
-
   useEffect(() => {
-    map.on("click", function (e){
-      //console.log("click");
-      setMarkerPosition(e.latlng);
-    });
-    map.on("locationfound", function (e) {
+    map.on("locationfound", async function (e) {
       //console.log("here");
-      map.setView(e.latlng, map.getZoom(), {animate:true});
-      setMarkerPosition(e.latlng);
+      map.setView(e.latlng, map.getZoom());
+
+      //get potholes here from serve
+      const potholes = await getPotholesTest(e.latlng);
+      
+      for(const pothole of potholes.potholes){
+        const marker = new L.marker([pothole.latitude, pothole.longitude],{icon:customMarkerIcon});
+        map.addLayer(marker);
+        console.log(pothole);
+      }
     });
     map.locate();
   },[map]);
 
-  const onMarkerDragEnd = (e) =>{
-    console.log(e);
-  }
 
-  return (
-  <Marker
-    position={markerPosition}
-    icon={customMarkerIcon}
-    draggable={true}
-    eventHandlers={eventHandlers}
-    ref={markerRef}
-  >
-    <CustomPopup markerPos={getMarkerPos}/>
-  </Marker>
-  );
+  return null;
 }
 
 
@@ -109,7 +77,7 @@ const MapLocations = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      {/* <CustomMarker/> need component that will have code that fetches points*/}
+      <CustomComp/>
     </MapContainer>
   );
 }

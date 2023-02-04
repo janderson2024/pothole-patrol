@@ -13,7 +13,7 @@ async function callRegisterApi(position) {
   }
   console.log(data);
 
-  const response = await fetch('./api/reportpotholes', {
+  const response = await fetch('./api/frontend_test', {
       method: 'POST',
       headers: {
           'Content-type': 'application/json'
@@ -43,7 +43,7 @@ function CustomPopup({markerPos}) {
 }
 
 const customMarkerIcon = new L.Icon ({
-  iconUrl: 'https://cdn0.iconfinder.com/data/icons/map-location-solid-style/91/Map_-_Location_Solid_Style_01-512.png',
+  iconUrl: './pin.png',
   iconSize: [50, 50],
   iconAnchor: [25, 50],
   popupAnchor: [1, -34],
