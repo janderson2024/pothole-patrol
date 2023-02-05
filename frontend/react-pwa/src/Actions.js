@@ -100,7 +100,7 @@ function SubmitLocation() {
 function LocateOnMap(props) {
   return (
     <div className="button-container">
-    <Link className="LocateLink" to="/mark_map/">
+    <Link className="LocateLink" to="/mark_map">
       <button className="LocateOnMap">
        {props.text}
        <PinDropIcon className="PinDropIcon" />
