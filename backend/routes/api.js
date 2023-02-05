@@ -50,7 +50,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
             approx_latitude: userLat,
             approx_longitude: userLong
         };
-        let potholeSql = "INSERT INTO potholes SET ?";
+        let potholeSql = "INSERT INTO Potholes SET ?";
         let potholeQuery =  await db.query(potholeSql, pothole, (err, result) => {
             if (err) throw err;
             console.log(result);
