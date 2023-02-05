@@ -41,7 +41,7 @@ function CustomComp() {
       
       for(const pothole of potholes.potholes){
         const marker = new L.marker([pothole.latitude, pothole.longitude],{icon:customMarkerIcon});
-        marker.addTo(map).bindPopup("Pothole location: " + pothole.latitude + ", " + pothole.longitude);
+        marker.addTo(map).bindPopup("Pothole here! It has " + pothole.reportCount + " report(s)!");
         //console.log(pothole);
       }
     });
