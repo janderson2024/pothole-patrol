@@ -5,8 +5,6 @@ import '../src/styles.css';
 import L from 'leaflet';
 
 
-
-
 const carMarkerIcon = new L.Icon ({
     iconUrl: 'https://cdn0.iconfinder.com/data/icons/car-with-sensor/100/Car_Location-512.png',
     iconSize: [100, 100],

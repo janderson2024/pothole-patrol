@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import PinDropIcon from '@mui/icons-material/PinDrop';
 
 function getLocation(success, error) {
   if (navigator.geolocation) {
@@ -32,6 +34,7 @@ export default function Actions(props) {
   return (
     <div className="actions-container">
       <SubmitLocation />
+      <pre>OR</pre>
       <LocateOnMap text="LOCATE ON MAP" />
     </div>
   );
@@ -40,7 +43,7 @@ export default function Actions(props) {
 function SubmitLocation() {
   const statuses= {
     submitMyLocation: "SUBMIT MY LOCATION",
-    locating: "LOCATING...",
+    locating: "LOCATING",
     submitted: "SUBMITTED",
     unableToGetLocation: "UNABLE TO GET LOCATION"
   }
@@ -88,6 +91,7 @@ function SubmitLocation() {
     <div className="coordinates">
       <button disabled={disabled} className="SubmitLocation" onClick={getLocation} type="button">
         <p>{status}</p>
+        <MyLocationIcon className="LocationIcon"/>
       </button>
     </div>
   );
@@ -95,11 +99,14 @@ function SubmitLocation() {
 
 function LocateOnMap(props) {
   return (
+    <div className="button-container">
     <Link className="LocateLink" to="/mark_map/">
       <button className="LocateOnMap">
        {props.text}
+       <PinDropIcon className="PinDropIcon" />
       </button>
     </Link>
+    </div>
   );
 }
 

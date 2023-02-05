@@ -12,6 +12,7 @@ html {
 
 .body {
     height: 100vh;
+    margin: 0;
 }
 
 .map-container {
@@ -21,6 +22,54 @@ html {
     position: absolute;
     margin-left: 3px;
     margin-right: 3px;
+}
+
+/* Home Page */
+
+.how-it-works-container {
+    margin-top: 20px;
+}
+
+.how-it-works-title {
+    font-family: 'Outfit';
+    margin-top: 10px;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: var(--tertiary);
+    text-align: left;
+}
+
+.how-it-works-summary {
+    font-family: 'Roboto Slab';
+    font-size: 1.1rem;
+    color: var(--tertiary);
+}
+
+.submit-location-title, .locate-on-map-title {
+    font-family: 'Outfit';
+    font-size: 1.25rem;
+    color: var(--secondary);
+    font-weight: bold;
+}
+
+ul {
+    margin: auto;
+    list-style: none;
+    background-color: aliceblue;
+    width: 300px;
+    border-style: solid;
+    border-color: var(--quarternary);
+    border-radius: 5px;
+    padding-bottom: 25px;
+    padding-left: 20px;
+}
+
+li {
+    text-align: left;
+}
+
+hr {
+    width: 325px;
 }
 
 /* About Page */
@@ -56,8 +105,10 @@ html {
 
 .site-title {
     font-family: 'Major Mono Display';
-    font-size: 2rem;
+    font-size: 1.75rem;
     text-decoration: none;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .site-title:hover {
@@ -76,37 +127,47 @@ html {
     align-items: center;
 }
 
+
 .nav a, .link, .LocateLink {
     color: inherit;
     text-decoration: none;
 }
 
+
 .actions-container {
-    margin-top: 250px;
+    margin-top: 30px;
     align-content: flex-end;
+}
+
+.button-container {
+    width: 325px;
+    margin: auto;
 }
 
 .SubmitLocation {
     display: flex;
-    color: var(--quinary);
     font-family: 'Outfit';
     font-size: 1.4rem;
     background-color: var(--secondary);
     color: var(--primary);
     width: 325px;
-    padding: 3px;
     border-radius: 5px;
     border-style: none;
     justify-content: center;
     margin: auto;
-    margin-bottom: 40px;
 }
 
 .SubmitLocation:hover {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: var(--quinary);
     cursor: pointer;
     padding: 0;
+    justify-content: center;
+}
+
+.LocationIcon {
+    padding-top: 25.5px;
+    padding-left: 10px;
 }
 
 .LocateOnMap {
@@ -129,6 +190,20 @@ html {
     cursor: pointer;
 }
 
+.PinDropIcon {
+    padding-left: 7px;
+    padding-top: 3px;
+}
+
+pre {
+    font-family: 'Outfit';
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--tertiary);
+    padding: 0;
+    text-align: center;
+}
+
 @media screen and (max-width: 600px) {
 
     .nav {
@@ -136,50 +211,76 @@ html {
     }
 
     .site-title {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         padding: 5px;
     }
 
     .map-container {
-        width: 96%;
+        margin-left: 3px;
+        margin-right: 20px;
+    }
+}
+   
+@media screen and (max-width: 414px) {
+    .map-container {
+        width: 95%;
     }
 }
 
-@media screen and (min-width: 350px) {
+@media screen and (min-width: 540px) {
     .map-container {
         width: 96%;
-    }
-}
-    
-@media screen and (min-width: 500px) {
-    .map-container {
-        width: 98%;
     }
 }
 
 @media screen and (min-width: 1000px) {
     .map-container {
-        width: 98.5%;
+        margin-left: 3px;
+        margin-right: 3px;
     }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (min-width: 820px) {
+    .map-container {
+        width: 97.5%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .map-container {
+        width: 97%;
+    }
+}
+
+@media screen and (min-width: 912px) {
+    .map-container {
+        width: 97.5%;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .map-container {
+        width: 98.25%;
+    }
+}
+
+@media screen and (max-width: 280px) {
+    .map-container {
+        width: 93%;
+    }
+
     .SubmitLocation {
-        font-size: smaller;
-        width: 75%;
+        width: 250px;
+        font-size: medium;
     }
 
     .LocateOnMap {
-        font-size: smaller;
-        width: 75%;
-        padding: 15px;
+        width: 200px;
+        font-size: medium;
     }
 
-    .site-title {
-        font-size: .9rem;
+    .LocationIcon, .PinDropIcon {
+        display: none;
     }
+}
 
-    .nav {
-        padding: 10px;
-    }
-} 
