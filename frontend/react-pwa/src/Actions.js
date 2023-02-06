@@ -45,10 +45,10 @@ function SubmitLocation() {
     submitMyLocation: "SUBMIT MY LOCATION",
     locating: "LOCATING",
     submitted: "SUBMITTED",
-    unableToGetLocation: "UNABLE TO GET LOCATION"
+    unableToGetLocation: "SUBMISSION FAILED"
   }
 
-  const [status, setStatus] = useState("SUBMIT MY LOCATION");
+  const [status, setStatus] = useState(statuses.submitMyLocation);
   const [disabled, setDisabled] = useState(false);
 
   const getLocation = () => {
@@ -108,6 +108,4 @@ function LocateOnMap(props) {
     </Link>
     </div>
   );
-}
-
-//nest in a container with side margins? 
+} 

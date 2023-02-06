@@ -84,15 +84,15 @@ hr {
 
 
 .h3 {
-    font-family: 'Outfit';
-    font-weight: bolder;
-    margin-top: 30px;
-}
-
-.h4 {
     font-family: 'Noto Sans Khmer';
     font-weight: bold;
+    margin-top: 30px;
     color: var(--secondary);
+}
+
+h2 {
+    font-family: 'Outfit';
+    font-weight: bold;
 }
 
 .p {
@@ -100,6 +100,20 @@ hr {
     margin-bottom: 30px;
 }
 
+.attributions {
+    color: var(--secondary);
+    text-decoration: none;
+}
+
+footer {
+    position: sticky;
+    font-family: 'Noto Sans Khmer';
+    font-size: 12px;
+    background-color:var(--secondary);
+    color: var(--primary);
+    padding: 10px;
+    border-radius: 5px;
+}
 /* Navigation bar */
 
 .site-title {
@@ -182,7 +196,6 @@ hr {
 }
 
 .LocateOnMap:hover {
-    font-size: 1.45rem;
     color: rgb(2, 115, 252);
     cursor: pointer;
 }
