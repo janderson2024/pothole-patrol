@@ -32,8 +32,9 @@ html {
 
 .how-it-works-title {
     font-family: 'Outfit';
-    margin-top: 10px;
-    font-size: 1.7rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
     font-weight: bold;
     color: var(--tertiary);
     text-align: left;
@@ -41,35 +42,37 @@ html {
 
 .how-it-works-summary {
     font-family: 'Roboto Slab';
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--tertiary);
 }
 
-.submit-location-title, .locate-on-map-title {
+.submit-location-title, .locate-on-map-title, 
+.permissions-title, .view-map-title {
     font-family: 'Outfit';
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: var(--secondary);
     font-weight: bold;
 }
 
-ul {
+.how-it-works-list {
     margin: auto;
     list-style: none;
     background-color: aliceblue;
-    width: 300px;
+    width: 290px;
     border-style: solid;
     border-color: var(--quarternary);
     border-radius: 5px;
-    padding-bottom: 25px;
     padding-left: 20px;
 }
 
 li {
     text-align: left;
+    padding-bottom: 15px;
 }
 
 hr {
-    width: 325px;
+    width: 310px;
+    margin-top: 25px;
 }
 
 /* About Page */
@@ -84,10 +87,6 @@ hr {
     font-family: 'Outfit';
     font-weight: bolder;
     margin-top: 30px;
-}
-
-.indent-container {
-    margin-left: 20px;
 }
 
 .h4 {
@@ -135,22 +134,17 @@ hr {
 
 
 .actions-container {
-    margin-top: 30px;
+    margin-top: 25px;
     align-content: flex-end;
-}
-
-.button-container {
-    width: 325px;
-    margin: auto;
 }
 
 .SubmitLocation {
     display: flex;
     font-family: 'Outfit';
-    font-size: 1.4rem;
+    font-size: 1.45rem;
     background-color: var(--secondary);
     color: var(--primary);
-    width: 325px;
+    width: 315px;
     border-radius: 5px;
     border-style: none;
     justify-content: center;
@@ -158,11 +152,13 @@ hr {
 }
 
 .SubmitLocation:hover {
-    font-size: 1.5rem;
     color: var(--quinary);
     cursor: pointer;
-    padding: 0;
     justify-content: center;
+}
+
+.SubmitLocation:disabled {
+    color: var(--quarternary);
 }
 
 .LocationIcon {
@@ -176,7 +172,7 @@ hr {
     font-size: 1.4rem;
     background-color: var(--quarternary);
     color: var(--tertiary);
-    width: 325px;
+    width: 315px;
     border-radius: 5px;
     border-style: none;
     justify-content: center;
@@ -186,7 +182,8 @@ hr {
 }
 
 .LocateOnMap:hover {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
+    color: rgb(2, 115, 252);
     cursor: pointer;
 }
 
@@ -200,8 +197,8 @@ pre {
     font-size: 1.2rem;
     font-weight: bold;
     color: var(--tertiary);
-    padding: 0;
     text-align: center;
+    margin: 10px;
 }
 
 @media screen and (max-width: 600px) {
