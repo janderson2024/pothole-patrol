@@ -62,7 +62,7 @@ function SubmitLocation() {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           };
-         const response = await fetch("./api/submitpothole", {
+         const response = await fetch("./api/frontend_test", {
             method: "POST",
             headers: {
               "Content-type": "application/json",
@@ -99,8 +99,8 @@ function SubmitLocation() {
 
 function LocateOnMap(props) {
   return (
-    <div className="button-container">
-    <Link className="LocateLink" to="/mark_map">
+    <div>
+    <Link className="LocateLink" to="/mark_map/">
       <button className="LocateOnMap">
        {props.text}
        <PinDropIcon className="PinDropIcon" />
