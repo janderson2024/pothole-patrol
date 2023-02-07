@@ -62,7 +62,7 @@ function SubmitLocation() {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           };
-         const response = await fetch("./api/frontend_test", {
+         const response = await fetch("./api/submitpothole", {
             method: "POST",
             headers: {
               "Content-type": "application/json",
