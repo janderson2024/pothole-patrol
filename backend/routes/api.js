@@ -91,7 +91,7 @@ router.post("/reportrepair", userMiddleware, async (req, res) => {
 
 
 router.get("/potholes", async (req, res) => {
-    const latitude = req.query.latitude;
+    /*const latitude = req.query.latitude;
     const longitude = req.query.longitude;
     const filter = req.query.filter;
 
@@ -99,9 +99,9 @@ router.get("/potholes", async (req, res) => {
         const url = "/api/potholes?latitude={latitude}&longitude={longitude}&filter={city or zip}";
         const error = "missing queries. Url should look like " + url;
         return res.status(401).json({"error":error});
-    }
+    }/*
 
-    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
+    /*const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
     const fetchResp = await fetch(geoUrl);
     const geoData = await fetchResp.json();
 
@@ -122,7 +122,11 @@ router.get("/potholes", async (req, res) => {
         searchFilter = geoResult.postcode;
         getPotholeSql = "SELECT * FROM `Potholes` WHERE `zipcode` = ?";
     }
-    const [results] = await db.query(getPotholeSql, [searchFilter]);
+    
+    const [results] = await db.query(getPotholeSql, [searchFilter]);*/
+    const getPotholeSQL = "SELECT * FROM `Potholes`";
+
+    const [results] = await db.query(getPotholeSQL);
 
     var returnObj = {potholes:[]};
     for(result of results){
