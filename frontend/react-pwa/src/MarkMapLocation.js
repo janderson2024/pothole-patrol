@@ -6,7 +6,7 @@ import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
 import L from 'leaflet';
 
-async function callRegisterApi(position) {
+async function callSubmitPotholeApi(position) {
   console.log(position.lat)
   const data = {
       "latitude": position.lat,
@@ -31,7 +31,7 @@ function CustomPopup({markerPos}) {
   
   const submitData = async() => {
     console.log("submit data: " + markerPos);
-    callRegisterApi(markerPos);
+    callSubmitPotholeApi(markerPos);
     setStatus("SUBMITTED!")
     setTimeout(() => {
       setStatus("SUBMIT")
