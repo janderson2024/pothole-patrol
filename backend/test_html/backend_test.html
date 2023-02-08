@@ -48,6 +48,8 @@
     <button type="button" id ="show-production-console" onclick="showConsole()">Load Server Console</button>
     <pre id="console-output"></pre>
     <button type="button" id="submitPotholeToDB" onclick="getLocation(submitPotholeToDB, showError)">Submit Pothole to Database</button>
+    <button type="button" id="updateCompletionStatus" onclick="getLocation(updateCompletionStatus, showError)">Update Completion Status</button>
+    
 
     <script>
         var testLatitude = undefined; 
@@ -197,6 +199,24 @@
             };
             console.log(data);
             response = await fetch('./api/submitpothole', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(data),
+            });
+
+            text = await response.text();
+            console.log(text);
+        }
+
+        async function updateCompletionStatus(position) {
+            const data = {
+                "latitude": testLatitude || position.coords.latitude,
+                "longitude": testLongitude || position.coords.longitude
+            };
+            console.log(data);
+            response = await fetch('./api/reportrepair', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'

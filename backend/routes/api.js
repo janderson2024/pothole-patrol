@@ -76,7 +76,17 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
         if (err) throw err;
         console.log(result);
     });
-    console.log("Pothole and/or Report succesfully added to DB");
+    //console.log("Pothole and/or Report succesfully added to DB");
+});
+
+router.post("/reportrepair", userMiddleware, async (req, res) => {
+    let potholeLat = req.body.latitude;
+    let potholeLong = req.body.longitude;
+
+    console.log(potholeLat);
+    console.log(potholeLong);
+
+    //Add code to find pothole ID and udate completion status of pothole
 });
 
 
