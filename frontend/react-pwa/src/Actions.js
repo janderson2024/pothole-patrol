@@ -45,10 +45,10 @@ function SubmitLocation() {
     submitMyLocation: "SUBMIT MY LOCATION",
     locating: "LOCATING",
     submitted: "SUBMITTED",
-    unableToGetLocation: "UNABLE TO GET LOCATION"
+    unableToGetLocation: "SUBMISSION FAILED"
   }
 
-  const [status, setStatus] = useState("SUBMIT MY LOCATION");
+  const [status, setStatus] = useState(statuses.submitMyLocation);
   const [disabled, setDisabled] = useState(false);
 
   const getLocation = () => {
@@ -62,7 +62,7 @@ function SubmitLocation() {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           };
-         const response = await fetch("./api/frontend_test", {
+         const response = await fetch("./api/submitpothole", {
             method: "POST",
             headers: {
               "Content-type": "application/json",
@@ -100,7 +100,7 @@ function SubmitLocation() {
 function LocateOnMap(props) {
   return (
     <div>
-    <Link className="LocateLink" to="/mark_map/">
+    <Link className="LocateLink" to="/mark_map">
       <button className="LocateOnMap">
        {props.text}
        <PinDropIcon className="PinDropIcon" />
@@ -108,6 +108,4 @@ function LocateOnMap(props) {
     </Link>
     </div>
   );
-}
-
-//nest in a container with side margins? 
+} 
