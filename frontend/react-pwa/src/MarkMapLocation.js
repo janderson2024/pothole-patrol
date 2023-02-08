@@ -7,12 +7,10 @@ import '../src/styles.css';
 import L from 'leaflet';
 
 async function callSubmitPotholeApi(position) {
-  console.log(position.lat)
   const data = {
       "latitude": position.lat,
       "longitude": position.lng
   }
-  console.log(data);
 
   const response = await fetch('./api/submitpothole', {
       method: 'POST',
