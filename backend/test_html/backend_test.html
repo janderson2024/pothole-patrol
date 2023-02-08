@@ -229,12 +229,7 @@
         }
 
         async function getPotholesTest(position) {
-            const data = {
-                lat: testLatitude || position.coords.latitude,
-                lng: testLongitude || position.coords.longitude,
-                filter: "city" || "zip"
-            };
-            const url = './api/potholes' + "?latitude=" + data.lat + "&longitude=" + data.lng + "&filter=" + data.filter;
+            const url = './api/potholes';
         
             response = await fetch(url, {
                 method: "GET"

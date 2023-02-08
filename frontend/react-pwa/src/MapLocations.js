@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import React, {useState, useEffect} from 'react';
+import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import { useMap } from 'react-leaflet/hooks'
 import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
@@ -13,13 +13,8 @@ const customMarkerIcon = new L.Icon ({
 }); 
 
 // need a component that would call this, then make a new marker on lat/long
-async function getPotholesTest(position) {
-  const data = {
-      lat: position.lat,
-      lng: position.lng,
-      filter: "city" || "zip"
-  };
-  const url = './api/potholes?latitude=' + data.lat + "&longitude=" + data.lng + "&filter=" + data.filter;
+async function getPotholesTest() {
+  const url = './api/potholes';
 
   const response = await fetch(url, {
       method: "GET"
@@ -28,34 +23,74 @@ async function getPotholesTest(position) {
 }
 
 
-function CustomComp() {
+function CenterMapComp() {
   const map = useMap();
-
   useEffect(() => {
     map.on("locationfound", async function (e) {
-      //console.log("here");
       map.setView(e.latlng, map.getZoom());
-
-      //get potholes here from serve
-      const potholes = await getPotholesTest(e.latlng);
-      
-      for(const pothole of potholes.potholes){
-        const marker = new L.marker([pothole.latitude, pothole.longitude],{icon:customMarkerIcon});
-        marker.addTo(map).bindPopup("Pothole here! It has " + pothole.reportCount + " report(s)!");
-        //console.log(pothole);
-      }
     });
     map.locate();
   },[map]);
-
 
   return null;
 }
 
 
+
 const MapLocations = () => {
+  const [markers, setMarkers] = useState([]);
+
+  const [cityFilter, setCityFilter] = useState('');
+  const [zipFilter, setZipFilter] = useState('');
+  const [filterType, setFilterType] = useState('no-filter');
+
+  useEffect( () => {
+    async function getPotholeList(){
+      //get potholes here from server
+      const potholes = await getPotholesTest();
+      setMarkers(potholes.potholes);
+    }
+    getPotholeList();
+    },[]);
+
+  let filteredMarkers = markers;
+
+  if (filterType === 'city') {
+    filteredMarkers = markers.filter(
+      (marker) => marker.city.toLowerCase().includes(cityFilter.toLowerCase())
+    );
+  } else if (filterType === 'zip') {
+    filteredMarkers = markers.filter(
+      (marker) => marker.zip.toLowerCase().includes(zipFilter.toLowerCase())
+    );
+  }
 
   return (
+    <>
+    <select
+        value={filterType}
+        onChange={(event) => setFilterType(event.target.value)}
+      >
+        <option value="no-filter">No filter</option>
+        <option value="city">Filter by city</option>
+        <option value="zip">Filter by zip</option>
+      </select>
+      {filterType === 'city' && (
+        <input
+          type="text"
+          placeholder="Filter by city"
+          value={cityFilter}
+          onChange={(event) => setCityFilter(event.target.value)}
+        />
+      )}
+      {filterType === 'zip' && (
+        <input
+          type="text"
+          placeholder="Filter by zip"
+          value={zipFilter}
+          onChange={(event) => setZipFilter(event.target.value)}
+        />
+      )}
     <MapContainer 
       className='map-container' 
       center={[0, 0]} 
@@ -66,10 +101,19 @@ const MapLocations = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <CustomComp/>
+      <CenterMapComp/>
+      {filteredMarkers.map((pothole, idx) => (
+        <Marker key={`marker-${idx}`} position={[pothole.latitude, pothole.longitude]} icon={customMarkerIcon}>
+          <Popup>
+            TODO: add button to mark as completed
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
+    </>
   );
-}
+
+};
 
 
 export default MapLocations;

@@ -133,7 +133,7 @@ router.get("/potholes", async (req, res) => {
         pothole = {
             "potholeID" : result.ID,
             "city" : result.city,
-            "zip" : result.zip,
+            "zip" : result.zipcode,
             "reportCount" : result.report_count,
             "status" : result.status,
             "latitude" : parseFloat(result.approx_latitude),
