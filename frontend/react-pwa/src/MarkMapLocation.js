@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import Button from '@mui/material/Button';
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import { useMap } from 'react-leaflet/hooks'
 import '../node_modules/leaflet/dist/leaflet.css';
@@ -38,7 +39,7 @@ function CustomPopup({markerPos}) {
   }
   return (
       <Popup minWidth={90}>
-        <button onClick={submitData}>{status}</button>
+        <Button variant="contained"onClick={submitData}>{status}</Button>
       </Popup>
   )
 }

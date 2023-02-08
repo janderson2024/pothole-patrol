@@ -15,7 +15,9 @@ export default function About() {
         <p className="p">
           While allowing location permissions in your browser is required for
           the app to work, we take every possible precaution to protect personally
-          identifiable data. We only gather information strictly necessary for running the app.
+          identifiable data. We only gather information strictly necessary for running the app, namely the user's IP address, 
+          the user's 'user agent', which is simply information the browser sends about the type of a device, and the user's city based off
+          a geolocation check. We don't store current user positions or track user movements.
           All information shown on the public map is anonymous. The app does not gather personal contact information. Our
           backend database only contains anonymous User ID's.
         </p>
@@ -26,7 +28,7 @@ export default function About() {
             acknowledge the following artists:
             <ul>
               <li>
-                <a
+                <a 
                   className="attributions"
                   href="https://www.flaticon.com/authors/chattapat"
                 >
