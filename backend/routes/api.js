@@ -80,13 +80,11 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
 });
 
 router.post("/reportrepair", async (req, res) => {
-    console.log("Post test")
-    let potholeId = req.body.potholeId;
-    console.log(potholeId);
+    let userPotholeId = req.body.potholeId;
+    console.log(userPotholeId);
+    await subtractReportCount(userPotholeId);
 
-    
-
-    //Add code to find pothole ID and udate completion status of pothole
+    //Add code to check if pothole report number is 0... remove pothole from database if report count is down to 0
 });
 
 
@@ -258,3 +256,16 @@ async function updateReportCount (potholeID) {
     let updateSql = "UPDATE `Potholes` SET `report_count` = ? WHERE `ID` = ?";
     await db.query(updateSql, [newReportCount, potholeID]);
 }
+
+//Locates pothole in Database, lowers report count by 1
+async function subtractReportCount (potholeID) {
+    sql = "SELECT * FROM `Potholes` WHERE `ID` = ?";
+    const [results] = await db.query(sql, potholeID);
+    for(var i = 0; i < results.length; i++){
+        currentReportCount = parseInt(results[i].report_count);
+    }
+    let newReportCount = currentReportCount - 1;
+    let updateSql = "UPDATE `Potholes` SET `report_count` = ? WHERE `ID` = ?";
+    await db.query(updateSql, [newReportCount, potholeID]);
+}
+
