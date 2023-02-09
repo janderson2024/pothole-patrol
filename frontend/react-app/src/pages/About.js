@@ -60,6 +60,7 @@ export default function About() {
           </p>
         </div>
       </div>
+      <footer>&copy; 2023 Joshua Anderson, Dennis Bowen, and Monica Tuttle </footer>
     </main>
   );
 }
