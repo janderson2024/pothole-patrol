@@ -44,9 +44,9 @@ function CustomPopup({markerPos}) {
 
 const customMarkerIcon = new L.Icon ({
   iconUrl: './pin.png',
-  iconSize: [50, 50],
-  iconAnchor: [25, 50],
-  popupAnchor: [1, -34],
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+  popupAnchor: [2, -30],
 });
 
 
