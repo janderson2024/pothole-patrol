@@ -111,7 +111,6 @@ footer {
     font-size: 12px;
     background-color:var(--secondary);
     color: var(--primary);
-    padding: 10px;
     border-radius: 5px;
 }
 /* Navigation bar */
@@ -122,6 +121,10 @@ footer {
     text-decoration: none;
     padding-bottom: 0px;
     padding-top: 0px;
+}
+
+.site-title:hover {
+    color: var(--quinary);
 }
 
 .nav {
