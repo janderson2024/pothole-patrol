@@ -41,7 +41,7 @@ if(process.env.MODE == "development"){
     });
 }
 
-app.use(static,express.static("../frontend/react-pwa/build"));
+app.use(static,express.static("../frontend/react-app/build"));
 
 app.use(user, userRouter);
 app.use(api, apiRouter);
@@ -57,7 +57,7 @@ app.get(test_html, (req, res) => {
 
 //fixes the issue with "cannot get only if the react side changes"
 app.get(home + "*", async (req, res) => {
-    const frontendPath = path.join(__dirname, "../frontend/react-pwa/build/index.html");
+    const frontendPath = path.join(__dirname, "../frontend/react-app/build/index.html");
     if(await fileExists(frontendPath)){
         res.sendFile(frontendPath);
     } else {
