@@ -6,19 +6,19 @@ export default function Home() {
       <div className="how-it-works-summary">
         <ul className="how-it-works-list">
           <h3 className="how-it-works-title">HOW IT WORKS</h3>
-          <li>
+          <li className="instructions-item">
             <div className="permissions-title">ALLOW LOCATION PERMISSIONS</div>
             in the browser for this app to work
           </li>
-          <li>
+          <li className="instructions-item">
             <div className="submit-location-title">CLICK 'SUBMIT MY LOCATION'</div> to
             quickly report a pothole at your current location
           </li>
-          <li>
+          <li className="instructions-item">
             <div className="locate-on-map-title">CLICK 'LOCATE ON MAP'</div> to drag, click  
             and submit a marker where there's a pothole on the map
           </li>
-          <li>
+          <li className="instructions-item">
             <div className="view-map-title">VIEW MAP (UNDER 'MENU')</div>
             to see a map of all reports near you
           </li>
