@@ -15,6 +15,10 @@ html {
     margin: 0;
 }
 
+main {
+    height: 100%;
+}
+
 .map-container {
     width: 100%;
     height: calc(100% - 100px);
@@ -116,6 +120,7 @@ footer {
     background-color:var(--secondary);
     color: var(--primary);
     border-radius: 5px;
+    padding: 15px;
 }
 /* Navigation bar */
 
@@ -219,6 +224,32 @@ pre {
     color: var(--tertiary);
     text-align: center;
     margin: 10px;
+}
+
+/* View Map page */
+
+.select-filter {
+    background-color: #1773db;
+    color: var(--primary);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin: 5px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.select-container, .filter-container {
+    text-align: center;
+}
+
+.filter-input {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 112px;
+    text-align: center;
+    font-family: 'Noto Sans Khmer';
 }
 
 @media screen and (max-width: 600px) {

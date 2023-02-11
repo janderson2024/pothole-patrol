@@ -86,16 +86,21 @@ const MapLocations = () => {
 
   return (
     <>
-    <select
+    <div className="select-container">
+    <select 
+        className="select-filter"
         value={filterType}
         onChange={(event) => setFilterType(event.target.value)}
       >
-        <option value="no-filter">No filter</option>
-        <option value="city">Filter by city</option>
-        <option value="zip">Filter by zip</option>
+        <option value="no-filter">NO FILTER</option>
+        <option value="city">FILTER BY CITY</option>
+        <option value="zip">FILTER BY ZIP</option>
       </select>
+      </div>
+      <div className="filter-container">
       {filterType === 'city' && (
         <input
+          className="filter-input"
           type="text"
           placeholder="Filter by city"
           value={cityFilter}
@@ -104,12 +109,15 @@ const MapLocations = () => {
       )}
       {filterType === 'zip' && (
         <input
+          className="filter-input"
           type="text"
           placeholder="Filter by zip"
           value={zipFilter}
           onChange={(event) => setZipFilter(event.target.value)}
         />
       )}
+      </div>
+
     <MapContainer 
       className='map-container' 
       center={[0, 0]} 
