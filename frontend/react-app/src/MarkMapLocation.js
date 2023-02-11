@@ -99,7 +99,7 @@ const MarkMapLocation = () => {
 
   return (
     <MapContainer 
-      className='map-container' 
+      className='map' 
       center={[0, 0]} 
       zoom={15} 
       scrollWheelZoom={true}

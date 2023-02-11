@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Noto+Sans+Khmer&family=Outfit&family=Roboto+Slab&display=swap');
 
 html {
-    /*box-sizing: border-box;*/
+    box-sizing: border-box;
     height: 100%;
     --primary: white;
     --secondary: #1565C0;
@@ -17,15 +17,14 @@ html {
 
 main {
     height: 100%;
+    width: 100%;
 }
 
-.map-container {
-    width: 100%;
-    height: calc(100% - 100px);
+.map {
+    width: calc(100% - 16px);
     border-radius: 5px;
-    position: absolute;
-    margin-left: 3px;
-    margin-right: 3px;
+    height: calc(100% - 100px);
+    position: fixed;
 }
 
 /* Home Page */
@@ -108,6 +107,10 @@ h2 {
     margin-bottom: 30px;
 }
 
+.privacy-list-item {
+    color:black;
+}
+
 .attributions {
     color: var(--secondary);
     text-decoration: none;
@@ -136,6 +139,9 @@ footer {
     color: var(--quinary);
 }
 
+.site-title::first-letter {
+    outline: black;
+}
 .nav {
     position: sticky;
     border-radius: 5px;
@@ -172,6 +178,7 @@ footer {
     color: var(--primary);
     width: 315px;
     border-radius: 5px;
+    padding: 0;
     border-style: none;
     justify-content: center;
     margin: auto;
@@ -202,7 +209,7 @@ footer {
     border-radius: 5px;
     border-style: none;
     justify-content: center;
-    padding: 25px;
+    padding: 22px;
     margin: auto;
     text-decoration: none;
 }
@@ -228,6 +235,10 @@ pre {
 
 /* View Map page */
 
+.container-for-filter {
+    text-align: center;
+}
+
 .select-filter {
     background-color: #1773db;
     color: var(--primary);
@@ -241,94 +252,150 @@ pre {
 }
 
 .select-container, .filter-container {
-    text-align: center;
+    display: inline;
+    position: relative;
 }
 
 .filter-input {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    width: 112px;
-    text-align: center;
+    padding-top: 9px;
+    padding-bottom: 10px;
+    width: 150px;
     font-family: 'Noto Sans Khmer';
 }
 
-@media screen and (max-width: 600px) {
+/* Media queries */
 
-    .nav {
-        background-color: var(--secondary);
-    }
+@media screen and (max-width: 403px) {
 
     .site-title {
         font-size: 1.3rem;
         padding: 5px;
     }
-
-    .map-container {
-        margin-left: 3px;
-        margin-right: 20px;
-    }
 }
-   
-@media screen and (max-width: 414px) {
-    .map-container {
-        width: 95%;
+
+@media screen and (max-width: 340px) {
+
+    .site-title {
+        font-size: 1rem;
+        padding: 5px;
     }
 }
 
-@media screen and (min-width: 540px) {
-    .map-container {
-        width: 96%;
-    }
-}
+/* Media query for devices like the Galaxy Fold */
 
-@media screen and (min-width: 1000px) {
-    .map-container {
-        margin-left: 3px;
-        margin-right: 3px;
-    }
-}
+@media screen and (max-width: 320px) {
 
-@media screen and (min-width: 820px) {
-    .map-container {
-        width: 97.5%;
-    }
-}
-
-@media screen and (min-width: 768px) {
-    .map-container {
-        width: 97%;
-    }
-}
-
-@media screen and (min-width: 912px) {
-    .map-container {
-        width: 97.5%;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-    .map-container {
-        width: 98.25%;
-    }
-}
-
-@media screen and (max-width: 280px) {
-    .map-container {
-        width: 93%;
-    }
-
-    .SubmitLocation {
-        width: 250px;
-        font-size: medium;
+    .site-title {
+        font-size: .95rem;
+        padding-left: 0;
     }
 
     .LocateOnMap {
-        width: 200px;
-        font-size: medium;
+        font-family: 'Outfit';
+        font-size: 1.25rem;
+        background-color: var(--quarternary);
+        color: var(--tertiary);
+        width: 265px;
+        border-radius: 5px;
+        border-style: none;
+        justify-content: center;
+        text-decoration: none;
+        padding-bottom: 20px;
+        padding-top: 20px;
     }
 
-    .LocationIcon, .PinDropIcon {
-        display: none;
+    .SubmitLocation {
+        font-family: 'Outfit';
+        font-size: 1.25rem;
+        background-color: var(--secondary);
+        color: var(--primary);
+        width: 265px;
+        border-radius: 5px;
+        border-style: none;
+        justify-content: center;
+        padding: 2px;
+        margin: auto;
+    }
+
+    .how-it-works-title {
+        font-family: 'Outfit';
+        margin-top: 5px;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--tertiary);
+        text-align: left;
+    }
+
+    .how-it-works-summary {
+        font-family: 'Roboto Slab';
+        font-size: .9rem;
+        color: var(--tertiary);
+    }
+    
+    .submit-location-title, .locate-on-map-title, 
+    .permissions-title, .view-map-title {
+        font-family: 'Outfit';
+        font-size: .9rem;
+        color: var(--secondary);
+        font-weight: bold;
+    }
+    
+    .how-it-works-list {
+        list-style: none;
+        background-color: aliceblue;
+        width: 240px;
+        border-style: solid;
+        border-color: var(--quarternary);
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav {
+        position: sticky;
+        width: 91%;
+        border-radius: 5px;
+        background-color: var(--secondary);
+        color: var(--primary);
+        display: flex;
+        justify-content: space-between;
+        padding-right: .75rem;
+        padding-left: .75rem;
+        align-items: center;
+    }
+
+    hr {
+        width: 260px;
+        margin-top: 25px;
+    }
+  
+    footer {
+        width: 88.5%;
+        position: sticky;
+        font-family: 'Noto Sans Khmer';
+        font-size: 12px;
+        background-color:var(--secondary);
+        color: var(--primary);
+        border-radius: 5px;
+        padding: 15px;
+    }
+
+    .LocationIcon {
+        padding-top: 21px;
+        padding-left: 10px;
+    }
+
+    .PinDropIcon {
+        padding-top: 2px;
+    }
+
+    /* View map page for devices with small screens */
+    
+    .filter-input {
+        padding-top: 9px;
+        padding-bottom: 10px;
+        width: 125px;
+        font-family: 'Noto Sans Khmer';
     }
 }
-

@@ -31,15 +31,15 @@ const MenuPopupState = () => {
       <Button variant="contained" {...bindTrigger(popupState)}>
         Menu
       </Button>
-      <Menu className="menu" {...bindMenu(popupState)}>
+      <Menu {...bindMenu(popupState)}>
         <CustomLink className="link" to="/view_map">
-          <MenuItem className="menu-item">VIEW MAP</MenuItem>
+          <MenuItem>VIEW MAP</MenuItem>
         </CustomLink>
         <CustomLink className="link" to="/about">
-          <MenuItem className="menu-item">ABOUT</MenuItem>
+          <MenuItem>ABOUT</MenuItem>
         </CustomLink>
         <CustomLink className="link" to="/">
-          <MenuItem className="menu-item">HOME</MenuItem>
+          <MenuItem>HOME</MenuItem>
         </CustomLink>
       </Menu>
     </div>
