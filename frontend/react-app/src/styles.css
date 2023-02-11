@@ -65,9 +65,13 @@ html {
     padding-left: 20px;
 }
 
-li {
+.instructions-item {
     text-align: left;
     padding-bottom: 15px;
+}
+
+li {
+    color: var(--tertiary);
 }
 
 hr {
@@ -140,11 +144,15 @@ footer {
 }
 
 
-.nav a, .link, .LocateLink {
+.nav a, .LocateLink {
     color: inherit;
     text-decoration: none;
 }
 
+.link {
+    color: var(--secondary);
+    text-decoration: none;
+}
 
 .actions-container {
     margin-top: 25px;
