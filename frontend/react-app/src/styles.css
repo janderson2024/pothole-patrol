@@ -166,6 +166,12 @@ footer {
     align-items: center;
 }
 
+.locate-on-map-container {
+    width: 315px;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+}
 
 .nav a, .LocateLink {
     color: inherit;

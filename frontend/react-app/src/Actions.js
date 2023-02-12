@@ -54,7 +54,7 @@ function SubmitLocation() {
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus(statuses.unableToGetLocation);
-      alert("Please allow location permissions in your site settings to use this app.")
+      alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
     } else {
       setStatus(statuses.locating);
       navigator.geolocation.getCurrentPosition(
@@ -83,7 +83,7 @@ function SubmitLocation() {
 
         () => {
           setStatus(statuses.unableToGetLocation);
-          alert("Please allow location permissions in your site settings to use this app.")
+          alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
         }
       );
     }
@@ -100,12 +100,14 @@ function SubmitLocation() {
 }
 
 function LocateOnMap(props) {
-  const [status, setStatus] = useState("LOCATE ON MAP");
   const [disabled, setDisabled] = useState(false);
-  const getLocation = () => {
+  const getPermissions = () => {
     if (!navigator.geolocation) {
-      setStatus("SUBMISSION FAILED");
-      alert("Please allow location permissions in your site settings to use this app.")
+      setDisabled(true);
+      alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
+      setTimeout(() => {
+        setDisabled(false)
+      }, 60000);
     } else {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
@@ -114,25 +116,26 @@ function LocateOnMap(props) {
             longitude: position.coords.longitude,
           };
           console.log(coordinates)
+          setDisabled(false)
         },
-
         () => {
-          setStatus("SUBMISSION FAILED");
-          setDisabled(true)
-          alert("Please allow location permissions in your site settings to use this app.")
+          setDisabled(true);
+          alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
+          setTimeout(() => {
+            setDisabled(false)
+          }, 60000);
         }
       );
     }
   };
-
   return (
-    <div>
+    <div className="locate-on-map-container">
     <Link className="LocateLink" to="/mark_map">
-      <button className="LocateOnMap">
+      <button disabled={disabled} className="LocateOnMap" onClick={getPermissions} type="button">
        {props.text}
        <PinDropIcon className="PinDropIcon" />
       </button>
     </Link>
     </div>
   );
-} 
+  }
