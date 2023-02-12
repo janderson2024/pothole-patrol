@@ -15,8 +15,8 @@ export default function Home() {
             quickly report a pothole at your current location
           </li>
           <li className="instructions-item">
-            <div className="locate-on-map-title">CLICK 'LOCATE ON MAP'</div> to drag, click  
-            and submit a marker where there's a pothole on the map
+            <div className="locate-on-map-title">CLICK 'LOCATE ON MAP'</div> Click on a location where there's a pothole. 
+            Then click on the marker to submit.
           </li>
           <li className="instructions-item">
             <div className="view-map-title">VIEW MAP (UNDER 'MENU')</div>
