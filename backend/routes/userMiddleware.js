@@ -33,19 +33,19 @@ async function userMiddleware(req, res, next){
         return res.status(401).json({"error":"No included lat/lon"});
     }
 
-    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
+    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
     const fetchResp = await fetch(geoUrl);
     const geoData = await fetchResp.json();
     if(geoData.error){
         return res.status(401).json({"geoData error": geoData.message});
     }
-    if(geoData.results.length < 1 || (!geoData.results[0].city)){
+    if(geoData.results.length < 1 || (!geoData.results[0].county) || (!geoData.results[0].city)){
         return res.status(401).json({"geoData error": "Lat Lon could not result in a city"});
     }
-    geoCity = geoData.results[0].city;
+    geoCounty = geoData.results[0].county;
 
-    if(process.env.MODE == "production" && user.city != geoCity){
-        return res.status(401).json({"error":"different city than recorded user city... fail quietly"});
+    if(process.env.MODE == "production" && user.county != geoCounty){
+        return res.status(401).json({"error":"different county than recorded user county... fail quietly"});
     }
 
     //at this point a report is going to be created.

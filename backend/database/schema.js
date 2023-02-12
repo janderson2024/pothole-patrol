@@ -50,7 +50,7 @@ async function createNewTables(){
     const users_sql = "CREATE TABLE `Users` ("+
 	" `ID` INT NOT NULL AUTO_INCREMENT,"+
 	" `user_agent` varchar(255) NOT NULL,"+
-	" `city` varchar(255) NOT NULL,"+
+	" `county` varchar(255) NOT NULL,"+
     " `ip` varchar(255) NOT NULL,"+
 	" `reliability` INT NOT NULL,"+
 	" `last_report` TIMESTAMP NOT NULL,"+

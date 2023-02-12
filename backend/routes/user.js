@@ -3,7 +3,6 @@ const router = express.Router();
 const fetch = require("node-fetch");
 
 const db = require("../database/connection");
-const latlonDistance = require("../helpers/latlonDistance");
 
 const COOKIE_NAME = process.env.COOKIE_NAME;
 //milli in sec * sec in min * min in hr * hr in day * day in month
@@ -48,9 +47,18 @@ router.post("/register", async (req, res) => {
     //checks if there is a cookie AND it is signed. 
     //If the cookie isn't properly signed, we cant trust it
     if(req.signedCookies[COOKIE_NAME]){
-        uid = req.signedCookies[COOKIE_NAME]
+        const uid = req.signedCookies[COOKIE_NAME]
         //cookie is already set and signed, so it's not tampered
-        return makeCookie(res, uid);
+
+        //check if the user is actually in the DB
+        const getUserSql = "SELECT * FROM `Users` WHERE `ID` = ?";
+        const [result] = await db.query(getUserSql, [uid]);
+        const user = result[0];
+        if(user){
+            return makeCookie(res, uid); 
+        }
+        res.clearCookie(COOKIE_NAME);
+        
     }
 
     //pull the ip and user-agent
@@ -78,45 +86,40 @@ router.post("/register", async (req, res) => {
 
     //user ip is not in the system, so now its time to create a new user
 
-    //first we want to get the city from the ip
-    //we try the ip-api first. It's free, so I don't feel bad if the results don't line up
-    //fetch the ip geolocation data from the ip-api API
-    const apiUrl = "http://ip-api.com/json/"+ ip + "?fields=126975";
-    fetchResp = await fetch(apiUrl);
-    ipapiData = await fetchResp.json();
+    //get the country from the IP address
+    const apiUrl = "http://ip-api.com/json/"+ ip;
+    const ipApiResp = await fetch(apiUrl);
+    const ipapiData = await ipApiResp.json();
 
-    var city = "";
-    //get the city from the api returned data
-    if(ipapiData.status == "success"){
-        const distance = latlonDistance(ipapiData.lat, ipapiData.lon, userLat, userLon);
-        
-        //if the distance is less than 15 km, then we use this city as the response
-        if(distance <= 15){
-            city = ipapiData.city;
-        }
+    //now we make the call to the geoapify service
+    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ userLat +"&lon=" + userLon + "&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
+    const geoResp = await fetch(geoUrl);
+    const geoData = await geoResp.json();
+
+    if(geoData.error){
+        return res.status(401).json({"geoData error": geoData.message});
     }
+    if(geoData.results.length < 1 || (!geoData.results[0].county) || (!geoData.results[0].country)){
+        return res.status(401).json({"geoData error": "Lat Lon could not result in data"});
+    }
+    
+    const userCounty = geoData.results[0].county;
+    
 
-    if(!city){
-        //only run if city hasn't been set yet
-        //now we make the call to the geoapify service
-        const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ userLat +"&lon=" + userLon + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
-        const fetchResp = await fetch(geoUrl);
-        const geoData = await fetchResp.json();
-
-        if(geoData.error){
-            return res.status(401).json({"geoData error": geoData.message});
+    //if the ipApi fails, just move on...
+    //if success, but countries aren't equal: fail and call it spam 
+    if(ipapiData.status == "success"){
+        const ipCountry = ipapiData.country;
+        const userCountry = geoData.results[0].country;
+        if(ipCountry != userCountry){
+            return res.status(401).json({"error": "Ip address in different country than report"});
         }
-        if(geoData.results.length < 1){
-            return res.status(401).json({"geoData error": "Lat Lon could not result in a city"});
-        }
-        
-        city = geoData.results[0].city;
     }
 
     //At this point: it is time to insert the new user
     //new user with a reliability score of 1, a last report time set to 5 min ago (to help dodge the spam detection), and a last signin time of now
-    const insertSql = 'INSERT INTO `Users` (`user_agent`, `city`, `ip`, `reliability`, `last_report`, `last_signin`) VALUES (?, ?, ?, 1, now()-300, now());'
-    const [insertResult] = await db.query(insertSql, [userAgent, city, ip]);
+    const insertSql = 'INSERT INTO `Users` (`user_agent`, `county`, `ip`, `reliability`, `last_report`, `last_signin`) VALUES (?, ?, ?, 1, now()-300, now());'
+    const [insertResult] = await db.query(insertSql, [userAgent, userCounty, ip]);
     console.log("Created new user: " + insertResult.insertId);
 
     return makeCookie(res, insertResult.insertId);
