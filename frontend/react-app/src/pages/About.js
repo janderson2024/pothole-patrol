@@ -47,7 +47,7 @@ export default function About() {
         <h3 className="h3">THE TEAM</h3>
         <p className="p">
           Pothole Patrol was developed by Joshua Anderson, Dennis Bowen, and
-          Monica Tuttle, with instructional support from Jason Phan, Nicholas Groesch, and Dustin Turpin, as part of{" "}
+          Monica Tuttle, with instructional support from Nicholas Groesch, Jason Phan, and Dustin Turpin, as part of{" "}
           <a className="attributions" href="https://techwise.talentsprint.com/">
             TechWise by TalentSprint
           </a>

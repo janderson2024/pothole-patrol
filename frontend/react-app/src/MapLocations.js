@@ -99,7 +99,7 @@ const MapLocations = () => {
             <input
               className="filter-input"
               type="text"
-              placeholder="Filter by city"
+              placeholder="Enter city"
               value={cityFilter}
               onChange={(event) => setCityFilter(event.target.value)}
             />
@@ -108,7 +108,7 @@ const MapLocations = () => {
             <input
               className="filter-input"
               type="text"
-              placeholder="Filter by zip"
+              placeholder="Enter zip"
               value={zipFilter}
               onChange={(event) => setZipFilter(event.target.value)}
             />
