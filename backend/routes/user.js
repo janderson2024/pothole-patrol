@@ -92,7 +92,7 @@ router.post("/register", async (req, res) => {
     const ipapiData = await ipApiResp.json();
 
     //now we make the call to the geoapify service
-    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ userLat +"&lon=" + userLon + "&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
+    const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ userLat +"&lon=" + userLon + "&type=city&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
     const geoResp = await fetch(geoUrl);
     const geoData = await geoResp.json();
 
