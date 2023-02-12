@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useMap } from "react-leaflet/hooks";
 import "../node_modules/leaflet/dist/leaflet.css";
 import "../src/styles.css";
+import Button from "@mui/material/Button";
 import L from "leaflet";
 
 const getIcon = (reportCount) => {
@@ -133,7 +134,8 @@ const MapLocations = () => {
             icon={getIcon(pothole.reportCount)}
           >
             <Popup>
-              TODO: add button to mark as completed for Pothole Id :{" "}
+            {/* TODO: allow ability to update DB based on fixed pothole */}
+              <Button variant="contained">Mark as fixed</Button> 
               {pothole.potholeID}
             </Popup>
           </Marker>
