@@ -100,15 +100,13 @@ function SubmitLocation() {
 }
 
 function LocateOnMap(props) {
-  const [disabled, setDisabled] = useState(false);
+  const [link, setLink] = useState("/")
+
   const getPermissions = () => {
     if (!navigator.geolocation) {
-      setDisabled(true);
       alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
-      setTimeout(() => {
-        setDisabled(false)
-      }, 60000);
     } else {
+      setLink("/mark_map")
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const coordinates = {
@@ -116,26 +114,22 @@ function LocateOnMap(props) {
             longitude: position.coords.longitude,
           };
           console.log(coordinates)
-          setDisabled(false)
         },
         () => {
-          setDisabled(true);
           alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
-          setTimeout(() => {
-            setDisabled(false)
-          }, 60000);
+          setLink("/")
         }
       );
     }
   };
   return (
     <div className="locate-on-map-container">
-    <Link className="LocateLink" to="/mark_map">
-      <button disabled={disabled} className="LocateOnMap" onClick={getPermissions} type="button">
+    <Link className="LocateLink" to={link}>
+      <button className="LocateOnMap" onClick={getPermissions} type="button">
        {props.text}
        <PinDropIcon className="PinDropIcon" />
       </button>
     </Link>
     </div>
   );
-  }
+}
