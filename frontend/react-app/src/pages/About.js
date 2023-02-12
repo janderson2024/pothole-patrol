@@ -23,7 +23,7 @@ export default function About() {
             <ul>
               <li className="privacy-list-item">user's IP address</li>
               <li className="privacy-list-item">
-                <em>the user agent</em>, which is simply information the browser
+                <em>user agent</em>, which is simply information the browser
                 sends about the type of a device being used
               </li>
               <li className="privacy-list-item">
@@ -31,7 +31,7 @@ export default function About() {
               </li>
             </ul>
           </p>
-          We do <em>not</em>:
+          We do <strong>NOT</strong>:
           <ul>
             <li className="privacy-list-item">
               track current user positions or user movements
@@ -41,20 +41,28 @@ export default function About() {
             </li>
           </ul>
           <br></br>
-          Our database only contains auto-generated and anonymous User IDs, and all
-          information shown on the map is anonymous.
+          Our database only contains auto-generated and anonymous User IDs, and
+          all information shown on the map is anonymous.
         </p>
         <h3 className="h3">THE TEAM</h3>
         <p className="p">
           Pothole Patrol was developed by Joshua Anderson, Dennis Bowen, and
-          Monica Tuttle, with support from TechWise by TalentSprint, an 18-month
-          software engineering upskilling program sponsored by Google.
+          Monica Tuttle, with instructional support from Jason Phan, Nicholas Groesch, and Dustin Turpin, as part of{" "}
+          <a className="attributions" href="https://techwise.talentsprint.com/">
+            TechWise by TalentSprint
+          </a>
+          , an intensive software engineering training program sponsored by
+          Google.
         </p>
         <div className="indent-container">
           <h3 className="h3">ATTRIBUTIONS</h3>
           <p className="p">
-            For the Google fonts and the logo featured on our app, we wish to
-            acknowledge the following artists:
+            For the{" "}
+            <a className="attributions" href="https://fonts.google.com/about">
+              Google Fonts
+            </a>{" "}
+            and the car logo featured on our app, we wish to give attributions to the
+            following artists:
             <ul>
               <li>
                 <a
@@ -89,7 +97,12 @@ export default function About() {
           </p>
         </div>
       </div>
-      <footer>&copy; 2023 Joshua Anderson, Dennis Bowen, Monica Tuttle </footer>
+      <footer>
+      <a href="https://gitlab.com/janderson2024/pothole-patrol">
+          <img className="gitlab-icon" src="./gitlab_icon.png" alt="Logo" />
+        </a>
+        &copy; 2023 Joshua Anderson, Dennis Bowen, Monica Tuttle{" "}
+      </footer>
     </main>
   );
 }

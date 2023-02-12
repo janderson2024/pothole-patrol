@@ -54,6 +54,7 @@ function SubmitLocation() {
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus(statuses.unableToGetLocation);
+      alert("Please allow location permissions in your site settings to use this app.")
     } else {
       setStatus(statuses.locating);
       navigator.geolocation.getCurrentPosition(
@@ -82,6 +83,7 @@ function SubmitLocation() {
 
         () => {
           setStatus(statuses.unableToGetLocation);
+          alert("Please allow location permissions in your site settings to use this app.")
         }
       );
     }
@@ -98,6 +100,31 @@ function SubmitLocation() {
 }
 
 function LocateOnMap(props) {
+  const [status, setStatus] = useState("LOCATE ON MAP");
+  const [disabled, setDisabled] = useState(false);
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus("SUBMISSION FAILED");
+      alert("Please allow location permissions in your site settings to use this app.")
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const coordinates = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+          console.log(coordinates)
+        },
+
+        () => {
+          setStatus("SUBMISSION FAILED");
+          setDisabled(true)
+          alert("Please allow location permissions in your site settings to use this app.")
+        }
+      );
+    }
+  };
+
   return (
     <div>
     <Link className="LocateLink" to="/mark_map">

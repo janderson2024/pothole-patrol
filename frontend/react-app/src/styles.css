@@ -118,12 +118,24 @@ h2 {
 
 footer {
     position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: 'Noto Sans Khmer';
-    font-size: 12px;
+    font-size: 14px;
     background-color:var(--secondary);
     color: var(--primary);
     border-radius: 5px;
-    padding: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.gitlab-icon {
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 5px;
+    height: 40px;
 }
 /* Navigation bar */
 
@@ -369,9 +381,19 @@ pre {
         width: 260px;
         margin-top: 25px;
     }
+
+    pre {
+        font-family: 'Outfit';
+        font-size: 1rem;
+        font-weight: bold;
+        color: var(--tertiary);
+        text-align: center;
+        margin: 10px;
+    }
   
     footer {
         width: 88.5%;
+        display: space-between;
         position: sticky;
         font-family: 'Noto Sans Khmer';
         font-size: 12px;
@@ -389,6 +411,7 @@ pre {
     .PinDropIcon {
         padding-top: 2px;
     }
+
 
     /* View map page for devices with small screens */
     
