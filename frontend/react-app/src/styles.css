@@ -281,17 +281,6 @@ pre {
     font-family: 'Noto Sans Khmer';
 }
 
-.marker-popup {
-    display: inline-flex;
-    font-family: 'Roboto Slab';
-    font-size: 11px;
-}
-
-.fixed-button {
-    display: grid;
-
-}
-
 /* Media queries */
 
 @media screen and (max-width: 403px) {
