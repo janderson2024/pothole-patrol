@@ -133,10 +133,10 @@ const MapLocations = () => {
             position={[pothole.latitude, pothole.longitude]}
             icon={getIcon(pothole.reportCount)}
           >
-            <Popup maxWidth="120">
+            <Popup className="marker-popup" maxWidth="130">
               Pothole here! It has {pothole.reportCount} report{"(s)"}!
             {/* TODO: allow ability to update DB based on fixed pothole */}
-              <Button variant="contained">Mark fixed</Button> 
+              <Button className="fixed-button" variant="contained">Mark fixed</Button> 
             </Popup>
           </Marker>
         ))}
