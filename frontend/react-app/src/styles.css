@@ -351,6 +351,13 @@ pre {
         padding-left: 0;
     }
 
+    .locate-on-map-container {
+        width: 265px;
+        text-align: center;
+        justify-content: center;
+        margin: auto;
+    }
+
     .LocateOnMap {
         font-family: 'Outfit';
         font-size: 1.25rem;
