@@ -281,6 +281,16 @@ pre {
     font-family: 'Noto Sans Khmer';
 }
 
+.marker-popup {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+.fixed-button {
+    display: inline-flex;
+    flex-direction: row;
+}
+
 /* Media queries */
 
 @media screen and (max-width: 403px) {
