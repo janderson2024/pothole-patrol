@@ -283,12 +283,13 @@ pre {
 
 .marker-popup {
     display: inline-flex;
-    flex-direction: row;
+    font-family: 'Roboto Slab';
+    font-size: 14px;
 }
 
 .fixed-button {
-    display: inline-flex;
-    flex-direction: row;
+    display: grid;
+
 }
 
 /* Media queries */
