@@ -20,7 +20,7 @@ export default function Home() {
           </li>
           <li className="instructions-item">
             <div className="view-map-title">VIEW MAP (UNDER 'MENU')</div>
-            to see a map of all reports near you
+            to see a map of all reports near you and to report potholes as fixed
           </li>
         </ul>
         <hr></hr>

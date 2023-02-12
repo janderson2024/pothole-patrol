@@ -104,7 +104,7 @@ function LocateOnMap(props) {
 
   const getPermissions = () => {
     if (!navigator.geolocation) {
-      alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
+      alert("Please allow location permissions in your browser's settings. Then refresh or close/reopen the browser to use this app.")
     } else {
       setLink("/mark_map")
       navigator.geolocation.getCurrentPosition(
@@ -116,7 +116,7 @@ function LocateOnMap(props) {
           console.log(coordinates)
         },
         () => {
-          alert("Please allow location permissions in your browser's site settings and then refresh the browser to use this app.")
+          alert("Please allow location permissions in your browser's settings. Then refresh or close/reopen the browser to use this app.")
           setLink("/")
         }
       );
