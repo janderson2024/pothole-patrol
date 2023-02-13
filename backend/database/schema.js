@@ -63,7 +63,7 @@ async function createNewTables(){
 }
 
 async function alterTables(){
-    const foreign_pothole = "ALTER TABLE `Reports` ADD CONSTRAINT `Reports_fk0` FOREIGN KEY (`potholeID`) REFERENCES `Potholes`(`ID`);";
+    const foreign_pothole = "ALTER TABLE `Reports` ADD CONSTRAINT `Reports_fk0` FOREIGN KEY (`potholeID`) REFERENCES `Potholes`(`ID`) ON DELETE CASCADE;";
     const foreign_user = "ALTER TABLE `Reports` ADD CONSTRAINT `Reports_fk1` FOREIGN KEY (`userID`) REFERENCES `Users`(`ID`);";
 
     const add_foreign_keys = 'SET FOREIGN_KEY_CHECKS=1;';

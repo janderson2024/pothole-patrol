@@ -81,7 +81,9 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
 
 router.post("/reportrepair", async (req, res) => {
     let userPotholeId = req.body.potholeId;
+    console.log(req.body);
     await subtractReportCount(userPotholeId);
+    res.send("Recieved pothole completion!");
 });
 
 
