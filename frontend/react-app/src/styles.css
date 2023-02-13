@@ -107,6 +107,17 @@ h2 {
     margin-bottom: 30px;
 }
 
+.prettify-title {
+    font-family: 'Outfit';
+    font-weight: bolder;
+    font-size: medium;
+    color: black;
+}
+
+.prettify-first-letter {
+    font-family: 'Major Mono Display'
+}
+
 .privacy-list-item {
     color:black;
 }
@@ -131,12 +142,24 @@ footer {
     padding-right: 10px;
     padding-left: 10px;
 }
+.gitlab-container {
+    gap: .5rem;
+    align-items: center;
+    display: flex;
+    font-family: 'Noto Sans Khmer';
+}
 
 .gitlab-icon {
     align-items: center;
     padding-top: 5px;
-    height: 40px;
+    height: 35px;
 }
+
+.gitlab-pitch {
+    color: var(--primary);
+    font-size: 12px;
+}
+
 /* Navigation bar */
 
 .site-title {
@@ -318,8 +341,12 @@ pre {
     .gitlab-icon {
         align-items: center;
         padding-top: 5px;
-        padding-left: 10px;
+        padding-left: 5px;
         height: 30px;
+    }
+
+    .gitlab-pitch {
+        font-size: 10px;
     }
 }
 
@@ -472,6 +499,9 @@ pre {
         padding-bottom: 5px;
     }
     
+    .gitlab-pitch {
+        font-size: 8px;
+    }
     .gitlab-icon {
         align-items: center;
         padding-top: 5px;

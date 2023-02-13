@@ -10,8 +10,13 @@ export default function About() {
         </p>
         <p className="p">
           Not every municipality has a robust 311 call center ticketing system
-          set up. Pothole Patrol crowdsources pothole reports so we all can
-          better track these road hazards on our daily routes.
+          set up.{" "}
+          <strong className="prettify-title">
+            <strong className="prettify-first-letter">P</strong>OTHOLE{" "}
+            <strong className="prettify-first-letter">P</strong>ATROL
+          </strong>{" "}
+          crowdsources pothole reports so we all can better track these road
+          hazards on our daily routes.
         </p>
         <h3 className="h3">PRIVACY</h3>
         <p className="p">
@@ -40,14 +45,18 @@ export default function About() {
               gather personal contact information
             </li>
           </ul>
-          <br></br>
           Our database only contains auto-generated and anonymous User IDs, and
           all information shown on the map is anonymous.
         </p>
         <h3 className="h3">THE TEAM</h3>
         <p className="p">
-          Pothole Patrol was developed by Joshua Anderson, Dennis Bowen, and
-          Monica Tuttle, with instructional support from Nicholas Groesch, Jason Phan, and Dustin Turpin, as part of{" "}
+          <strong className="prettify-title">
+            <strong className="prettify-first-letter">P</strong>OTHOLE{" "}
+            <strong className="prettify-first-letter">P</strong>ATROL
+          </strong>{" "}
+          was developed by Joshua Anderson, Dennis Bowen, and Monica Tuttle,
+          under the mentorship of Nicholas Groesch, Jason Phan, and Dustin
+          Turpin. This app was developed with support from{" "}
           <a className="attributions" href="https://techwise.talentsprint.com/">
             TechWise by TalentSprint
           </a>
@@ -55,13 +64,13 @@ export default function About() {
           Google.
         </p>
         <div className="indent-container">
-          <h3 className="h3">ATTRIBUTIONS</h3>
+          <h3 className="h3">ARTIST ATTRIBUTIONS</h3>
           <p className="p">
-            For the{" "}
+            For the car logo displayed in the browser tab and the{" "}
             <a className="attributions" href="https://fonts.google.com/about">
               Google Fonts
             </a>{" "}
-            and the car logo featured on our app, we wish to give attributions to the
+            displayed throughout the app, we wish to give attributions to the
             following artists:
             <ul>
               <li>
@@ -75,9 +84,9 @@ export default function About() {
               <li>
                 <a
                   className="attributions"
-                  href="https://christianrobertson.com/"
+                  href="https://www.behance.net/erreefe?locale=en_US"
                 >
-                  Christian Robertson
+                  Rodrigo Fuenzalida
                 </a>
               </li>
               <li>
@@ -88,9 +97,9 @@ export default function About() {
               <li>
                 <a
                   className="attributions"
-                  href="https://www.behance.net/erreefe?locale=en_US"
+                  href="https://christianrobertson.com/"
                 >
-                  Rodrigo Fuenzalida
+                  Christian Robertson
                 </a>
               </li>
             </ul>
@@ -98,9 +107,19 @@ export default function About() {
         </div>
       </div>
       <footer>
-      <a href="https://gitlab.com/janderson2024/pothole-patrol">
-          <img className="gitlab-icon" src="./gitlab_icon.png" alt="Logo" />
-        </a>
+        <div className="gitlab-container">
+          <a href="https://gitlab.com/janderson2024/pothole-patrol">
+            <img className="gitlab-icon" src="./gitlab_icon.png" alt="Logo" />
+          </a>
+          <span>
+            <a
+              className="gitlab-pitch"
+              href="https://gitlab.com/janderson2024/pothole-patrol"
+            >
+              Code on Gitlab
+            </a>
+          </span>
+        </div>{" "}
         &copy; 2023 Joshua Anderson, Dennis Bowen, Monica Tuttle{" "}
       </footer>
     </main>
