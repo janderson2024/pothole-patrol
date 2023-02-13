@@ -40,15 +40,18 @@ async function getPotholesTest() {
   return await response.json();
   //return {"potholes":[{"potholeID":1,"city":"Port Saint Lucie","zip":"34953","reportCount":5,"status":"Not completed","latitude":27.2621,"longitude":-80.3835},{"potholeID":2,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.263043318823183,"longitude":-80.37253646240883},{"potholeID":3,"city":"Port Saint Lucie","zip":"34953","reportCount":2,"status":"Not completed","latitude":27.25341053100089,"longitude":-80.37676543868598},{"potholeID":4,"city":"Port Saint Lucie","zip":"34987","reportCount":1,"status":"Not completed","latitude":27.27294407274045,"longitude":-80.42533667052845},{"potholeID":5,"city":"Port Saint Lucie","zip":"34952","reportCount":1,"status":"Not completed","latitude":27.29903549441731,"longitude":-80.30472710467508},{"potholeID":6,"city":"Pittsburgh","zip":"15210","reportCount":1,"status":"Not completed","latitude":40.41254846437486,"longitude":-80.0052923478928},{"potholeID":7,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.262640975882256,"longitude":-80.38001272951445},{"potholeID":8,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.259512784361693,"longitude":-80.38837610672822},{"potholeID":9,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.2637651482132,"longitude":-80.37830579633257}]};
 }
-async function callCompletionStatusApi() {
-  let pothole = document.getElementById("potholeId");
+async function callCompletionStatusApi(id) {
+  console.log(id);
+  const data = {
+    "potholeId" : id
+  }
   const response = await fetch('./api/reportrepair', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json'
     },
 
-    body: JSON.stringify({potholeId : pothole.value}),
+    body: JSON.stringify(data)
   });
 
   const text = await response.text();
@@ -60,7 +63,7 @@ function CustomPopup({pothole}) {
   
   const updatePotholeStatus = async() => {
     console.log("submit data: " + pothole);
-    callCompletionStatusApi(pothole);
+    callCompletionStatusApi(pothole.potholeID);
     setStatus("SUBMITTED!")
     setTimeout(() => {
       setStatus("MARK FIXED")
@@ -167,7 +170,7 @@ const MapLocations = () => {
             position={[pothole.latitude, pothole.longitude]}
             icon={getIcon(pothole.reportCount)}
           >
-            <CustomPopup/>
+            <CustomPopup pothole={pothole}/>
           </Marker>
         ))}
       </MapContainer>
