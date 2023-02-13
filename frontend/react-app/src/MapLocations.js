@@ -67,6 +67,7 @@ function CustomPopup({pothole}) {
     setStatus("SUBMITTED!")
     setTimeout(() => {
       setStatus("MARK FIXED")
+      window.location.reload();
     }, 3000);
   }
   return (

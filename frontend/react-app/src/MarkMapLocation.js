@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import { useMap } from 'react-leaflet/hooks'
@@ -25,15 +26,17 @@ async function callSubmitPotholeApi(position) {
 }
 
 function CustomPopup({markerPos}) {
+  let navigate = useNavigate();
   const [status, setStatus] = useState("SUBMIT");
   
   const submitData = async() => {
     console.log("submit data: " + markerPos);
-    callSubmitPotholeApi(markerPos);
+    await callSubmitPotholeApi(markerPos);
+    
     setStatus("SUBMITTED!")
     setTimeout(() => {
-      setStatus("SUBMIT")
-    }, 3000);
+      navigate("/");
+    }, 1000);
   }
   return (
       <Popup minWidth={90}>
