@@ -81,10 +81,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
 
 router.post("/reportrepair", async (req, res) => {
     let userPotholeId = req.body.potholeId;
-    console.log(userPotholeId);
     await subtractReportCount(userPotholeId);
-
-    //Add code to check if pothole report number is 0... remove pothole from database if report count is down to 0
 });
 
 
@@ -265,7 +262,24 @@ async function subtractReportCount (potholeID) {
         currentReportCount = parseInt(results[i].report_count);
     }
     let newReportCount = currentReportCount - 1;
-    let updateSql = "UPDATE `Potholes` SET `report_count` = ? WHERE `ID` = ?";
-    await db.query(updateSql, [newReportCount, potholeID]);
+    //Delete pothole from databse if the number if the number of times the pothole has been reported fix equals
+    //the number of times the pothole has been reported. Otherwise, just update the report count. 
+    if (newReportCount <= 0) {
+        deletePothole (potholeID);
+    } else {
+        let updateSql = "UPDATE `Potholes` SET `report_count` = ? WHERE `ID` = ?";
+        await db.query(updateSql, [newReportCount, potholeID]);
+    }
 }
+
+//Function to delete pothole from database
+async function deletePothole(potholeId)
+ {
+    var sql = "DELETE FROM `Potholes` WHERE `ID` = ?";
+    let potholeQuery =  await db.query(sql, potholeId, (err, result) => {
+        if (err) throw err;
+            console.log(result);
+        });
+    console.log("Pothole Deleted");
+ }
 
