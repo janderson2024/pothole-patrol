@@ -69,7 +69,7 @@ function CustomPopup({pothole}) {
     setStatus("SUBMITTED!")
     setTimeout(() => {
       setStatus("MARK FIXED")
-      navigate(window.location.pathname, { replace: true });
+      navigate("/view_map", { replace: true });
     }, 2000);
   }
   return (
