@@ -31,12 +31,11 @@ function CustomPopup({markerPos}) {
   
   const submitData = async() => {
     console.log("submit data: " + markerPos);
-    await callSubmitPotholeApi(markerPos);
-    
+    callSubmitPotholeApi(markerPos);
     setStatus("SUBMITTED!")
     setTimeout(() => {
       navigate("/");
-    }, 1000);
+    }, 2000);
   }
   return (
       <Popup minWidth={90}>

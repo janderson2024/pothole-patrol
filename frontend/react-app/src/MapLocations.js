@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useMap } from "react-leaflet/hooks";
 import "../node_modules/leaflet/dist/leaflet.css";
@@ -59,6 +60,7 @@ async function callCompletionStatusApi(id) {
 }
 
 function CustomPopup({pothole}) {
+  var navigate = useNavigate();
   const [status, setStatus] = useState("MARK FIXED");
   
   const updatePotholeStatus = async() => {
@@ -67,8 +69,8 @@ function CustomPopup({pothole}) {
     setStatus("SUBMITTED!")
     setTimeout(() => {
       setStatus("MARK FIXED")
-      window.location.reload();
-    }, 3000);
+      navigate(window.location.pathname, { replace: true });
+    }, 2000);
   }
   return (
       <Popup className="marker-popup" maxWidth={130}>
