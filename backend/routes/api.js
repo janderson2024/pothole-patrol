@@ -86,39 +86,6 @@ router.post("/reportrepair", async (req, res) => {
 
 
 router.get("/potholes", async (req, res) => {
-    /*const latitude = req.query.latitude;
-    const longitude = req.query.longitude;
-    const filter = req.query.filter;
-
-    if(!(latitude && longitude && filter && (filter == "city" || filter == "zip"))){
-        const url = "/api/potholes?latitude={latitude}&longitude={longitude}&filter={city or zip}";
-        const error = "missing queries. Url should look like " + url;
-        return res.status(401).json({"error":error});
-    }/*
-
-    /*const geoUrl = "https://api.geoapify.com/v1/geocode/reverse?lat="+ latitude +"&lon=" + longitude + "&type=street&format=json&apiKey=" + process.env.GEOAPIFY_KEY;
-    const fetchResp = await fetch(geoUrl);
-    const geoData = await fetchResp.json();
-
-    if(geoData.error){
-        return res.status(401).json({"geoData error": geoData.message});
-    }
-    if(geoData.results.length < 1){
-        return res.status(401).json({"geoData error": "Lat Lon could not result in city or zip"});
-    }
-    const geoResult = geoData.results[0];
-
-    var searchFilter;
-    var getPotholeSql;
-    if(filter == "city"){
-        searchFilter = geoResult.city;
-        getPotholeSql = "SELECT * FROM `Potholes` WHERE `city` = ?";
-    } else {
-        searchFilter = geoResult.postcode;
-        getPotholeSql = "SELECT * FROM `Potholes` WHERE `zipcode` = ?";
-    }
-    
-    const [results] = await db.query(getPotholeSql, [searchFilter]);*/
     const getPotholeSQL = "SELECT * FROM `Potholes`";
 
     const [results] = await db.query(getPotholeSQL);
