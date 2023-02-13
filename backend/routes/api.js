@@ -83,7 +83,7 @@ router.post("/reportrepair", async (req, res) => {
     let userPotholeId = req.body.potholeId;
     console.log(req.body);
     await subtractReportCount(userPotholeId);
-    res.send("Recieved pothole completion!");
+    res.send("Pothole repair reported!");
 });
 
 
