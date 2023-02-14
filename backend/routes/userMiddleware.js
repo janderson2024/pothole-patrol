@@ -22,8 +22,8 @@ async function userMiddleware(req, res, next){
     const now = new Date();
     const diffBetweenNowAndReport = now.getTime() - lastReport.getTime();
 
-    //limits this to 1 report to 1 minute (only on production)
-    if(process.env.MODE == "production" && (diffBetweenNowAndReport <= (1000 * 60 * 1))){
+    //limits this to 1 report to 10 seconds (only on production)
+    if(process.env.MODE == "production" && (diffBetweenNowAndReport <= (1000 * 10))){
         return res.status(401).json({"error":"last report was too soon"});
     }
 
