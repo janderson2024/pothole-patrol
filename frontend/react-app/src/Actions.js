@@ -78,7 +78,7 @@ function SubmitLocation() {
           setTimeout(() => {
             setStatus(statuses.submitMyLocation)
             setDisabled(false)
-          }, 60000);
+          }, 10000);
         },
 
         () => {
