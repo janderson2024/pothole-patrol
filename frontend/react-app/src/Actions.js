@@ -35,7 +35,7 @@ export default function Actions(props) {
     <div className="actions-container">
       <SubmitLocation />
       <pre>OR</pre>
-      <LocateOnMap text="LOCATE ON MAP" />
+      <ReportOnMap text="REPORT ON MAP" />
     </div>
   );
 }
@@ -99,7 +99,7 @@ function SubmitLocation() {
   );
 }
 
-function LocateOnMap(props) {
+function ReportOnMap(props) {
   const [link, setLink] = useState("/")
 
   const getPermissions = () => {
@@ -125,7 +125,7 @@ function LocateOnMap(props) {
   return (
     <div className="locate-on-map-container">
     <Link className="LocateLink" to={link}>
-      <button className="LocateOnMap" onClick={getPermissions} type="button">
+      <button className="ReportOnMap" onClick={getPermissions} type="button">
        {props.text}
        <PinDropIcon className="PinDropIcon" />
       </button>

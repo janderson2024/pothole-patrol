@@ -240,7 +240,7 @@ footer {
     padding-left: 10px;
 }
 
-.LocateOnMap {
+.ReportOnMap {
     font-family: 'Outfit';
     display: flex;
     font-size: 1.4rem;
@@ -255,7 +255,7 @@ footer {
     text-decoration: none;
 }
 
-.LocateOnMap:hover {
+.ReportOnMap:hover {
     color: rgb(2, 115, 252);
     cursor: pointer;
 }
