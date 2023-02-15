@@ -7,8 +7,6 @@ export default function About() {
         <p className="p">
           Potholes are potentially dangerous road hazards and a common complaint
           of residents across municipalities in the United States and globally.
-        </p>
-        <p className="p">
           Not every municipality has a robust 311 call center ticketing system
           set up.{" "}
           <strong className="prettify-title">
@@ -116,7 +114,7 @@ export default function About() {
               className="gitlab-pitch"
               href="https://gitlab.com/janderson2024/pothole-patrol"
             >
-              Code on Gitlab
+              Code on GitLab
             </a>
           </span>
         </div>{" "}

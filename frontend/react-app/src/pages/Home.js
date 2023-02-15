@@ -12,11 +12,11 @@ export default function Home() {
           </li>
           <li className="instructions-item">
             <div className="submit-location-title">CLICK 'SUBMIT MY LOCATION'</div> to
-            quickly report a pothole at your current location
+            instantly report a pothole at your current location
           </li>
           <li className="instructions-item">
-            <div className="locate-on-map-title">CLICK 'LOCATE ON MAP'</div> Click on a location where there's a pothole. 
-            Then click on the marker to submit.
+            <div className="locate-on-map-title">CLICK 'REPORT ON MAP'</div> to move the marker to a location where there's a pothole. 
+            Then click on the marker to submit a report.
           </li>
           <li className="instructions-item">
             <div className="view-map-title">VIEW MAP (UNDER 'MENU')</div>
