@@ -135,7 +135,8 @@ router.get("/show_console", (req, res) => {
     res.sendFile(path.join(__dirname, "../output.txt"));
 });
 
-
+const routingApi = require("./routing");
+router.use("/routing", routingApi);
 
 module.exports = router;
 
