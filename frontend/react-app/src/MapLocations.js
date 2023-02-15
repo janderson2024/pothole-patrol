@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useMap } from "react-leaflet/hooks";
 import "../node_modules/leaflet/dist/leaflet.css";
