@@ -45,7 +45,7 @@ async function callCompletionStatusApi(id) {
   const data = {
     "potholeId" : id
   }
-  const response = await fetch('./api/reportrepair', {
+  const response = await fetch('./api/potholes/repair', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json'
