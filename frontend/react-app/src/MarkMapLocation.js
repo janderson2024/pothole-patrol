@@ -13,7 +13,7 @@ async function callSubmitPotholeApi(position) {
       "longitude": position.lng
   }
 
-  const response = await fetch('./api/submitpothole', {
+  const response = await fetch('./api/potholes/report', {
       method: 'POST',
       headers: {
           'Content-type': 'application/json'
