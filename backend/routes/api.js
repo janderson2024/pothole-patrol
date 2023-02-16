@@ -19,7 +19,7 @@ Latitude: 47.6123 | Longitude: -122.3363 | City: Seattle | Zip: 98191
 Latitude: 42.0267 | Longitude: -93.6465 | City: Ames | Zip: 00000
 */
 
-router.post("/submitpothole", userMiddleware, async (req, res) => {
+router.post("/potholes/report", userMiddleware, async (req, res) => {
     let userLat = req.body.latitude;
     let userLong = req.body.longitude;
     let userCity = req.geoData.city;
@@ -79,7 +79,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     res.send("Pothole submitted!");
 });
 
-router.post("/reportrepair", async (req, res) => {
+router.post("/potholes/repair", async (req, res) => {
     let userPotholeId = req.body.potholeId;
     console.log(req.body);
     await subtractReportCount(userPotholeId);
