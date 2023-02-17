@@ -155,7 +155,7 @@ const MapLocations = () => {
         </div>
       </div>
       <MapContainer
-        className="map"
+        className="map-locations"
         center={[0, 0]}
         zoom={15}
         scrollWheelZoom={true}

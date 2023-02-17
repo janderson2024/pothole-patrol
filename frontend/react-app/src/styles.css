@@ -27,6 +27,12 @@ main {
     position: fixed;
 }
 
+.map-locations {
+    width: calc(100% - 16px);
+    border-radius: 5px;
+    height: calc(100% - 150px);
+    position: fixed;
+}
 /* Home Page */
 
 .how-it-works-container {
