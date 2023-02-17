@@ -135,30 +135,12 @@
                 "longitude": testLongitude || position.coords.longitude
             };
 
-            response = await fetch('./api/mid_test', {
+            response = await fetch('./api/testing/middleware', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify(data),
-            });
-
-            text = await response.text();
-            console.log(text);
-
-        }
-        async function callSubmitPothole(position) {
-            const data = {
-                "latitude": testLatitude || position.coords.latitude,
-                "longitude": testLongitude || position.coords.longitude
-            };
-            //GET for now, but needs to be a POST
-            response = await fetch('./api/submitpothole', {
-                method: 'GET',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                //body: JSON.stringify(data),
             });
 
             text = await response.text();
@@ -172,7 +154,7 @@
                 "longitude": testLongitude || position.coords.longitude
             };
 
-            response = await fetch('./api/frontend_test', {
+            response = await fetch('./api/testing/frontend', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -185,7 +167,7 @@
 
         }
         async function showConsole(){
-            response = await fetch('./api/show_console', {
+            response = await fetch('./api/testing/console', {
                 method: 'GET'
             });
 
@@ -199,7 +181,7 @@
                 "longitude": testLongitude || position.coords.longitude
             };
             console.log(data);
-            response = await fetch('./api/submitpothole', {
+            response = await fetch('./api/potholes/report', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -213,7 +195,7 @@
 
         async function updateCompletionStatus() {
             let pothole = document.getElementById("potholeId");
-            response = await fetch('./api/reportrepair', {
+            response = await fetch('./api/potholes/repair', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
