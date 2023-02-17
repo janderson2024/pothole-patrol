@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
-import { useMap } from 'react-leaflet/hooks'
+import { useMap } from 'react-leaflet/hooks';
 import '../node_modules/leaflet/dist/leaflet.css';
 import '../src/styles.css';
 import L from 'leaflet';
@@ -13,7 +13,7 @@ async function callSubmitPotholeApi(position) {
       "longitude": position.lng
   }
 
-  const response = await fetch('./api/submitpothole', {
+  const response = await fetch('./api/potholes/report', {
       method: 'POST',
       headers: {
           'Content-type': 'application/json'

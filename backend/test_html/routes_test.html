@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Testing the routes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        body {
+            background-color: rgb(56, 56, 56);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        button {
+            background-color: rgb(67, 69, 90);
+            color: white;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(84, 87, 112);
+        }
+
+        pre {
+            color: white;
+            font-size: 16px;
+        }
+        #map { height: 400px; width: 80%; }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <button onclick="sendRoutingData()">Test send routing data</button>
+
+    <script>
+
+    var myMap = L.map('map').setView([38.908838755401035, -77.02346458179596], 12);
+    
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    }).addTo(myMap);
+
+    const turnByTurnMarkerStyle = {
+        radius: 5,
+        fillColor: "#fff",
+        color: "#555",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 1
+    }
+
+    async function sendRoutingData(){
+        const data = {
+            source: {
+                lat: 38.937165, 
+                lng: -77.045590
+            },
+            dest: {
+                lat: 38.881152,
+                lng: -76.990693
+            }
+        };
+
+        response = await fetch('./routing/generate', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        });
+
+        geoJson = await response.json();
+        console.log(geoJson);
+
+        L.geoJSON(geoJson, {
+            style: (feature) => {
+                return {
+                color: "rgba(255,0,0)",
+                weight: 5
+                };
+            }
+        }).bindPopup((layer) => {
+            return "Popupppp";
+        }).addTo(myMap);
+
+
+    }
+    </script>
+</body>
+</html>

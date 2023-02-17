@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useMap } from "react-leaflet/hooks";
 import "../node_modules/leaflet/dist/leaflet.css";
@@ -45,7 +45,7 @@ async function callCompletionStatusApi(id) {
   const data = {
     "potholeId" : id
   }
-  const response = await fetch('./api/reportrepair', {
+  const response = await fetch('./api/potholes/repair', {
     method: 'POST',
     headers: {
         'Content-type': 'application/json'

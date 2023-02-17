@@ -19,7 +19,7 @@ Latitude: 47.6123 | Longitude: -122.3363 | City: Seattle | Zip: 98191
 Latitude: 42.0267 | Longitude: -93.6465 | City: Ames | Zip: 00000
 */
 
-router.post("/submitpothole", userMiddleware, async (req, res) => {
+router.post("/potholes/report", userMiddleware, async (req, res) => {
     let userLat = req.body.latitude;
     let userLong = req.body.longitude;
     let userCity = req.geoData.city;
@@ -79,7 +79,7 @@ router.post("/submitpothole", userMiddleware, async (req, res) => {
     res.send("Pothole submitted!");
 });
 
-router.post("/reportrepair", async (req, res) => {
+router.post("/potholes/repair", async (req, res) => {
     let userPotholeId = req.body.potholeId;
     console.log(req.body);
     await subtractReportCount(userPotholeId);
@@ -110,32 +110,11 @@ router.get("/potholes", async (req, res) => {
 
 });
 
-router.post("/mid_test", userMiddleware, (req, res) => {
-    console.log("On the api side...");
-    console.log(req.user);
-    console.log(req.geoData);
-    console.log(req.latitude);
-    console.log(req.longitude);
-    res.json({"nerd": "true"});
-});
+const testingApi = require("./testing");
+router.use("/testing", testingApi);
 
-router.post("/frontend_test", userMiddleware, (req, res) => {
-    console.log("The frontend made a request to this api!");
-
-    res.json({"success": "Data was recieved and will be saved", "lat" : req.body.latitude, "long" : req.body.longitude});
-});
-
-router.get("/show_console", (req, res) => {
-    if(process.env.MODE != "production"){
-        return res.send("You are not on the server. You dont need to access this!");
-    }
-    if(req.cookies["test_html_key"] != process.env.TEST_HTML_KEY){
-        return res.send("Imagine trying to bypass my checks lmaoooooooo");
-    }
-    res.sendFile(path.join(__dirname, "../output.txt"));
-});
-
-
+const routingApi = require("./routing");
+router.use("/routing", routingApi);
 
 module.exports = router;
 
