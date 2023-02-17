@@ -13,15 +13,17 @@ router.get("/", (req, res) => {
 
 
 router.post("/generate", async (req, res) => {
-    //need point 1 lat lon
     const source = [req.body.source.lat, req.body.source.lng];
     const destination = [req.body.dest.lat, req.body.dest.lng];
-    //need point 2 lat lon
-    //console.log(source);
-    //console.log(destination);
 
-    //validate those two points are within 500km of each other and validate all 4 are filled out
-    //TODO
+    if(!(source[0] && source[1] && destination[0] && destination[1])){
+        return res.status(401).json({"missing data":"You need both a source and destination position!"});
+    }
+
+    const dist = latlonDistance(source[0], source[1], destination[0], destination[1]);
+    if(dist >= 500){
+        return res.status(401).json({"too big": "the distance between the two points cannot be greater than 500km"});
+    }
 
     //get city for the two points
     //TODO
@@ -59,7 +61,7 @@ router.post("/generate", async (req, res) => {
     const geoData = await fetchResp.json();
     console.log(geoData);
 
-    /*
+    {/* understanding the output
     geoData will be an object with "features", "properties", and "type"
 
     features is an array, of "features". Each item represents a route api call
@@ -98,7 +100,7 @@ router.post("/generate", async (req, res) => {
 
     instruction is an object with a "text" which is just the directions for that "step"
 
-    */
+    */}
     
     if(geoData.error){
         return res.status(401).json({"geoData error": geoData.message});
