@@ -150,6 +150,7 @@ footer {
   padding-right: 10px;
   padding-left: 10px;
 }
+
 .gitlab-container {
   gap: 0.5rem;
   align-items: center;
@@ -172,49 +173,101 @@ footer {
 
 .instructions-container {
   background-color: aliceblue;
-  border-color: var(--tertiary);
   border-radius: 5px;
+  border-style: solid;
+  border-color: var(--quarternary);
+  width: 75%;
+  margin: auto;
+  margin-top: 25px;
+  margin-bottom: 15px;
+}
+
+.instructions-greeting-container {
+  width: 75%;
+  margin: auto;
+}
+
+.instructions-greeting {
+  font-family: "Outfit";
+  text-align: center;
+  color: var(--tertiary);
+}
+
+.instructions-prettify-title {
+  font-family: "Outfit";
+  font-size: 30px;
+  color: var(--tertiary);
+}
+
+.instructions-prettify-first-letter {
+  font-family: "Major Mono Display";
+}
+
+.instructions-divider {
+  width: 100%;
+}
+
+.browsers-list-title {
+  font-family: "Noto Sans Khmer";
+  color: var(--secondary);
+  font-size: 20px;
+  font-weight: bolder;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.instructions-subheading {
+  font-family: "Noto Sans Khmer";
+  font-size: 19px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: var(--secondary);
+}
+
+.instructions-section-container {
+  margin: auto;
+}
+
+h4 {
+  font-family: "Noto Sans Khmer";
+  font-size: 16px;
+}
+
+.browsers-ordered-list {
+  font-family: "Outfit";
+  font-size: 15px;
+  font-weight: bold;
+  padding-left: 15px;
+}
+
+.browsers-list-item {
+  font-family: "Roboto Slab";
+  font-size: 18px;
+  justify-content: left;
+  padding-bottom: 5px;
+}
+
+.accept-permissions-emphasis {
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+.browser-link {
+  color: var(--secondary);
+  font-weight: bold;
+  text-decoration: none;
   width: 50%;
+}
+
+.home-page-screenshot {
+  height: 500px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: var(--quarternary);
   margin: auto;
   display: flex;
 }
 
-.instructions-greeting {
-    font-family: 'Outfit';
-    text-align: center;
-    color: var(--tertiary);
-    display: grid;
-}
-
-.browsers-list-title {
-    font-family: 'Outfit';
-    text-align: center;
-    color: var(--secondary);
-    font-size: 20px;
-    display: grid;
-}
-
-h4 {
-    font-family: 'Noto Sans Khmer';
-    font-size: 16px;
-    display: grid;
-}
-
-.browsers-ordered-list {
-    font-family: 'Outfit';
-    font-size: 15px;
-    display: grid;
-}
-
-.browsers-list-item {
-    font-family: 'Noto Sans Khmer';
-    display: grid;
-}
-
-.home-page-screenshot {
-    height: 400px;
-    display: flex;
-}
 /* Navigation bar */
 
 .site-title {
@@ -232,6 +285,7 @@ h4 {
 .site-title::first-letter {
   outline: black;
 }
+
 .nav {
   position: sticky;
   border-radius: 5px;
@@ -437,6 +491,7 @@ pre {
 /* Media query for devices like the Galaxy Fold */
 
 @media screen and (max-width: 320px) {
+
   .site-title {
     font-size: 0.95rem;
     padding-left: 0;
