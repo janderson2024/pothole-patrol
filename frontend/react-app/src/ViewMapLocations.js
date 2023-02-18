@@ -43,40 +43,46 @@ async function getPotholesTest() {
 async function callCompletionStatusApi(id) {
   console.log(id);
   const data = {
-    "potholeId" : id
-  }
-  const response = await fetch('./api/potholes/repair', {
-    method: 'POST',
+    potholeId: id,
+  };
+  const response = await fetch("./api/potholes/repair", {
+    method: "POST",
     headers: {
-        'Content-type': 'application/json'
+      "Content-type": "application/json",
     },
 
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   const text = await response.text();
   console.log(text);
 }
 
-function CustomPopup({pothole}) {
+function CustomPopup({ pothole }) {
   const [status, setStatus] = useState("MARK FIXED");
-  
-  const updatePotholeStatus = async() => {
+
+  const updatePotholeStatus = async () => {
     console.log("submit data: " + pothole);
     callCompletionStatusApi(pothole.potholeID);
-    setStatus("SUBMITTED!")
+    setStatus("SUBMITTED!");
     setTimeout(() => {
-      setStatus("MARK FIXED")
+      setStatus("MARK FIXED");
       window.location.reload();
     }, 2000);
-  }
+  };
   return (
-      <Popup className="marker-popup" maxWidth={130}>
-              Pothole here! It has {pothole.reportCount} report{"(s)"}!
-            {/* TODO: allow ability to update DB based on fixed pothole */}
-              <Button className="fixed-button" variant="contained" onClick={updatePotholeStatus}>{status}</Button> 
-            </Popup>
-  )
+    <Popup className="marker-popup" maxWidth={130}>
+      Pothole here! It has {pothole.reportCount} report{"(s)"}!
+      {/* TODO: allow ability to update DB based on fixed pothole */}
+      <Button
+        className="fixed-button"
+        variant="contained"
+        onClick={updatePotholeStatus}
+      >
+        {status}
+      </Button>
+    </Popup>
+  );
 }
 
 function CenterMapComp() {
@@ -91,7 +97,7 @@ function CenterMapComp() {
   return null;
 }
 
-const MapLocations = () => {
+const ViewMapLocations = () => {
   const [markers, setMarkers] = useState([]);
 
   const [cityFilter, setCityFilter] = useState("");
@@ -171,7 +177,7 @@ const MapLocations = () => {
             position={[pothole.latitude, pothole.longitude]}
             icon={getIcon(pothole.reportCount)}
           >
-            <CustomPopup pothole={pothole}/>
+            <CustomPopup pothole={pothole} />
           </Marker>
         ))}
       </MapContainer>
@@ -179,4 +185,4 @@ const MapLocations = () => {
   );
 };
 
-export default MapLocations;
+export default ViewMapLocations;

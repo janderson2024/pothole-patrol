@@ -1,7 +1,11 @@
-import MapLocations from "../MapLocations";
+import ViewMapLocations from "../ViewMapLocations";
+import Navbar from "../Navbar";
 
 export default function ViewMap() {
   return (
-      <MapLocations />
+    <div>
+      <Navbar />
+      <ViewMapLocations />
+    </div>
   );
 }
