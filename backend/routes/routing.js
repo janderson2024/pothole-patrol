@@ -46,7 +46,7 @@ router.post("/generate", async (req, res) => {
         avoid_string = "&avoid=";
         for(result of results){
             if((result.approx_latitude != source[0] || result.approx_longitude != source[1])
-            || (result.approx_latitude != destination[0] || result.approx_longitude != destination[1])){
+            && (result.approx_latitude != destination[0] || result.approx_longitude != destination[1])){
                 avoid_string += "location:" + result.approx_latitude + "," + result.approx_longitude + "|";
             }
         }
