@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+} from "react-leaflet";
 import { useMap } from "react-leaflet/hooks";
 import "../node_modules/leaflet/dist/leaflet.css";
 import "../src/styles.css";
@@ -73,7 +78,6 @@ function CustomPopup({ pothole }) {
   return (
     <Popup className="marker-popup" maxWidth={130}>
       Pothole here! It has {pothole.reportCount} report{"(s)"}!
-      {/* TODO: allow ability to update DB based on fixed pothole */}
       <Button
         className="fixed-button"
         variant="contained"
@@ -99,7 +103,6 @@ function CenterMapComp() {
 
 const MapLocations = () => {
   const [markers, setMarkers] = useState([]);
-
   const [cityFilter, setCityFilter] = useState("");
   const [zipFilter, setZipFilter] = useState("");
   const [filterType, setFilterType] = useState("no-filter");
@@ -127,7 +130,6 @@ const MapLocations = () => {
 
   return (
     <div>
-      <img className="map-key" src="./map-key.png" alt=""></img>
       <div className="container-for-filter">
         <div className="select-container">
           <select
