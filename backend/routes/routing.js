@@ -1,16 +1,10 @@
 const express = require("express");
 const fetch = require("node-fetch");
-const path = require("path");
 const router = express.Router();
 const latlonDistance = require("../helpers/latlonDistance");
 
 const userMiddleware = require("./userMiddleware");
 const db = require("../database/connection");
-
-router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../test_html/routes_test.html"));
-});
-
 
 router.post("/generate", async (req, res) => {
     const source = [req.body.source.lat, req.body.source.lng];

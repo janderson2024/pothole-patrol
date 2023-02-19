@@ -1,16 +1,10 @@
 const express = require("express");
-const fetch = require("node-fetch");
-const path = require("path");
 const router = express.Router();
 
 const userMiddleware = require("./userMiddleware");
 //const apiHelper = require("../helpers/apiHelper");
 const db = require("../database/connection");
 
-router.get("/", (req, res) => {
-    res.send("API page");
-    console.log("API route successful");
-});
 
 /* User Input Latitudes / Longitudes for DB Testing:
 Latitude: 40.748817 | Longitude: -73.985428 | City: New York | Zip: 10001
