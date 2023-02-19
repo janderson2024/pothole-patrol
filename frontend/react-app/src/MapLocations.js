@@ -169,15 +169,15 @@ const MapLocations = () => {
         zoom={15}
         scrollWheelZoom={true}
       >
-        <img src="./map-key.png" alt="Color Key"
-          style={{
-            position: 'absolute',
-            top: 5,
-            right: 10,
-            maxWidth: '300px',
-            maxHeight: '300px',
-            zIndex: 9999
-          }} 
+        <img className="map-key" src="./map-key.png" alt="Color Key"
+          // style={{
+          //   position: 'absolute',
+          //   top: 5,
+          //   right: 10,
+          //   maxWidth: '300px',
+          //   maxHeight: '300px',
+          //   zIndex: 9999
+          // }} 
         />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
