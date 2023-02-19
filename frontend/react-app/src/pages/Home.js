@@ -5,17 +5,26 @@ import Instructions from "./PermissionsInstructions.js";
 import React, { useState } from "react";
 
 export default function Home(props) {
-  const [redirectTo, setRedirectTo] = useState(true); // your state value to manipulate
-  navigator.permissions.query({ name: "geolocation" }).then((result) => {
-    if (result.state === "granted") {
-      setRedirectTo(true);
-      console.log("Hey, home page");
-    } else {
-      setRedirectTo(false);
-      console.log("Hey, permissions page!");
-    }
-  });
+const [redirectTo, setRedirectTo] = useState(true); // your state value to manipulate
+if (!navigator.geolocation) {
+  } else {
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const coordinates = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        setRedirectTo(true);
+        console.log(coordinates)
+        console.log("Hey, you gained access to the app!");
+      },
 
+      () => {
+        setRedirectTo(false);
+        console.log("Hey, you're on the permissions page.")
+      }
+    );
+  }
   if (redirectTo) {
     return <DefaultHome />;
   } else {
@@ -26,7 +35,7 @@ export default function Home(props) {
       </div>
     );
   }
-}
+};
 
 function DefaultHome() {
   return (
