@@ -127,7 +127,6 @@ const MapLocations = () => {
 
   return (
     <div>
-      <img className="map-key" src="./map-key.png" alt=""></img>
       <div className="container-for-filter">
         <div className="select-container">
           <select
@@ -167,6 +166,16 @@ const MapLocations = () => {
         zoom={15}
         scrollWheelZoom={true}
       >
+        <img src="./map-key.png" alt="Color Key"
+          style={{
+            position: 'absolute',
+            top: 5,
+            right: 10,
+            maxWidth: '300px',
+            maxHeight: '300px',
+            zIndex: 9999
+          }} 
+        />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
