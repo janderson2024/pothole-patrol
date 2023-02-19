@@ -30,7 +30,7 @@ main {
 .map-locations {
   width: calc(100% - 16px);
   border-radius: 5px;
-  height: calc(100% - 210px);
+  height: calc(100% - 140px);
   position: fixed;
 }
 
