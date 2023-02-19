@@ -40,7 +40,7 @@ function DefaultHome() {
               <div className="permissions-title">
                 ALLOW LOCATION PERMISSIONS
               </div>
-              in the browser and refresh the page for this app to work
+              for this site in the browser
             </li>
             <li className="instructions-item">
               <div className="submit-location-title">
@@ -50,8 +50,7 @@ function DefaultHome() {
             </li>
             <li className="instructions-item">
               <div className="locate-on-map-title">CLICK 'REPORT ON MAP'</div>{" "}
-              to move the marker to a location where there's a pothole. Then
-              click on the marker to submit a report.
+              to move the marker to a place where there's a pothole. Click on the marker to submit a report
             </li>
             <li className="instructions-item">
               <div className="view-map-title">VIEW MAP (UNDER 'MENU')</div>
