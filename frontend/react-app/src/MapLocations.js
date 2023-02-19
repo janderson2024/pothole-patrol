@@ -97,7 +97,7 @@ function CenterMapComp() {
   return null;
 }
 
-const ViewMapLocations = () => {
+const MapLocations = () => {
   const [markers, setMarkers] = useState([]);
 
   const [cityFilter, setCityFilter] = useState("");
@@ -185,4 +185,4 @@ const ViewMapLocations = () => {
     </div>
   );
 };
-export default ViewMapLocations;
+export default MapLocations;
