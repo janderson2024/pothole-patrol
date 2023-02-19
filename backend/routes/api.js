@@ -75,7 +75,6 @@ router.post("/potholes/report", userMiddleware, async (req, res) => {
 
 router.post("/potholes/repair", async (req, res) => {
     let userPotholeId = req.body.potholeId;
-    console.log(req.body);
     await subtractReportCount(userPotholeId);
     res.send("Pothole repair reported!");
 });
