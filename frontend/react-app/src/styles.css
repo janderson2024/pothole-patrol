@@ -188,7 +188,7 @@ footer {
 }
 
 .instructions-greeting {
-  font-family: 'Noto Sans Khmer';
+  font-family: "Noto Sans Khmer";
   font-size: 28px;
   text-align: center;
   color: var(--tertiary);
@@ -387,9 +387,8 @@ pre {
   top: 10px;
   right: 10px;
   max-width: 250px;
-  max-height: 300px;
   border-style: solid;
-  border-width: .5px;
+  border-width: 0.5px;
   border-color: grey;
   border-radius: 5px;
   padding-bottom: 5px;
@@ -501,10 +500,16 @@ pre {
 
 /* Media query for devices like the Galaxy Fold */
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 540px) {
 
+  .map-key {
+    max-width: 175px;
+  } 
+}
+
+@media screen and (max-width: 320px) {
   .site-title {
-    font-size: .95rem;
+    font-size: 0.95rem;
     padding-left: 0;
   }
 
@@ -647,9 +652,10 @@ pre {
     width: 125px;
     font-family: "Noto Sans Khmer";
   }
-}
 
-.map-key {
-  max-width: 175px;
-  max-height: 300px;
+  .map-key {
+    max-width: 175px;
+    max-height: 300px;
+  }
+
 }
