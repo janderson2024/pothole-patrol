@@ -126,7 +126,8 @@ const ViewMapLocations = () => {
   }
 
   return (
-    <>
+    <div>
+      <img className="map-key" src="./map-key.png" alt=""></img>
       <div className="container-for-filter">
         <div className="select-container">
           <select
@@ -181,8 +182,7 @@ const ViewMapLocations = () => {
           </Marker>
         ))}
       </MapContainer>
-    </>
+    </div>
   );
 };
-
 export default ViewMapLocations;

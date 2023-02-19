@@ -6,20 +6,8 @@ export default function Instructions(props) {
       <div className="instructions-container">
         <div className="instructions-greeting-container">
           <h1 className="instructions-greeting">
-            Welcome to{" "}
-            <strong className="instructions-prettify-title">
-              <strong className="instructions-prettify-first-letter">P</strong>
-              OTHOLE{" "}
-              <strong className="instructions-prettify-first-letter">P</strong>
-              ATROL!
-            </strong>{" "}
-            <hr className="instructions-divider"></hr>
+            Welcome!
           </h1>
-          {/* <h2 className="browsers-list-title">
-            You're seeing this page because you haven't enabled location
-            permissions for this site.
-          </h2>
-          <hr className="instructions-divider"></hr> */}
           <div className="instructions-section-container">
             <h2 className="instructions-subheading">
               Before you can use our app to report potholes near you, you'll
@@ -27,11 +15,8 @@ export default function Instructions(props) {
             </h2>
             <ol className="browsers-ordered-list">
               <li className="browsers-list-item">
-                <strong className="accept-permissions-emphasis">
                   Allow location permissions for this site in your browser.
-                </strong>{" "}
-                You can find instructions specific to your browser through the
-                following links:
+                Here are links to instructions for the most commonly used browsers:
                 <ul className="browsers-unordered-list">
                   <br></br>
                   <li className="browsers-list-item">
@@ -94,8 +79,8 @@ export default function Instructions(props) {
               </li>
               <br></br>
               <li className="browsers-list-item">
-                Refresh the page. Once you do that, you'll have access to the
-                app which looks like this image:
+                Refresh the page. Then you'll have access to the
+                app, which looks like this:
                 <br></br>
                 <br></br>
                 <img
@@ -103,11 +88,6 @@ export default function Instructions(props) {
                   src="./pothole-patrol-mobile.png"
                   alt=""
                 ></img>
-              </li>
-              <br></br>
-              <li className="browsers-list-item">
-                If refreshing the page doesn't work, close and reopen the
-                browser. Then go come back to this site.
               </li>
             </ol>
           </div>
