@@ -53,13 +53,15 @@ router.post("/generate", async (req, res) => {
         avoid_string = avoid_string.slice(0, -1);
     }
 
-    var geoUrl = geoUrl + waypoints + mode + avoid_string + apiKey;
+    const potholeFreeUrl = geoUrl + waypoints + mode + avoid_string + apiKey;
 
-    console.log(geoUrl);
     //make API request
-    const fetchResp = await fetch(geoUrl);
-    const geoData = await fetchResp.json();
-    console.log(geoData);
+    const freeResp = await fetch(potholeFreeUrl);
+    const freeData = await freeResp.json();
+
+    const potholeFastUrl = geoUrl + waypoints + mode + apiKey;
+    const fastResp = await fetch(potholeFastUrl);
+    const fastData = await fastResp.json();
 
     {/* understanding the output
     geoData will be an object with "features", "properties", and "type"
@@ -102,14 +104,24 @@ router.post("/generate", async (req, res) => {
 
     */}
     
-    if(geoData.error){
-        return res.status(401).json({"geoData error": geoData.message});
+    if(freeData.error){
+        return res.status(401).json({"geoData error": freeData.message});
+    }
+    if(fastData.error){
+        return res.status(401).json({"geoData error": fastData.message});
     }
 
     returnGeoJson = {
-        geometry: geoData.features[0].geometry,
-        properties: geoData.features[0].properties,
-        type: "Feature"    
+        "freeData" : {
+            geometry: freeData.features[0].geometry,
+            properties: freeData.features[0].properties,
+            type: "Feature"
+        },
+        "fastData" : {
+            geometry: fastData.features[0].geometry,
+            properties: fastData.features[0].properties,
+            type: "Feature"
+        }    
     }
 
     //send it to user

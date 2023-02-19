@@ -8,6 +8,10 @@ const routeStyle = {
   color: "#0f4c91",
   weight: 5,
 };
+const fastStyle = {
+  color: "#1565c0",
+  weight: 3,
+};
 
 const waypointMarker = new L.Icon({
   iconUrl: "./pin.png",
@@ -81,6 +85,7 @@ function Map() {
   const [userPosition, setUserPosition] = useState(null);
   const [destPosition, setDestPosition] = useState(null);
   const [routingData, setRoutingData] = useState(null);
+  const [fastData, setFastData] = useState(null);
   const [gotData, setGotData] = useState(false);
   const [potholes, setPotholes] = useState(null);
   const [waypoints, setWayPoints] = useState(null);
@@ -105,12 +110,14 @@ function Map() {
     }
     const geoData = await response.json();
     setGotData(true);
-    setPotholes(geoData.properties.avoid[0].values);
+    setPotholes(geoData.freeData.properties.avoid[0].values);
     setWayPoints([
-      geoData.properties.waypoints[0].location,
-      geoData.properties.waypoints[1].location,
+      geoData.freeData.properties.waypoints[0].location,
+      geoData.freeData.properties.waypoints[1].location,
     ]);
-    setRoutingData(geoData);
+    console.log(geoData);
+    setRoutingData(geoData.freeData);
+    setFastData(geoData.fastData);
   }
 
   return (
@@ -126,7 +133,10 @@ function Map() {
       />
 
       {routingData && (
-        <GeoJSON style={routeStyle} key="my-geoJson" data={routingData} />
+        <GeoJSON style={routeStyle} key="my-freeJson" data={routingData} />
+      )}
+      {fastData && (
+        <GeoJSON style={fastStyle} key="my-fastJson" data={fastData} />
       )}
 
       {potholes &&
