@@ -193,14 +193,18 @@
             console.log(text);
         }
 
-        async function updateCompletionStatus() {
-            let pothole = document.getElementById("potholeId");
+        async function updateCompletionStatus(position) {
+            const data = {
+                "latitude": testLatitude || position.coords.latitude,
+                "longitude": testLongitude || position.coords.longitude,
+                "potholeId" : document.getElementById("potholeId")
+            };
             response = await fetch('./api/potholes/repair', {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify({potholeId : pothole.value}),
+                body: JSON.stringify(data),
                 
             });
         }

@@ -1,7 +1,7 @@
 {
   "name": "pothole-patrol",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend Express server for the pothole-patrol project. Built for Techwise cohort 1 project 2",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
