@@ -5,9 +5,7 @@ export default function Instructions(props) {
     <main>
       <div className="instructions-container">
         <div className="instructions-greeting-container">
-          <h1 className="instructions-greeting">
-            Welcome!
-          </h1>
+          <h1 className="instructions-greeting">Welcome!</h1>
           <div className="instructions-section-container">
             <h2 className="instructions-subheading">
               Before you can use our app to report potholes near you, you'll
@@ -15,8 +13,8 @@ export default function Instructions(props) {
             </h2>
             <ol className="browsers-ordered-list">
               <li className="browsers-list-item">
-                  Allow location permissions for this site in your browser.
-                Here are links to instructions for the most commonly used browsers:
+                Allow location permissions for this site in your browser. Here
+                are links to instructions for the most commonly used browsers:
                 <ul className="browsers-unordered-list">
                   <br></br>
                   <li className="browsers-list-item">
@@ -79,8 +77,8 @@ export default function Instructions(props) {
               </li>
               <br></br>
               <li className="browsers-list-item">
-                Refresh the page. Then you'll have access to the
-                app, which looks like this:
+                Refresh the page. Then you'll have access to the app, which
+                looks like this:
                 <br></br>
                 <br></br>
                 <img

@@ -4,9 +4,9 @@ import AltNavbar from "../AltNavbar.js";
 import Instructions from "./PermissionsInstructions.js";
 import React, { useState } from "react";
 
-export default function Home(props) {
-const [redirectTo, setRedirectTo] = useState(true); // your state value to manipulate
-if (!navigator.geolocation) {
+export default function Home() {
+  const [redirectTo, setRedirectTo] = useState(true);
+  if (!navigator.geolocation) {
   } else {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
@@ -15,13 +15,13 @@ if (!navigator.geolocation) {
           longitude: position.coords.longitude,
         };
         setRedirectTo(true);
-        console.log(coordinates)
+        console.log(coordinates);
         console.log("Hey, you gained access to the app!");
       },
 
       () => {
         setRedirectTo(false);
-        console.log("Hey, you're on the permissions page.")
+        console.log("Hey, you're on the permissions page.");
       }
     );
   }
@@ -35,7 +35,7 @@ if (!navigator.geolocation) {
       </div>
     );
   }
-};
+}
 
 function DefaultHome() {
   return (
@@ -59,7 +59,8 @@ function DefaultHome() {
             </li>
             <li className="instructions-item">
               <div className="locate-on-map-title">CLICK 'REPORT ON MAP'</div>{" "}
-              to move the marker to a place where there's a pothole. Click on the marker to submit a report
+              to move the marker to a place where there's a pothole. Click on
+              the marker to submit a report
             </li>
             <li className="instructions-item">
               <div className="view-map-title">VIEW MAP (UNDER 'MENU')</div>

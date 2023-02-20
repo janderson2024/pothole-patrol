@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useMap } from "react-leaflet/hooks";
 import "../node_modules/leaflet/dist/leaflet.css";
 import "../src/styles.css";
@@ -35,7 +30,6 @@ const getIcon = (reportCount) => {
   });
 };
 
-// need a component that would call this, then make a new marker on lat/long
 async function getPotholesTest() {
   const url = "./api/potholes";
 
@@ -43,7 +37,6 @@ async function getPotholesTest() {
     method: "GET",
   });
   return await response.json();
-  //return {"potholes":[{"potholeID":1,"city":"Port Saint Lucie","zip":"34953","reportCount":5,"status":"Not completed","latitude":27.2621,"longitude":-80.3835},{"potholeID":2,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.263043318823183,"longitude":-80.37253646240883},{"potholeID":3,"city":"Port Saint Lucie","zip":"34953","reportCount":2,"status":"Not completed","latitude":27.25341053100089,"longitude":-80.37676543868598},{"potholeID":4,"city":"Port Saint Lucie","zip":"34987","reportCount":1,"status":"Not completed","latitude":27.27294407274045,"longitude":-80.42533667052845},{"potholeID":5,"city":"Port Saint Lucie","zip":"34952","reportCount":1,"status":"Not completed","latitude":27.29903549441731,"longitude":-80.30472710467508},{"potholeID":6,"city":"Pittsburgh","zip":"15210","reportCount":1,"status":"Not completed","latitude":40.41254846437486,"longitude":-80.0052923478928},{"potholeID":7,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.262640975882256,"longitude":-80.38001272951445},{"potholeID":8,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.259512784361693,"longitude":-80.38837610672822},{"potholeID":9,"city":"Port Saint Lucie","zip":"34953","reportCount":1,"status":"Not completed","latitude":27.2637651482132,"longitude":-80.37830579633257}]};
 }
 async function callCompletionStatusApi(id) {
   console.log(id);
@@ -109,7 +102,6 @@ const MapLocations = () => {
 
   useEffect(() => {
     async function getPotholeList() {
-      //get potholes here from server
       const potholes = await getPotholesTest();
       setMarkers(potholes.potholes);
     }
@@ -169,16 +161,7 @@ const MapLocations = () => {
         zoom={15}
         scrollWheelZoom={true}
       >
-        <img className="map-key" src="./map-key.png" alt="Color Key"
-          // style={{
-          //   position: 'absolute',
-          //   top: 5,
-          //   right: 10,
-          //   maxWidth: '300px',
-          //   maxHeight: '300px',
-          //   zIndex: 9999
-          // }} 
-        />
+        <img className="map-key" src="./map-key.png" alt="Color Key" />
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

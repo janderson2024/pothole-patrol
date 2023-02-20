@@ -15,9 +15,6 @@ export default function SubmitLocation() {
   const getLocation = () => {
     if (!navigator.geolocation) {
       setStatus(statuses.unableToGetLocation);
-      alert(
-        "Please allow location permissions in your browser's site settings and then refresh the browser to use this app."
-      );
     } else {
       setStatus(statuses.locating);
       navigator.geolocation.getCurrentPosition(
@@ -46,9 +43,6 @@ export default function SubmitLocation() {
 
         () => {
           setStatus(statuses.unableToGetLocation);
-          alert(
-            "Please allow location permissions in your browser's site settings and then refresh the browser to use this app."
-          );
         }
       );
     }

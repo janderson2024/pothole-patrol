@@ -3,14 +3,12 @@ import ViewMap from "./pages/ViewMap.js";
 import MarkMap from "./pages/MarkMap.js";
 import RouteMap from "./pages/RouteMap";
 import About from "./pages/About.js";
-// import Navbar from './Navbar.js';
 import Instructions from "./pages/PermissionsInstructions.js";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      {/* <Navbar />  */}
       <div>
         <Routes>
           <Route path="/permissions_instructions" element={<Instructions />} />

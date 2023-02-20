@@ -5,9 +5,6 @@ import PinDropIcon from "@mui/icons-material/PinDrop";
 export default function ReportOnMap(props) {
   const getPermissions = () => {
     if (!navigator.geolocation) {
-      alert(
-        "Please allow location permissions in your browser's settings. Then refresh or close/reopen the browser to use this app."
-      );
     } else {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
@@ -17,11 +14,7 @@ export default function ReportOnMap(props) {
           };
           console.log(coordinates);
         },
-        () => {
-          alert(
-            "Please allow location permissions in your browser's settings. Then refresh or close/reopen the browser to use this app."
-          );
-        }
+        () => {}
       );
     }
   };

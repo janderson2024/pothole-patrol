@@ -503,7 +503,7 @@ pre {
 @media screen and (max-width: 540px) {
 
   .map-key {
-    max-width: 175px;
+    max-width: 200px;
   } 
 }
 
@@ -644,8 +644,6 @@ pre {
     padding-top: 2px;
   }
 
-  /* View map page for devices with small screens */
-
   .filter-input {
     padding-top: 9px;
     padding-bottom: 10px;
@@ -654,7 +652,7 @@ pre {
   }
 
   .map-key {
-    max-width: 175px;
+    max-width: 190px;
     max-height: 300px;
   }
 
